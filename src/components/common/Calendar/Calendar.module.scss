@@ -1,0 +1,75 @@
+
+@import '@/styles/theme.scss';
+// 최상단 컨테이너
+:global(.react-calendar) {
+  border: none;
+  width: auto;
+}
+
+:global(.react-calendar__navigation button) {
+  min-width: auto;
+}
+
+// 날짜 텍스트 컬러 
+:global(.react-calendar__month-view__days__day) {
+  color :$gray500;
+}
+
+// 오늘 날짜를 hover
+:global(.react-calendar__tile--now:enabled:hover) {
+  background-color: #e6e6e6; //호버 컬러는 임의로 지었어요. 어플이라서 TODO: 디자인 컬러 받기
+}
+
+// 날짜를 hover했을때
+:global(.react-calendar__tile--active:enabled:hover) {
+  background-color: #e6e6e6;
+}
+
+
+// 날짜를 클릭해서 focused 상태인경우
+:global(.react-calendar__tile--active:enabled:focus) {
+  background-color: $gray400; 
+}
+
+
+// 오늘 날짜
+:global(.react-calendar__tile--now) {
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+// today active 날짜
+:global(.react-calendar__tile--active) {
+  background-color: $gray400; 
+  border-radius: 8px;
+  color: #fff;
+}
+
+// 날짜가 오늘보다 이전인 날짜 
+:global(.past-date) {
+  color: $gray300;
+  text-decoration: line-through;
+  pointer-events: none;
+}
+
+// [일,월,화,수] 표시 요일
+:global(.react-calendar__month-view__weekdays) {
+  color: $gray500;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+// prev month 버튼 
+:global(.react-calendar__navigation__arrow,.react-calendar__navigation__prev-button) {
+  > img,svg {
+    transform: rotate(180deg); /* 화살표를 180도 돌립니다. */
+  }
+}
+
+.PrevArrowIcon {
+  stroke: $gray400; //400
+}
+
+.NextArrowIcon {
+  stroke: $black;
+}

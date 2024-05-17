@@ -1,0 +1,42 @@
+@import '@/styles/theme.scss';
+
+button {
+  border-radius: 8px;
+  &.Gray {
+    background-color: $gray500;
+    color: $white;
+  }
+  &.White {
+    background-color: $white;
+    border: 1px solid $gray300;
+    color: $gray500;
+  }
+  &.Primary {
+    background-color: $primary;
+    color: $white;
+  }
+  &.Disabled {
+    background-color: $gray300;
+    color: $white;
+  }
+  &.Reserved {
+    background-color: $white;
+    border: 1px solid $gray200;
+    color: $gray100;
+  }
+  &.TimeActive {
+    background-color: $gray400;
+    border: 1px solid $gray400;
+    color: $white;
+  }
+  &.TimeDisabled {
+    pointer-events: none;
+    border: 1px solid $gray200;
+    color: $gray100;
+    background-color: transparent;
+  }
+  &.Spacing {
+    background-color: $spacing400;
+    color: $white;
+  }
+}

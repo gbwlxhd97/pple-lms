@@ -1,0 +1,53 @@
+@import '@/styles/theme.scss';
+
+.ChatRoomsEditWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100dvh;
+
+  > .ChatRoomsEditContainer {
+    > .ChatRoomsEditHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15.5px 0px;
+
+      margin-bottom: 8px;
+      color: $black;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 29px;
+
+      > .BackIcon {
+        stroke: $gray500;
+        cursor: pointer;
+      }
+
+      > .ChatRoomsEditTitle {
+        color: $gray1000;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+      }
+
+      > .ChatRoomsEditSubTitle {
+        color: $gray500;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  > .DeleteButton {
+    width: 100%;
+    padding: 17px 0px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.32px;
+    margin-bottom: 20px;
+  }
+}
