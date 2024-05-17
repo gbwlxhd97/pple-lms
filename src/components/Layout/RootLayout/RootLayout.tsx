@@ -10,9 +10,23 @@ const RootLayout = () => {
 
   return (
     <div className={styles.RootLayout}>
-      <button className={styles.Hamburger} onClick={toggleAsideBar}>
+      <div className={styles.HeaderWrap}>
+      <div>
+        홈버튼
+      </div>
+      {
+        isOpen ? (
+          <button className={styles.Hamburger} onClick={toggleAsideBar}>
+        x
+      </button>
+        ) : (
+          <button className={styles.Hamburger} onClick={toggleAsideBar}>
         &#9776;
       </button>
+        )
+      }
+      
+      </div>
       <div className={`${styles.AsideContainer} ${isOpen ? styles.open : ''}`}>
         <aside className={styles.AsideBar}>
           <h2>Aside Bar</h2>
