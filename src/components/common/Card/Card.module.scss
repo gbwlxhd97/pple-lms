@@ -1,0 +1,24 @@
+.CardContainer {
+    padding: 4px 0;
+    margin: 16px 0;
+}
+
+.TitleFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.CardWrap {
+    border: 1px solid gray;
+    padding: 8px;
+    margin-top: 10px;
+    .Flex:not(:first-child) {
+        margin-top: 8px; /* 원하는 margin-top 값 */
+    }
+}

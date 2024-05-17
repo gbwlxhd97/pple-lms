@@ -21,9 +21,6 @@ export const requestAPI = () => {
         headers: {
           'Content-Type': contentType ?? 'application/json',
         },
-        validateStatus: (status) => {
-          return true;
-        },
       })
         .then(handleResponse)
         .catch((err) => {

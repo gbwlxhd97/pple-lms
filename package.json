@@ -14,6 +14,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.28.4",
     "axios": "^1.6.8",
+    "qs": "^6.12.1",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.26",
+    "@types/qs": "^6.9.15",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",

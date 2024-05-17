@@ -2,6 +2,7 @@ import Button from '@/components/common/Button/Button';
 import styles from './SignIn.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import Input from '@/components/common/Input/Input';
+import { useRouter } from '@/hooks/useRouter';
 
 const SignInPage = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -9,6 +10,7 @@ const SignInPage = () => {
     password: '',
   });
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInfo((prevContactInfo) => ({
@@ -23,6 +25,10 @@ const SignInPage = () => {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  const handlePushRouter = (route: string) => {
+    route === 'login' ? router.push('/home') : router.push('/sign-up');
+  };
 
   return (
     <div className={styles.SignInContainer}>
@@ -49,10 +55,19 @@ const SignInPage = () => {
       <Button
         buttonType={isValidateButton ? 'Primary' : 'Disabled'}
         className={styles.LoginButton}
+        onClick={() => {
+          handlePushRouter('login');
+        }}
       >
         로그인
       </Button>
-      <Button buttonType="Primary" className={styles.LoginButton}>
+      <Button
+        buttonType="Primary"
+        className={styles.LoginButton}
+        onClick={() => {
+          handlePushRouter('sign-up');
+        }}
+      >
         회원가입
       </Button>
     </div>

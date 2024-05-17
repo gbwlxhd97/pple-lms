@@ -1,0 +1,36 @@
+import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
+import { stringify } from 'qs';
+
+/**
+ *
+ * example :router.push('/home', { key: 'value' }, { someState: 'stateValue' });
+ * @returns
+ */
+export function useRouter() {
+  const navigate = useNavigate();
+  return useMemo(() => {
+    return {
+      back(steps = 1) {
+        navigate(-steps);
+      },
+      push(path: RoutePath, search?: any, state?: any) {
+        navigate(
+          {
+            pathname: path,
+            search: search ? stringify(search, { indices: false }) : undefined,
+          },
+          { state }
+        );
+      },
+    };
+  }, [navigate]);
+}
+
+export type RoutePath =
+  | '/login'
+  | '/sign-up'
+  | '/home'
+  | '/confirmation'
+  | '/waiting'
+  | '/inquiry-complete';

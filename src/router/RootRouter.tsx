@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 import SignInPage from '@/pages/Auth/SignIn/SignIn';
 import SignUpPage from '@/pages/Auth/SignUp/SignUp';
+import MainPage from '@/pages/Main/Main';
 
 export const RootRouter = () => {
   const router = createBrowserRouter(
@@ -21,7 +22,7 @@ export const RootRouter = () => {
         <Route path="chat-list" element={<CharRooms />} />
         <Route path="reservation" element={<ReservationIndexPage />} />
         <Route path="chat-list/*" element={<ChatRoom />} />
-        <Route path="reservation/*" element={<DetailReservation />} />
+        <Route path="main" element={<MainPage />} />
       </Route>
     )
   );

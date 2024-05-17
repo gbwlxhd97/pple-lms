@@ -54,9 +54,13 @@ button {
 
 .Divider {
   border: 1px solid $gray300;
-  width: 100% !important;
   &.Reservation {
     margin: 26px 0;
+  }
+  &.Vertical {
+    height: 15px;
+    border: 1px solid $gray400;
+    width: 2px;
   }
 }
 
