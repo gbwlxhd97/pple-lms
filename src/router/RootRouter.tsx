@@ -10,12 +10,14 @@ import {
   Route,
 } from 'react-router-dom';
 import SignInPage from '@/pages/Auth/SignIn/SignIn';
+import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 
 export const RootRouter = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route path="login" element={<SignInPage />} />
+        <Route path="sign-up" element={<SignUpPage />} />
         <Route path="chat-list" element={<CharRooms />} />
         <Route path="reservation" element={<ReservationIndexPage />} />
         <Route path="chat-list/*" element={<ChatRoom />} />

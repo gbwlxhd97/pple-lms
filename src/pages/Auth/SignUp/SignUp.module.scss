@@ -1,16 +1,25 @@
-.InputWrap {
+.SignUpContainer {
+  // padding: 16px 0;
+}
+
+
+.LoginButton {
   width: 100%;
-  max-width: 100%;
-  display: block;
-  align-items: flex-start;
-  justify-content: flex-start;
+  padding: 6px 0;
   margin-top: 10px;
 }
 
-.InputLabel {
-  text-align: left;
+.LabelWrap {
+  margin-top: 10px;
 }
-.InputField {
+
+.Flex {
+  display: flex;
+  margin-top: 6px;
+  gap: 4px  ;
+}
+
+.WrapInput {
   padding: 4px 10px;
   background-color: #fff;
   color: #000;
@@ -19,9 +28,9 @@
   line-height: 24px;
   border-radius: 8px;
   border: 1px solid #8b95a1;
-  margin-top: 6px;
   width: calc(100% - 20px) ;
   transition: all 0.3s ease-in-out; /* 애니메이션 추가 */
+  flex: 70%;
   &::placeholder {
       color: #dbdee2;
   }
@@ -31,4 +40,10 @@
     outline: none; /* 기본 아웃라인 제거 */
     transform: scale(1.02); /* 포커스 시 살짝 커지도록 */
   }
+}
+
+.WrapButton {
+  padding: 2px 16px;
+  width: 100%;
+  flex:30%;
 }
