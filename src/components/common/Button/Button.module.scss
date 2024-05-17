@@ -14,10 +14,12 @@ button {
   &.Primary {
     background-color: $primary;
     color: $white;
+    transition: background-color 0.2s;
   }
   &.Disabled {
     background-color: $gray300;
     color: $white;
+    transition: background-color 0.2s;
   }
   &.Reserved {
     background-color: $white;

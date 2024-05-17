@@ -1,16 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import styles from './RootLayout.module.scss';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const RootLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleAsideBar = useCallback(() => {
     setIsOpen(!isOpen);
   },[isOpen]);
+  const {pathname} = useLocation()
+  
+  const isNotLoginPage = pathname !== '/login'
 
   return (
     <div className={styles.RootLayout}>
-      <div className={styles.HeaderWrap}>
+      {
+        isNotLoginPage &&
+        <>
+          <div className={styles.HeaderWrap}>
       <div>
         홈버튼
       </div>
@@ -34,10 +40,10 @@ const RootLayout = () => {
         </aside>
         <div className={`${styles.Overlay} ${isOpen ? styles.open : ''}`} onClick={toggleAsideBar}></div>
       </div>
+        </>
+      }
       <div className={styles.Content}>
         <Outlet />
-        <h1>Welcome to My App</h1>
-        <p>This is a mobile-like centered content.</p>
       </div>
     </div>
   );

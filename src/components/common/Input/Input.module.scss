@@ -1,0 +1,27 @@
+.InputWrap {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.InputLabel {
+  text-align: left;
+}
+.InputField {
+  padding: 4px 10px;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  border-radius: 8px;
+  border: 1px solid #8b95a1;
+  margin-top: 6px;
+  width: calc(100% - 20px) ;
+  &::placeholder {
+      color: #dbdee2;
+  }
+}
