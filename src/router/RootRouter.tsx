@@ -12,6 +12,7 @@ import {
 import SignInPage from '@/pages/Auth/SignIn/SignIn';
 import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
+import AttendancePage from '@/pages/Attendance/Attendance';
 
 export const RootRouter = () => {
   const router = createBrowserRouter(
@@ -21,7 +22,7 @@ export const RootRouter = () => {
         <Route path="sign-up" element={<SignUpPage />} />
         <Route path="chat-list" element={<CharRooms />} />
         <Route path="reservation" element={<ReservationIndexPage />} />
-        <Route path="chat-list/*" element={<ChatRoom />} />
+        <Route path="attendance" element={<AttendancePage />} />
         <Route path="main" element={<MainPage />} />
       </Route>
     )

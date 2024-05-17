@@ -13,7 +13,6 @@ const Title = ({ title }: TitleProps) => {
       style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
       }}
     >
       <div className="Divider Vertical"></div>

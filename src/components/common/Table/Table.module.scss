@@ -1,0 +1,26 @@
+.TableHead {
+    background-color: skyblue;
+    width: 100%;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        > th {
+            flex: 1;
+            text-align: left;
+            padding: 8px 12px;
+        }
+    }
+}
+
+.TableBody {
+    background-color: lightgray;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        > td {
+            flex: 1;
+            text-align: left;
+            padding: 8px 12px;
+        }
+    }
+}
