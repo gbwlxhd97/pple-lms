@@ -12,23 +12,20 @@
 
 ## 폴더 구조 설명
     📦src
-    ┣ 📂assets
-    ┃ ┣ 📂icon
-    ┃ ┗ 📂logo
-    ┣ 📂components
-    ┃ ┣ 📂Layout
-    ┃ ┗ 📂common
-    ┣ 📂hooks
+    ┣ 📂assets - (이미지,폰트 저장 폴더)
+    ┣ 📂components - (컴포넌트 폴더)
+    ┃ ┗ 📂common - (재사용 하는 작은 단위의 컴포넌트 폴더)
+    ┣ 📂hooks - (커스텀 훅 폴더)
     ┣ 📂icons
     ┃ ┣ 📂icon
     ┃ ┣ 📂logo
-    ┣ 📂interfaces
-    ┣ 📂mocks
-    ┣ 📂pages
-    ┣ 📂router
-    ┣ 📂styles
+    ┣ 📂interfaces - (타입을 지정하는 인터페이스 폴더)
+    ┣ 📂mocks - mock data를 처리하는 폴더
+    ┣ 📂pages - 페이지를 담당하는 폴더
+    ┣ 📂router - 라우터를 담당하여 각 라우터를 배정하는 폴더
+    ┣ 📂styles - 스타일, 글로벌 등등..
     ┣ 📂types
-    ┣ 📂utils
+    ┣ 📂utils - (순수함수 혹은 자바스크립트 함수를 작성하는 폴더)
 
 
 ## Usage

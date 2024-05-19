@@ -1,6 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import styles from './RootLayout.module.scss';
 import { Outlet, useLocation } from 'react-router-dom';
+import HomeIcon from '@/icons/icon/HomeIcon';
+import HamburgerIcon from '@/icons/icon/HamburgerIcon';
+import CloseIcon from '@/icons/icon/CloseIcon';
+import UserIcon from '@/icons/icon/UserIcon';
+import LogoutIcon from '@/icons/icon/LogoutIcon';
 
 const RootLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,14 +22,16 @@ const RootLayout = () => {
       {isNotLoginPage && (
         <>
           <div className={styles.HeaderWrap}>
-            <div>홈버튼</div>
+            <div>
+              <HomeIcon width={24} height={24} />
+            </div>
             {isOpen ? (
               <button className={styles.Hamburger} onClick={toggleAsideBar}>
-                x
+                <CloseIcon width={18} height={18} />
               </button>
             ) : (
               <button className={styles.Hamburger} onClick={toggleAsideBar}>
-                &#9776;
+                <HamburgerIcon width={42} height={42} />
               </button>
             )}
           </div>
@@ -34,6 +41,8 @@ const RootLayout = () => {
             <aside className={styles.AsideBar}>
               <h2>Aside Bar</h2>
               <p>Some content...</p>
+              <UserIcon width={24} height={24} />
+              <LogoutIcon width={24} height={24} />
             </aside>
             <div
               className={`${styles.Overlay} ${isOpen ? styles.open : ''}`}
