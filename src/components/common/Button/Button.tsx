@@ -9,6 +9,9 @@ type ButtonProps = {
     | 'Disabled'
     | 'Reserved'
     | 'TimeActive'
+    | 'Active'
+    | 'Abled'
+    | 'TimeDisabled'
     | 'TimeDisabled'
     | 'Spacing';
   children?: ReactNode;
@@ -19,7 +22,7 @@ type ButtonProps = {
 const Button = ({ children, buttonType, className, onClick }: ButtonProps) => {
   return (
     <button
-      disabled={['Disabled', 'Reserved'].includes(buttonType)}
+      disabled={['Disabled', 'Active'].includes(buttonType)}
       className={`${className} ${styles[buttonType]}`}
       onClick={onClick}
     >

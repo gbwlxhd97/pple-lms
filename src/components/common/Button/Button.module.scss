@@ -1,9 +1,16 @@
 @import '@/styles/theme.scss';
 
 button {
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s;
   &.Gray {
     background-color: $gray500;
+    color: $white;
+  }
+  &.Active {
+    background-color: $purple1;
     color: $white;
   }
   &.White {
@@ -17,10 +24,13 @@ button {
     transition: background-color 0.2s;
   }
   &.Disabled {
-    background-color: $gray300;
-    color: $white;
-    transition: background-color 0.2s;
+    background-color: $gray0;
+    color: $gray200;
     pointer-events: none;
+  }
+  &.Abled {
+    background-color: $purple2;
+    color: $purple1;
   }
   &.Reserved {
     background-color: $white;

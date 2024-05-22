@@ -32,7 +32,11 @@ const SignInPage = () => {
 
   return (
     <div className={styles.SignInContainer}>
-      <h2>
+      <h2
+        style={{
+          textAlign: 'center',
+        }}
+      >
         AI&SW
         <br />
         새싹인재 양성교육
@@ -53,7 +57,7 @@ const SignInPage = () => {
         label="비밀번호"
       />
       <Button
-        buttonType={isValidateButton ? 'Primary' : 'Disabled'}
+        buttonType={isValidateButton ? 'Active' : 'Disabled'}
         className={styles.LoginButton}
         onClick={() => {
           handlePushRouter('login');
@@ -62,7 +66,7 @@ const SignInPage = () => {
         로그인
       </Button>
       <Button
-        buttonType="Primary"
+        buttonType="Abled"
         className={styles.LoginButton}
         onClick={() => {
           handlePushRouter('sign-up');
