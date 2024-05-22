@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       <div className={styles.InputLabel}>{props.label}</div>
       <input
         className={`${props.className} ${styles.InputField}`}
-        ref={ref} // 이 부분이 추가되었습니다.
+        ref={ref}
         {...props}
       />
     </div>

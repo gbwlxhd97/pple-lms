@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 const handleResponse = (response: AxiosResponse) => {
