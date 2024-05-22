@@ -7,18 +7,20 @@ import Button from '../Button/Button';
 
 type TimerProps = {
   duration: number; // in seconds
-  onComplete: () => void;
+  onComplete: any;
   isComplete: boolean;
 };
 
 const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [authCode, setAuthCode] = useState('');
+  const [authCodeStatus, setAuthCodeStatus] = useState<
+    'ING' | 'ERROR' | 'SUCCESS'
+  >('ING');
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     setTimeLeft(duration);
-  }, [duration]);
-
+  }, [duration, isComplete]);
   useEffect(() => {
     if (timeLeft <= 0) {
       return;
@@ -43,12 +45,16 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
       const res = await memberAPIList.memberIdentityCodeCheck(payload);
       console.log(res);
       if (res) {
-        onComplete();
+        setAuthCodeStatus('SUCCESS');
+        onComplete(true);
+      } else {
+        setAuthCodeStatus('ERROR');
       }
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(isComplete, '인증번호ㄱ성공');
 
   return (
     <div className={styles.TimerContainer}>
@@ -56,7 +62,7 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
       <div className={styles.Flex}>
         <input
           type="text"
-          className={styles.WrapInput}
+          className={`${styles.WrapInput} ${authCodeStatus}`}
           placeholder="인증번호를 입력해주세요"
           onChange={(e) => {
             setAuthCode(e.target.value);
@@ -65,17 +71,27 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
         />
         <Button
           className={styles.WrapButton}
-          buttonType={authCode?.length > 0 ? 'Certification' : 'Disabled'}
+          buttonType={
+            isComplete
+              ? 'Disabled'
+              : authCode?.length > 0
+                ? 'Certification'
+                : 'Disabled'
+          }
           onClick={handleClickCheckAuthCode}
         >
           {isComplete ? '인증완료' : '인증하기'}
         </Button>
       </div>
-      <div className={styles.LeftedTime}>
-        인증번호를 입력해주세요 {durationFormatTime(timeLeft)}
+      <div className={`${styles.LeftedTime} ${authCodeStatus}`}>
+        {authCodeStatus === 'SUCCESS'
+          ? '인증이 완료되었습니다'
+          : authCodeStatus === 'ING'
+            ? `인증번호를 입력해주세요 ${durationFormatTime(timeLeft)}`
+            : `인증번호가 일치하지 않습니다 ${durationFormatTime(timeLeft)}`}
       </div>
     </div>
   );
 };
 
-export default memo(Timer);
+export default Timer;

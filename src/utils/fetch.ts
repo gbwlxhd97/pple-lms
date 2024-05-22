@@ -21,6 +21,7 @@ export const requestAPI = () => {
         headers: {
           'Content-Type': contentType ?? 'application/json',
         },
+        withCredentials: true,
       })
         .then(handleResponse)
         .catch((err) => {

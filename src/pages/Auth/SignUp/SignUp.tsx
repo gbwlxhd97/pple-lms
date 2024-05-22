@@ -37,7 +37,7 @@ const SignUpPage = () => {
   const handleClickAuthCode = async () => {
     setIsLoadin(true);
     //만약 재전송인경우 타임을 리셋한다.
-    if (isAuthCodeComplete) {
+    if (!isAuthCodeComplete) {
       setDurationTime(300);
     }
     try {
@@ -80,17 +80,27 @@ const SignUpPage = () => {
         />
         <Button
           className={styles.WrapButton}
-          buttonType={signUpInfo.tel?.length > 0 ? 'Active' : 'Disabled'}
+          buttonType={
+            isAuthCodeComplete
+              ? 'Disabled'
+              : signUpInfo.tel?.length > 0
+                ? 'Active'
+                : 'Disabled'
+          }
           onClick={handleClickAuthCode}
           isLoading={isLoading}
         >
-          {isSendAuthCode ? '재전송' : '인증번호 받기'}
+          {isAuthCodeComplete
+            ? '인증완료'
+            : isSendAuthCode
+              ? '재전송'
+              : '인증번호 받기'}
         </Button>
       </div>
       {isSendAuthCode && (
         <Timer
           duration={durationTime}
-          onComplete={() => setisAuthCodeComplete(true)}
+          onComplete={setisAuthCodeComplete}
           isComplete={isAuthCodeComplete}
         />
       )}

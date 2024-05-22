@@ -1,3 +1,4 @@
+import AssignmentCard from '../AssignmentCard/AssignmentCard';
 import Title from '../Title/Title';
 import styles from './Card.module.scss';
 
