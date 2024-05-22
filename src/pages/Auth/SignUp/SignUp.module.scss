@@ -53,3 +53,13 @@
   width: 100%;
   flex:30%;
 }
+
+.FlexCheckBoxWrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22px;
+  gap: 20px;
+  > button {
+    flex: 1;
+  }
+}

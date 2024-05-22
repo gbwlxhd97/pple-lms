@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import memberAPIList from '@/services/member';
 import { IRegister } from '@/interfaces/member';
 import Timer from '@/components/common/Timer/Timer';
+import CheckBox from '@/components/common/CheckBox/CheckBox';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -97,11 +98,15 @@ const SignUpPage = () => {
       <Input
         label="비밀번호를 입력하세요"
         name="password"
-        type="text"
+        type="password"
         placeholder="비밀번호"
         onChange={handleChange}
       />
-      <Input label="비밀번호 확인" type="text" placeholder="비밀번호 확인" />
+      <Input
+        label="비밀번호 확인"
+        type="password"
+        placeholder="비밀번호 확인"
+      />
       <Input
         label="Email"
         name="email"
@@ -116,7 +121,34 @@ const SignUpPage = () => {
         name="parent_tel"
         onChange={handleChange}
       />
-
+      <div className={styles.FlexCheckBoxWrap}>
+        <CheckBox
+          checkBoxType={
+            signUpInfo.memberRole === 'STUDENT' ? 'Active' : 'Default'
+          }
+          onClick={() => {
+            setSignUpInfo((prev) => ({
+              ...prev,
+              memberRole: 'STUDENT',
+            }));
+          }}
+        >
+          학생
+        </CheckBox>
+        <CheckBox
+          checkBoxType={
+            signUpInfo.memberRole === 'TEACHER' ? 'Active' : 'Default'
+          }
+          onClick={() => {
+            setSignUpInfo((prev) => ({
+              ...prev,
+              memberRole: 'TEACHER',
+            }));
+          }}
+        >
+          선생님
+        </CheckBox>
+      </div>
       <Button
         buttonType={isValidateSignUp ? 'Active' : 'Disabled'}
         className={styles.LoginButton}
