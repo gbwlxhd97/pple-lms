@@ -1,24 +1,39 @@
+@import '@/styles/theme.scss';
+
 .CardContainer {
-    padding: 4px 0;
-    margin: 16px 0;
+	padding: 4px 0;
+	margin: 16px 0;
 }
 
-.TitleFlex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 .Flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+
 .CardWrap {
-    border: 1px solid gray;
-    padding: 8px;
-    margin-top: 10px;
-    .Flex:not(:first-child) {
-        margin-top: 8px; /* 원하는 margin-top 값 */
-    }
+	border-radius: 10px;
+	border: 1px solid $gray100;
+	padding: 16px 20px; 
+	margin-top: 12px;
+	.Flex:not(:first-child) {
+			margin-top: 11px; /* 원하는 margin-top 값 */
+	}
+	.CardContent {
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		color: $gray400;
+		&.New {
+			font-weight: 700;
+			color: $black;
+		}
+	}
+	.CardDate {
+		color: $grayDefault;
+		font-size: 12px;
+		font-weight: 400;
+	}
 }

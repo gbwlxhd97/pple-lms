@@ -1,5 +1,10 @@
+import styles from './Title.module.scss';
+import { ArrowRightIcon } from '@/icons/icon';
+
 type TitleProps = {
   title: string;
+  className?: string;
+  isMore?: boolean;
 };
 
 /**
@@ -7,17 +12,28 @@ type TitleProps = {
  * @param param0
  * @returns
  */
-const Title = ({ title }: TitleProps) => {
+const Title = ({ title, isMore }: TitleProps) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <div className="Divider Vertical"></div>
-      <div style={{ marginLeft: '16px' }}>{title}</div>
+    <div className={styles.TitleFlex}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <div className="Divider Vertical"></div>
+        <div style={{ marginLeft: '16px' }} className={styles.CardTitle}>
+          {title}
+        </div>
+      </div>
+      {isMore && (
+        <div className={styles.CardMoreText}>
+          더 보기
+          <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
+        </div>
+      )}
     </div>
+    //
   );
 };
 

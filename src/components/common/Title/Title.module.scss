@@ -1,0 +1,20 @@
+@import '@/styles/theme.scss';
+.TitleFlex {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.CardTitle {
+	font-size: 16px;
+	font-weight: 600;
+}
+.CardMoreText {
+	color: $purple1;
+	font-size: 12px;
+	font-weight: 700;
+	cursor: pointer;
+	>img,svg {
+		margin-left: 8px;
+	}
+}

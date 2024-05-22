@@ -58,9 +58,11 @@ button {
     margin: 26px 0;
   }
   &.Vertical {
-    height: 15px;
-    border: 1px solid $gray400;
-    width: 2px;
+    height: 18px;
+    border: 1px solid $purple1;
+    background-color: $purple1;
+    width: 5px;
+    border-radius: 13px;
   }
 }
 

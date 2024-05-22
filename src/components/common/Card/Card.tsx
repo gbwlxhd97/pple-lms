@@ -9,15 +9,12 @@ type CardProps = {
 const Card = ({ title, options }: CardProps) => {
   return (
     <div className={styles.CardContainer}>
-      <div className={styles.TitleFlex}>
-        <Title title={title} />
-        <div>더 보기</div>
-      </div>
+      <Title title={title} isMore={true} />
       <div className={styles.CardWrap}>
         {options?.map((item, i) => (
           <div className={styles.Flex}>
-            <div>수학</div>
-            <div>2024.01.03</div>
+            <div className={styles.CardContent}>수학</div>
+            <div className={styles.CardDate}>2024.01.03</div>
           </div>
         ))}
       </div>
