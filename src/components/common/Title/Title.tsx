@@ -5,6 +5,7 @@ type TitleProps = {
   title: string;
   className?: string;
   isMore?: boolean;
+  count?: number;
 };
 
 /**
@@ -12,7 +13,7 @@ type TitleProps = {
  * @param param0
  * @returns
  */
-const Title = ({ title, isMore }: TitleProps) => {
+const Title = ({ title, isMore, count }: TitleProps) => {
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -25,6 +26,7 @@ const Title = ({ title, isMore }: TitleProps) => {
         <div style={{ marginLeft: '16px' }} className={styles.CardTitle}>
           {title}
         </div>
+        {count && <div className={styles.CardCount}>({count})</div>}
       </div>
       {isMore && (
         <div className={styles.CardMoreText}>

@@ -4,12 +4,14 @@ import styles from './Card.module.scss';
 type CardProps = {
   title: string;
   options: Array<any>;
+  titleiIsMore?: boolean;
+  count?: number;
 };
 
-const Card = ({ title, options }: CardProps) => {
+const Card = ({ title, options, titleiIsMore, count }: CardProps) => {
   return (
     <div className={styles.CardContainer}>
-      <Title title={title} isMore={true} />
+      <Title title={title} isMore={titleiIsMore} count={count} />
       <div className={styles.CardWrap}>
         {options?.map((item, i) => (
           <div className={styles.Flex}>
