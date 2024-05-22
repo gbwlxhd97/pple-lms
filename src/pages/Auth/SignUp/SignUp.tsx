@@ -4,6 +4,7 @@ import Button from '@/components/common/Button/Button';
 import { useEffect, useRef, useState } from 'react';
 import memberAPIList from '@/services/member';
 import { IRegister } from '@/interfaces/member';
+import Timer from '@/components/common/Timer/Timer';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -17,6 +18,12 @@ const SignUpPage = () => {
   });
   const [isSendAuthCode, setIsSendAuthCode] = useState<boolean>(false);
   const [isValidateSignUp, setIsValidateSignUp] = useState<boolean>(false);
+  const [isLoading, setIsLoadin] = useState(false);
+  /**
+   * 하위 3개 state는 timer 관련 state입니다.
+   */
+  const [durationTime, setDurationTime] = useState(300);
+  const [isAuthCodeComplete, setisAuthCodeComplete] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,19 +34,24 @@ const SignUpPage = () => {
   };
 
   const handleClickAuthCode = async () => {
-    const payload = {
-      tel: '01055121231',
-    };
-    const res = await memberAPIList.memberIdentityCheck(payload);
-    console.log(res);
-  };
-
-  const handleClickCheckAuthCode = async () => {
-    const payload = {
-      authCode: 0,
-    };
-    const res = await memberAPIList.memberIdentityCodeCheck(payload);
-    console.log(res);
+    setIsLoadin(true);
+    //만약 재전송인경우 타임을 리셋한다.
+    if (isAuthCodeComplete) {
+      setDurationTime(300);
+    }
+    try {
+      const payload = {
+        tel: signUpInfo.tel,
+      };
+      const res = await memberAPIList.memberIdentityCheck(payload);
+      if (res) {
+        setIsSendAuthCode(true);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoadin(false);
+    }
   };
 
   useEffect(() => {
@@ -69,28 +81,17 @@ const SignUpPage = () => {
           className={styles.WrapButton}
           buttonType={signUpInfo.tel?.length > 0 ? 'Active' : 'Disabled'}
           onClick={handleClickAuthCode}
+          isLoading={isLoading}
         >
-          {isSendAuthCode ? '재전송' : '인증번호 받기 '}
+          {isSendAuthCode ? '재전송' : '인증번호 받기'}
         </Button>
       </div>
       {isSendAuthCode && (
-        <>
-          <div className={styles.LabelWrap}>인증번호</div>
-          <div className={styles.Flex}>
-            <input
-              type="text"
-              className={styles.WrapInput}
-              placeholder="인증번호를 입력해주세요"
-            />
-            <Button
-              className={styles.WrapButton}
-              buttonType="Disabled"
-              onClick={handleClickCheckAuthCode}
-            >
-              인증하기
-            </Button>
-          </div>
-        </>
+        <Timer
+          duration={durationTime}
+          onComplete={() => setisAuthCodeComplete(true)}
+          isComplete={isAuthCodeComplete}
+        />
       )}
 
       <Input

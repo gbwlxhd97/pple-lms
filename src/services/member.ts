@@ -1,5 +1,6 @@
 import { IRegister } from '@/interfaces/member';
 import { requestAPI } from '@/utils/fetch';
+import axios from 'axios';
 
 type identityCodeBody = {
   tel: string;

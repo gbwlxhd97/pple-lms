@@ -4,7 +4,7 @@ button {
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
-  transition: background-color 0.2s;
+  transition: background-color 0.4s;
   padding: 12px 0;
   &.Gray {
     background-color: $gray500;
@@ -22,7 +22,6 @@ button {
   &.Primary {
     background-color: $primary;
     color: $white;
-    transition: background-color 0.2s;
   }
   &.Disabled {
     background-color: $gray0;
@@ -52,5 +51,9 @@ button {
   &.Spacing {
     background-color: $spacing400;
     color: $white;
+  }
+  &.Certification {
+    color: $white;
+    background-color: $gray400;
   }
 }

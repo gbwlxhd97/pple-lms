@@ -9,7 +9,7 @@ import initMocks from '@/mocks/index.js';
  * 개발환경에서만 실행해줍니다.
  */
 if (import.meta.env.DEV) {
-  await initMocks();
+  // await initMocks();
 }
 
 const queryClient = new QueryClient();

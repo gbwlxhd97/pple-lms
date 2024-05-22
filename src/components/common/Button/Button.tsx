@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import styles from './Button.module.scss';
+import { TailSpin } from 'react-loader-spinner';
 
 type ButtonProps = {
   buttonType:
@@ -12,21 +13,49 @@ type ButtonProps = {
     | 'Active'
     | 'Abled'
     | 'TimeDisabled'
-    | 'TimeDisabled'
+    | 'Certification'
     | 'Spacing';
   children?: ReactNode;
   className?: string;
   onClick?: () => void;
+  isLoading?: boolean;
 };
 
-const Button = ({ children, buttonType, className, onClick }: ButtonProps) => {
+const Button = ({
+  children,
+  buttonType,
+  className,
+  onClick,
+  isLoading,
+}: ButtonProps) => {
   return (
     <button
-      disabled={['Disabled', 'Active'].includes(buttonType)}
+      disabled={['Disabled'].includes(buttonType)}
       className={`${className} ${styles[buttonType]}`}
       onClick={onClick}
     >
-      {children}
+      {isLoading ? (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <TailSpin
+            visible={true}
+            height="24"
+            width="24"
+            color="#c7c7c7"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };
