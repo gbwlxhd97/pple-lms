@@ -9,15 +9,15 @@ type AssignmentProps = {
 
 const AssignmentCard = ({ title, description, dDay }: AssignmentProps) => {
   return (
-    <>
-      <div className={styles.AssignmentCardContainer}>
+    <div>
+      <div className={styles.AssignmentCardWrapper}>
         <div className={styles.AssignmentDescription}>{description}</div>
         <div className={styles.AssignmentTitleFlex}>
           <div className={styles.AssignmentDday}>{title}</div>
           <div className={styles.AssignmentTitle}>D-{dDay}</div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

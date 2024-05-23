@@ -1,10 +1,10 @@
 @import '@/styles/theme.scss';
 
-.AssignmentCardContainer {
+.AssignmentCardWrapper {
   padding: 20px;
-  border-radius: 10px;
-  margin-top: 12px;
   background-color: $purple2;
+  min-width: 300px;
+  border-radius: 10px;
   &.Blue {
     background-color: $purple2;
   }
@@ -17,6 +17,8 @@
   color: $gray400;
   font-size: 14px;
   font-weight: 500;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
 }
 
 .AssignmentTitleFlex {
