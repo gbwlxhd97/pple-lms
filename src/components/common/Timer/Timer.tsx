@@ -68,6 +68,7 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
             setAuthCode(e.target.value);
           }}
           ref={inputRef}
+          disabled={isComplete}
         />
         <Button
           className={styles.WrapButton}
@@ -83,7 +84,7 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
           {isComplete ? '인증완료' : '인증하기'}
         </Button>
       </div>
-      <div className={`${styles.LeftedTime} ${authCodeStatus}`}>
+      <div className={`${styles.LeftedTime} ${styles[authCodeStatus]}`}>
         {authCodeStatus === 'SUCCESS'
           ? '인증이 완료되었습니다'
           : authCodeStatus === 'ING'

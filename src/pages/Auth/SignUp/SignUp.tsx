@@ -102,6 +102,7 @@ const SignUpPage = () => {
           className={styles.WrapInput}
           name="tel"
           onChange={handleChange}
+          disabled={isAuthCodeComplete}
         />
         <Button
           className={styles.WrapButton}
