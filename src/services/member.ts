@@ -32,8 +32,8 @@ const memberShowMyInfo = async (id: string) => {
   return data;
 };
 
-const memberShow = async (id: string) => {
-  const { data } = await requestAPI().get(`/user/showMyInfoform/${id}`);
+const memberShowMainPage = async () => {
+  const { data } = await requestAPI().get(`/user/showMyInfoform`);
   return data;
 };
 
@@ -42,7 +42,7 @@ const memberAPIList = {
   memberIdentityCodeCheck,
   memberRegister,
   memberShowMyInfo,
-  memberShow,
+  memberShowMainPage,
 };
 
 export default memberAPIList;

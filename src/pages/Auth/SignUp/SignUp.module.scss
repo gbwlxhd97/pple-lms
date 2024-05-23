@@ -33,7 +33,7 @@
   font-size: 16px;
   border-radius: 8px;
   border: 1.5px solid $gray100;
-  width: calc(100% - 20px) ;
+  width: 100%;
   transition: all 0.3s ease-in-out; /* 애니메이션 추가 */
   flex: 70%;
   &::placeholder {
