@@ -1,3 +1,4 @@
+import authAPIList from './auth';
 import memberAPIList from './member';
 
-export default { memberAPIList };
+export default { memberAPIList, authAPIList };

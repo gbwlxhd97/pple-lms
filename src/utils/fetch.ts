@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -11,6 +12,13 @@ const handleResponse = (response: AxiosResponse) => {
   return response;
 };
 
+axiosInstance?.interceptors.request.use((config) => {
+  const session = Cookies.get('memberSessionKey');
+  if (session) {
+    config.headers['memberSessionKey'] = `${session}`;
+  }
+  return config;
+});
 export const requestAPI = () => {
   const request = (method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') => {
     return (url: string, bodyJson?: any, contentType?: string) => {

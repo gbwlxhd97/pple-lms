@@ -3,10 +3,13 @@ import styles from './SignIn.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import Input from '@/components/common/Input/Input';
 import { useRouter } from '@/hooks/useRouter';
+import authAPIList from '@/services/auth';
+import { handleKeyDown } from '@/utils';
+import Cookies from 'js-cookie';
 
 const SignInPage = () => {
   const [loginInfo, setLoginInfo] = useState({
-    id: '',
+    tel: '',
     password: '',
   });
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,14 +23,23 @@ const SignInPage = () => {
   };
 
   const isValidateButton =
-    loginInfo.id.length > 0 && loginInfo.password.length > 0;
+    loginInfo.tel.length > 0 && loginInfo.password.length > 0;
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  const handlePushRouter = (route: string) => {
-    route === 'login' ? router.push('/home') : router.push('/sign-up');
+  const handleLogin = async () => {
+    try {
+      const res = await authAPIList.login(loginInfo);
+      console.log(res);
+      if (res) {
+        Cookies.set('memberSessionKey', res);
+        router.push('/main');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -42,9 +54,9 @@ const SignInPage = () => {
         새싹인재 양성교육
       </h2>
       <Input
-        type="text"
+        type="tel"
         placeholder="전화번호를 입력하세요"
-        name="id"
+        name="tel"
         onChange={handleChange}
         label="전화번호"
         ref={inputRef}
@@ -55,13 +67,12 @@ const SignInPage = () => {
         name="password"
         onChange={handleChange}
         label="비밀번호"
+        onKeyDown={(e) => handleKeyDown(e, handleLogin)}
       />
       <Button
         buttonType={isValidateButton ? 'Active' : 'Disabled'}
         className={styles.LoginButton}
-        onClick={() => {
-          handlePushRouter('login');
-        }}
+        onClick={handleLogin}
       >
         로그인
       </Button>
@@ -69,7 +80,7 @@ const SignInPage = () => {
         buttonType="Abled"
         className={styles.LoginButton}
         onClick={() => {
-          handlePushRouter('sign-up');
+          router.push('/sign-up');
         }}
       >
         회원가입

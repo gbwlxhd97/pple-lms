@@ -7,6 +7,7 @@ import { IRegister } from '@/interfaces/member';
 import Timer from '@/components/common/Timer/Timer';
 import CheckBox from '@/components/common/CheckBox/CheckBox';
 import { useRouter } from '@/hooks/useRouter';
+import { validateForm } from '@/utils/validate';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -21,7 +22,6 @@ const SignUpPage = () => {
     passwordMatch: false,
   });
   const [isSendAuthCode, setIsSendAuthCode] = useState<boolean>(false);
-  const [isValidateSignUp, setIsValidateSignUp] = useState<boolean>(false);
   const [isLoading, setIsLoadin] = useState(false);
 
   const router = useRouter();
@@ -81,7 +81,8 @@ const SignUpPage = () => {
     inputRef.current?.focus();
   }, []);
 
-  useEffect(() => {}, [isValidateSignUp]);
+  const isFormValid = validateForm(signUpInfo, isAuthCodeComplete);
+  console.log(isFormValid);
 
   return (
     <>
@@ -158,7 +159,7 @@ const SignUpPage = () => {
       <Input
         label="보호자 전화번호"
         type="number"
-        placeholder="보호자 전화번호를 입력하세요"
+        placeholder="보호자 전화번호를 입력하세요 (-) 제외하고 입력하세요"
         name="parent_tel"
         onChange={handleChange}
       />
@@ -191,7 +192,7 @@ const SignUpPage = () => {
         </CheckBox>
       </div>
       <Button
-        buttonType={isValidateSignUp ? 'Active' : 'Disabled'}
+        buttonType={isFormValid ? 'Active' : 'Disabled'}
         className={styles.LoginButton}
         onClick={handleSubmit}
       >

@@ -1,7 +1,10 @@
 import { IRegister } from '@/interfaces/member';
 import { requestAPI } from '@/utils/fetch';
 import axios from 'axios';
-
+/**
+ * api가 member와 auth로 구분되어 있는데
+ * member 라우트가 회원가입쪽 api이기 때문에 member와 auth로 분리함
+ */
 type identityCodeBody = {
   tel: string;
 };
