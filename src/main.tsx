@@ -30,6 +30,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               color: '#ff6969',
             },
           },
+          loading: {
+            style: {
+              color: '#7879F1',
+            },
+          },
         }}
       />
       <RootRouter />
