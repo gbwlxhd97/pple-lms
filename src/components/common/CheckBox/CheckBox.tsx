@@ -16,7 +16,7 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   return (
     <button
-      className={`${className} ${styles[checkBoxType]}`}
+      className={`${styles.CheckBoxContainer} ${styles[checkBoxType]}`}
       onClick={onClick}
     >
       <div className={styles.CheckBoxFlex}>

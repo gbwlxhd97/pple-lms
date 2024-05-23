@@ -1,4 +1,3 @@
-import AssignmentCard from '../AssignmentCard/AssignmentCard';
 import Title from '../Title/Title';
 import styles from './Card.module.scss';
 
@@ -14,8 +13,8 @@ const Card = ({ title, options, titleiIsMore, count }: CardProps) => {
     <div className={styles.CardContainer}>
       <Title title={title} isMore={titleiIsMore} count={count} />
       <div className={styles.CardWrap}>
-        {options?.map((item, i) => (
-          <div className={styles.Flex}>
+        {options?.map((item: any, i: number) => (
+          <div className={styles.Flex} key={i}>
             <div className={styles.CardContent}>수학</div>
             <div className={styles.CardDate}>2024.01.03</div>
           </div>
