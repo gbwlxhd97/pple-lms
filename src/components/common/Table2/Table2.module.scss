@@ -1,0 +1,30 @@
+@import '@/styles/theme.scss';
+
+.TableHead {
+    background-color: $purple2;
+    width: 100%;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        color: gray;
+        > th {
+            flex: 1;
+            text-align: left;
+            padding: 8px 12px;
+        }
+    }
+}
+
+.TableBody {
+    background-color: white;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        > td {
+            flex: 1;
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid $gray100;
+        }
+    }
+}

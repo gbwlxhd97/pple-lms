@@ -13,6 +13,7 @@ import SignInPage from '@/pages/Auth/SignIn/SignIn';
 import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
+import NoticePage from '@/pages/Notice/Notice';
 
 export const RootRouter = () => {
   const router = createBrowserRouter(
@@ -24,6 +25,7 @@ export const RootRouter = () => {
         <Route path="reservation" element={<ReservationIndexPage />} />
         <Route path="attendance" element={<AttendancePage />} />
         <Route path="main" element={<MainPage />} />
+        <Route path="notice" element={<NoticePage />} />
       </Route>
     )
   );
