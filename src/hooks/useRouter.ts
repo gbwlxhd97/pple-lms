@@ -30,7 +30,7 @@ export function useRouter() {
 export type RoutePath =
   | '/login'
   | '/sign-up'
-  | '/home'
+  | '/main'
   | '/confirmation'
   | '/waiting'
   | '/inquiry-complete';

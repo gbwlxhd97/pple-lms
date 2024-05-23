@@ -5,4 +5,6 @@ export interface IRegister {
   email: string;
   memberRole: 'STUDENT' | 'TEACHER';
   parent_tel: string;
+  passwordConfirm: string;
+  passwordMatch?: boolean;
 }

@@ -6,6 +6,7 @@ import memberAPIList from '@/services/member';
 import { IRegister } from '@/interfaces/member';
 import Timer from '@/components/common/Timer/Timer';
 import CheckBox from '@/components/common/CheckBox/CheckBox';
+import { useRouter } from '@/hooks/useRouter';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,10 +17,15 @@ const SignUpPage = () => {
     email: '',
     memberRole: 'STUDENT', // select default
     parent_tel: '',
+    passwordConfirm: '',
+    passwordMatch: false,
   });
   const [isSendAuthCode, setIsSendAuthCode] = useState<boolean>(false);
   const [isValidateSignUp, setIsValidateSignUp] = useState<boolean>(false);
   const [isLoading, setIsLoadin] = useState(false);
+
+  const router = useRouter();
+
   /**
    * 하위 3개 state는 timer 관련 state입니다.
    */
@@ -28,10 +34,18 @@ const SignUpPage = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setSignUpInfo((prevContactInfo) => ({
-      ...prevContactInfo,
-      [name]: value,
-    }));
+
+    setSignUpInfo((prevState) => {
+      const updatedState = {
+        ...prevState,
+        [name]: value,
+      };
+
+      return {
+        ...updatedState,
+        passwordMatch: updatedState.password === updatedState.passwordConfirm,
+      };
+    });
   };
 
   const handleClickAuthCode = async () => {
@@ -55,9 +69,19 @@ const SignUpPage = () => {
     }
   };
 
+  const handleSubmit = async () => {
+    const res = await memberAPIList.memberRegister(signUpInfo);
+    console.log(res);
+    if (res) {
+      router.push('/main');
+    }
+  };
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  useEffect(() => {}, [isValidateSignUp]);
 
   return (
     <>
@@ -73,7 +97,7 @@ const SignUpPage = () => {
       <div className={styles.Flex}>
         <input
           type="text"
-          placeholder="전화번호를 입력하세요"
+          placeholder="전화번호를 입력하세요 (-) 제외하고 입력하세요"
           className={styles.WrapInput}
           name="tel"
           onChange={handleChange}
@@ -116,7 +140,14 @@ const SignUpPage = () => {
         label="비밀번호 확인"
         type="password"
         placeholder="비밀번호 확인"
+        name="passwordConfirm"
+        onChange={handleChange}
       />
+      {signUpInfo.passwordConfirm.length > 0 && !signUpInfo.passwordMatch && (
+        <div className={styles.PasswordMissMatch}>
+          비밀번호가 일치하지 않습니다.
+        </div>
+      )}
       <Input
         label="Email"
         name="email"
@@ -162,6 +193,7 @@ const SignUpPage = () => {
       <Button
         buttonType={isValidateSignUp ? 'Active' : 'Disabled'}
         className={styles.LoginButton}
+        onClick={handleSubmit}
       >
         회원가입
       </Button>
