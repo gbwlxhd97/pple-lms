@@ -6,6 +6,7 @@ import { useRouter } from '@/hooks/useRouter';
 import authAPIList from '@/services/auth';
 import { handleKeyDown } from '@/utils';
 import Cookies from 'js-cookie';
+import toast from 'react-hot-toast';
 
 const SignInPage = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -32,13 +33,15 @@ const SignInPage = () => {
   const handleLogin = async () => {
     try {
       const res = await authAPIList.login(loginInfo);
-      console.log(res);
       if (res) {
         Cookies.set('memberSessionKey', res);
         router.push('/main');
       }
     } catch (error) {
       console.log(error);
+      toast.error(
+        '전화번호 혹은 비밀번호를 잘못 입력하셨거나 등록되지 않은 전화번호 입니다.'
+      );
     }
   };
 

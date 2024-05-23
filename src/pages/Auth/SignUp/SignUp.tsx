@@ -82,7 +82,6 @@ const SignUpPage = () => {
   }, []);
 
   const isFormValid = validateForm(signUpInfo, isAuthCodeComplete);
-  console.log(isFormValid);
 
   return (
     <>

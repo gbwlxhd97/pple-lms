@@ -38,10 +38,7 @@ export const requestAPI = () => {
           if (err.response?.status !== 401) {
             return Promise.reject(err);
           }
-          return Promise.resolve(err);
-          // 무한 루프 방지 eject
-          //   axiosInstance.interceptors.response.eject(0);
-          //   return axiosInstance
+          throw err;
         });
     };
   };

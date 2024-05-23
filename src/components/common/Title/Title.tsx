@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
 
@@ -14,6 +15,9 @@ type TitleProps = {
  * @returns
  */
 const Title = ({ title, isMore, count }: TitleProps) => {
+  const loadingToast = () => {
+    toast.loading('준비중인 기능입니다.');
+  };
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -29,7 +33,7 @@ const Title = ({ title, isMore, count }: TitleProps) => {
         {count && <div className={styles.CardCount}>({count})</div>}
       </div>
       {isMore && (
-        <div className={styles.CardMoreText}>
+        <div className={styles.CardMoreText} onClick={loadingToast}>
           더 보기
           <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
         </div>
