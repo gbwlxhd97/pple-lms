@@ -3,13 +3,17 @@
 .AssignmentCardWrapper {
   padding: 20px;
   background-color: $purple2;
-  min-width: 300px;
+  min-width: 200px;
   border-radius: 10px;
+  transition: transform 0.2s ease;
   &.Blue {
     background-color: $purple2;
   }
   &.Pink {
     background-color: $pink200;
+  }
+  &.dragging {
+    transform: scale(1.02); // 드래그 중일 때 카드 확대
   }
 }
 
