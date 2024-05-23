@@ -97,7 +97,7 @@ const SignUpPage = () => {
       <div className={styles.LabelWrap}>전화번호</div>
       <div className={styles.Flex}>
         <input
-          type="text"
+          type="number"
           placeholder="전화번호를 입력하세요 (-) 제외하고 입력하세요"
           className={styles.WrapInput}
           name="tel"
