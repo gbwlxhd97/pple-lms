@@ -6,6 +6,7 @@ import HamburgerIcon from '@/icons/icon/HamburgerIcon';
 import CloseIcon from '@/icons/icon/CloseIcon';
 import UserIcon from '@/icons/icon/UserIcon';
 import LogoutIcon from '@/icons/icon/LogoutIcon';
+import ASidebar from '../Aside/Aside';
 
 const RootLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const RootLayout = () => {
 
   return (
     <div className={styles.RootLayout}>
-      {isNotLoginPage && (
+      {/* {isNotLoginPage && (
         <>
           <div className={styles.HeaderWrap}>
             <div>
@@ -50,7 +51,8 @@ const RootLayout = () => {
             ></div>
           </div>
         </>
-      )}
+      )} */}
+      <ASidebar />
       {pathname !== '/login' && (
         <>
           <div className={styles.HeaderTitle}>{headerTitle}</div>
