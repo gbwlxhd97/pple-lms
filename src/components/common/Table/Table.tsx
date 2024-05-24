@@ -8,23 +8,25 @@ interface TableProps {
 
 const Table = ({ tableBody, tableHead }: TableProps) => {
   return (
-    <table style={{ width: '100%' }}>
-      <thead className={styles.TableHead}>
-        <tr>
-          {tableHead.map((column, index) => (
-            <th key={index}>{column}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody className={styles.TableBody}>
-        {tableBody.map((row) => (
+    <div className={styles.TableContainer}>
+      <table style={{ width: '100%' }}>
+        <thead className={styles.TableHead}>
           <tr>
-            <td>{row.key}</td>
-            <td>{row.value}</td>
+            {tableHead.map((column, index) => (
+              <th key={index}>{column}</th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className={styles.TableBody}>
+          {tableBody.map((row) => (
+            <tr>
+              <td>{row.key}</td>
+              <td>{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

@@ -79,3 +79,11 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+table {
+  border-spacing: 0;
+  border-color: transparent;
+  border-radius: 10px;
+  border-collapse: collapse;
+  border-style: hidden;
+}

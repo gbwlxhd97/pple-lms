@@ -4,6 +4,7 @@ import Title from '@/components/common/Title/Title';
 import memberAPIList from '@/services/member';
 import { useEffect } from 'react';
 import AssignmentList from '@/components/common/AssignmentCardList/AssignmentCardList';
+import Cookies from 'js-cookie';
 
 const MainPage = () => {
   /**
@@ -11,7 +12,8 @@ const MainPage = () => {
    * 추후 react-query로 변경할 것입니다.
    */
   const getInfo = async () => {
-    const res = await memberAPIList.memberShowMainPage();
+    const session: any = Cookies.get('memberSessionKey');
+    const res = await memberAPIList.memberShowMainPage(session);
     console.log(res);
   };
 

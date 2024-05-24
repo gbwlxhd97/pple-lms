@@ -32,8 +32,10 @@ const memberShowMyInfo = async (id: string) => {
   return data;
 };
 
-const memberShowMainPage = async () => {
-  const { data } = await requestAPI().get(`/user/showMyInfoform`);
+const memberShowMainPage = async (ssesion: string) => {
+  const { data } = await requestAPI().get(
+    `/user/showMyInfoform?memberSessionKey=${ssesion}`
+  );
   return data;
 };
 

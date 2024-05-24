@@ -1,26 +1,38 @@
+@import '@/styles/theme.scss';
+
+.TableContainer {
+    border-radius: 7px 7px 0px 0px;
+}
+
 .TableHead {
-    background-color: skyblue;
+    border-radius: 10px;
+    background: #F3F5FF;
     width: 100%;
+    color: $gray300;
+    font-size: 14px;
+    font-weight: 600;
     > tr {
         display: flex;
         align-items: flex-start;
         > th {
             flex: 1;
             text-align: left;
-            padding: 8px 12px;
+            padding: 12px 14px;
         }
     }
 }
 
 .TableBody {
-    background-color: lightgray;
+    color:$gray400;
+    font-weight: 600;
     > tr {
         display: flex;
         align-items: flex-start;
         > td {
+            border-bottom: 1px solid $gray0;
             flex: 1;
             text-align: left;
-            padding: 8px 12px;
+            padding: 12px 14px;
         }
     }
 }
