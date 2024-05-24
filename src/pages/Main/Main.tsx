@@ -22,16 +22,20 @@ const MainPage = () => {
   }, []);
   return (
     <>
-      <div>학생님, 환영합니다.</div>
+      <div className={styles.MainUserWelcome}>
+        <span>학생</span>님, 환영합니다.
+      </div>
       <Card title="LMS 공지사항" options={[0, 2, 3]} titleiIsMore={true} />
       <Card title="수강중인 강의" options={[0, 2, 3]} titleiIsMore={true} />
-      <Title title={'나의 과제'} isMore={true} count={5} />
-      <AssignmentList
-        dataList={[1, 2, 3, 3, 4, 5, 6]}
-        dDay="1"
-        description="수학 레포트 어쩌구 저쩌구 어쩌구 저쩌구 어쩌..."
-        title="나의 과제"
-      />
+      <div className={styles.MainMyAssignmentWrap}>
+        <Title title={'나의 과제'} isMore={true} count={5} />
+        <AssignmentList
+          dataList={[1, 2, 3, 3, 4, 5, 6]}
+          dDay="1"
+          description="수학 레포트 어쩌구 저쩌구 어쩌구 저쩌구 어쩌..."
+          title="나의 과제"
+        />
+      </div>
     </>
   );
 };

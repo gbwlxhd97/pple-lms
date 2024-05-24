@@ -84,7 +84,7 @@ const SignUpPage = () => {
   const isFormValid = validateForm(signUpInfo, isAuthCodeComplete);
 
   return (
-    <>
+    <div className={styles.SignUpContainer}>
       <Input
         label="이름"
         type="text"
@@ -93,34 +93,36 @@ const SignUpPage = () => {
         name="name"
         onChange={handleChange}
       />
-      <div className={styles.LabelWrap}>전화번호</div>
-      <div className={styles.Flex}>
-        <input
-          type="number"
-          placeholder="전화번호를 입력하세요 (-) 제외하고 입력하세요"
-          className={styles.WrapInput}
-          name="tel"
-          onChange={handleChange}
-          disabled={isAuthCodeComplete}
-        />
-        <Button
-          className={styles.WrapButton}
-          buttonType={
-            isAuthCodeComplete
-              ? 'Disabled'
-              : signUpInfo.tel?.length > 0
-                ? 'Active'
-                : 'Disabled'
-          }
-          onClick={handleClickAuthCode}
-          isLoading={isLoading}
-        >
-          {isAuthCodeComplete
-            ? '인증완료'
-            : isSendAuthCode
-              ? '재전송'
-              : '인증번호 받기'}
-        </Button>
+      <div>
+        <div className={styles.LabelWrap}>전화번호</div>
+        <div className={styles.Flex}>
+          <input
+            type="number"
+            placeholder="전화번호를 입력하세요 (-) 제외하고 입력하세요"
+            className={styles.WrapInput}
+            name="tel"
+            onChange={handleChange}
+            disabled={isAuthCodeComplete}
+          />
+          <Button
+            className={styles.WrapButton}
+            buttonType={
+              isAuthCodeComplete
+                ? 'Disabled'
+                : signUpInfo.tel?.length > 0
+                  ? 'Active'
+                  : 'Disabled'
+            }
+            onClick={handleClickAuthCode}
+            isLoading={isLoading}
+          >
+            {isAuthCodeComplete
+              ? '인증완료'
+              : isSendAuthCode
+                ? '재전송'
+                : '인증번호 받기'}
+          </Button>
+        </div>
       </div>
       {isSendAuthCode && (
         <Timer
@@ -198,7 +200,7 @@ const SignUpPage = () => {
       >
         회원가입
       </Button>
-    </>
+    </div>
   );
 };
 

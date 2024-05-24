@@ -1,3 +1,5 @@
+@import '@/styles/theme.scss';
+
 .MainAssignmentWrapper {
   display: flex;
   align-items: center;
@@ -6,3 +8,17 @@
   margin-top: 10px;
   overflow: hidden;
 } 
+
+.MainUserWelcome{
+  color: $black;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 180.276%;
+  > span {
+    color: $purple1;
+  }
+}
+
+.MainMyAssignmentWrap {
+  padding: 40px 0;
+}
