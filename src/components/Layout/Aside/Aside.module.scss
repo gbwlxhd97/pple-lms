@@ -21,6 +21,13 @@
   gap: 20px;
 }
 
+.TitleBetweenFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 16px 18px 16px;
+}
+
 .NeighborFlex {
   display: flex;
   gap: 4px;

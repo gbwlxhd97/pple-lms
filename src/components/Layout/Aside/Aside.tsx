@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import styles from './Aside.module.scss';
 
@@ -8,7 +8,11 @@ import CloseIcon from '@/icons/icon/CloseIcon';
 import UserIcon from '@/icons/icon/UserIcon';
 import LogoutIcon from '@/icons/icon/LogoutIcon';
 
-const ASidebar = () => {
+type AsideProps = {
+  children?: ReactNode;
+};
+
+const ASidebar = ({ children }: AsideProps) => {
   const [toggle, setToggle] = useState(false);
 
   const toggleSidebar = () => {
@@ -72,7 +76,11 @@ const ASidebar = () => {
           </Menu>
         </Sidebar>
       </div>
-      <button onClick={toggleSidebar}>Toggle Sidebar</button>
+      <div className={styles.TitleBetweenFlex}>
+        <HomeIcon width={18} height={18} />
+        {children}
+        <HamburgerIcon width={18} height={18} onClick={toggleSidebar} />
+      </div>
     </>
   );
 };

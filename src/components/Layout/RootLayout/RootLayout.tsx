@@ -20,43 +20,18 @@ const RootLayout = () => {
 
   return (
     <div className={styles.RootLayout}>
-      {/* {isNotLoginPage && (
-        <>
-          <div className={styles.HeaderWrap}>
-            <div>
-              <HomeIcon width={24} height={24} />
-            </div>
-            {isOpen ? (
-              <button className={styles.Hamburger} onClick={toggleAsideBar}>
-                <CloseIcon width={18} height={18} />
-              </button>
-            ) : (
-              <button className={styles.Hamburger} onClick={toggleAsideBar}>
-                <HamburgerIcon width={42} height={42} />
-              </button>
-            )}
-          </div>
-          <div
-            className={`${styles.AsideContainer} ${isOpen ? styles.open : ''}`}
-          >
-            <aside className={styles.AsideBar}>
-              <h2>Aside Bar</h2>
-              <p>Some content...</p>
-              <UserIcon width={24} height={24} />
-              <LogoutIcon width={24} height={24} />
-            </aside>
-            <div
-              className={`${styles.Overlay} ${isOpen ? styles.open : ''}`}
-              onClick={toggleAsideBar}
-            ></div>
-          </div>
-        </>
-      )} */}
-      <ASidebar />
-      {pathname !== '/login' && (
+      {pathname === '/sign-up' && (
         <>
           <div className={styles.HeaderTitle}>{headerTitle}</div>
           <div className={'Divider Reservation'} />
+        </>
+      )}
+      {pathname !== '/login' && pathname !== '/sign-up' && (
+        <>
+          <ASidebar>
+            <div className={styles.WithAsideTitle}>{headerTitle}</div>
+          </ASidebar>
+          <div className={'Divider Title'} />
         </>
       )}
       <div className={styles.Content}>
