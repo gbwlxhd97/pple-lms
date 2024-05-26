@@ -16,7 +16,6 @@ const AllianceDropdown = ({
 }: AllianceDropdownProps) => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  console.log(region,"reigon");
   
   return (
     <div className={styles.AllianceDropdownWrapper}>

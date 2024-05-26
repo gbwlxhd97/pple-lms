@@ -11,6 +11,7 @@ import { RoutePath, useRouter } from '@/hooks/useRouter';
 import authAPIList from '@/services/auth';
 import { loadingToast } from '@/utils';
 import useProfileStore from '@/stores/useProfileStore';
+import Cookies from 'js-cookie';
 
 type AsideProps = {
   children?: ReactNode;
@@ -35,6 +36,7 @@ const ASidebar = ({ children }: AsideProps) => {
       const res = await authAPIList.logout();
       if (res.status === 200) {
         clear();
+        Cookies.remove('memberSessionKey');
         routeThenCloseAside('/login');
       }
     } catch (error) {

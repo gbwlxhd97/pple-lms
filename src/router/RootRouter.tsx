@@ -13,6 +13,7 @@ import SignInPage from '@/pages/Auth/SignIn/SignIn';
 import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
+import ProtectedRoute from './ProtectedRouter';
 
 export const RootRouter = () => {
   const router = createBrowserRouter(
@@ -20,10 +21,22 @@ export const RootRouter = () => {
       <Route path="/" element={<RootLayout />}>
         <Route path="login" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
-        <Route path="chat-list" element={<CharRooms />} />
-        <Route path="reservation" element={<ReservationIndexPage />} />
-        <Route path="attendance" element={<AttendancePage />} />
-        <Route path="main" element={<MainPage />} />
+        <Route
+          path="attendance"
+          element={
+            <ProtectedRoute>
+              <AttendancePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="main"
+          element={
+            <ProtectedRoute>
+              <MainPage />
+            </ProtectedRoute>
+          }
+        />
       </Route>
     )
   );

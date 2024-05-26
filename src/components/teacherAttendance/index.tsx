@@ -2,9 +2,11 @@ import { useState } from 'react';
 import AllianceDropdown from '../attendanceSelect';
 import Button from '../common/Button/Button';
 import styles from './index.module.scss';
+import { useLocation } from 'react-router-dom';
 
 const TeacherAttendance = () => {
-  const [studySession, setStudySession] = useState("")
+  const { state } = useLocation();
+  const [studySession, setStudySession] = useState(state ?? '')
   const districtList = [
     '서울특별시 전체',
     '경기도 전체',
@@ -20,6 +22,7 @@ const TeacherAttendance = () => {
     '경상도',
     '제주도',
   ];
+  
   return (
     <>
       <AllianceDropdown
