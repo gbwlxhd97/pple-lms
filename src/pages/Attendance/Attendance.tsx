@@ -10,8 +10,8 @@ import attendAPIList from '@/services/attend';
 const AttendancePage = () => {
 
   const getTeacherSection = async () => {
-    const res = attendAPIList.getTeacherSectionTitle()
-    console.log(res);
+    // const res = attendAPIList.getTeacherSectionTitle()
+    // console.log(res);
     
   }
 
