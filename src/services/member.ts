@@ -34,7 +34,7 @@ const memberShowMyInfo = async (id: string) => {
 
 const memberShowMainPage = async (ssesion: string) => {
   const { data } = await requestAPI().get(
-    `/user/showMyInfoform?memberSessionKey=${ssesion}`
+    `/user/showMainPage`
   );
   return data;
 };

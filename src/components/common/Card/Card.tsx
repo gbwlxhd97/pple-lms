@@ -15,8 +15,8 @@ const Card = ({ title, options, titleiIsMore, count }: CardProps) => {
       <div className={styles.CardWrap}>
         {options?.map((item: any, i: number) => (
           <div className={styles.Flex} key={i}>
-            <div className={styles.CardContent}>수학</div>
-            <div className={styles.CardDate}>2024.01.03</div>
+            <div className={styles.CardContent}>{item.title}</div>
+            <div className={styles.CardDate}>{item.writeAt?.replaceAll("-",".")}</div>
           </div>
         ))}
       </div>
