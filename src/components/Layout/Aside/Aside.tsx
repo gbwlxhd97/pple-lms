@@ -107,7 +107,9 @@ const ASidebar = ({ children }: AsideProps) => {
         </Sidebar>
       </div>
       <div className={styles.TitleBetweenFlex}>
-        <HomeIcon width={18} height={18} />
+        <HomeIcon width={18} height={18} onClick={() => {
+          routeThenCloseAside('/main')
+        }} />
         {children}
         <HamburgerIcon width={18} height={18} onClick={toggleSidebar} />
       </div>

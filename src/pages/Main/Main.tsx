@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import AssignmentList from '@/components/common/AssignmentCardList/AssignmentCardList';
 import Cookies from 'js-cookie';
 import { IMainPageResponse } from '@/interfaces/member';
+import useProfileStore from '@/stores/useProfileStore';
 
 const MainPage = () => {
   const [mainData, setMainData] = useState<IMainPageResponse>();
-
+  const {name} = useProfileStore()
   /**
    * 가장 기본이 되는 get요청이며
    * 추후 react-query로 변경할 것입니다.
@@ -31,10 +32,14 @@ const MainPage = () => {
   return (
     <>
       <div className={styles.MainUserWelcome}>
-        <span>{mainData?.userName}</span>님, 환영합니다.
+        <span>{name}</span>님, 환영합니다.
       </div>
       {/* TODO 아래 언디파인 고치기 */}
-      <Card title="LMS 공지사항" options={mainData?.lmsNoticeDtos || []} titleiIsMore={true} />
+      <Card
+        title="LMS 공지사항"
+        options={mainData?.lmsNoticeDtos || []}
+        titleiIsMore={true}
+      />
       <Card title="수강중인 강의" options={[0, 2, 3]} titleiIsMore={true} />
       <div className={styles.MainMyAssignmentWrap}>
         <Title title={'나의 과제'} isMore={true} count={5} />
