@@ -6,7 +6,9 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 유지 */
 }
 
 .HeaderWrap {
@@ -66,7 +68,9 @@
 }
 
 .Content {
-  padding: 0px 16px;
+  flex: 1 1 auto;
+  overflow-y: auto; /* 변경된 부분 */
+  padding: 20px; /* 선택 사항: 내부 여백을 위해 추가 */
   height: 100%;
 }
 

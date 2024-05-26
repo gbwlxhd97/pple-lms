@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AllianceDropdown from '../attendanceSelect';
 import Button from '../common/Button/Button';
 import styles from './index.module.scss';
 import { useLocation } from 'react-router-dom';
+import attendAPIList from '@/services/attend';
 
 const TeacherAttendance = () => {
   const { state } = useLocation();
@@ -22,7 +23,16 @@ const TeacherAttendance = () => {
     '경상도',
     '제주도',
   ];
-  
+
+  const getCourse = async () => {
+    const res = await attendAPIList.getCourseSection()
+    console.log(res);
+    
+  }
+
+  useEffect(() => {
+    getCourse()
+  },[])
   return (
     <>
       <AllianceDropdown

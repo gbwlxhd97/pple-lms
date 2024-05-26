@@ -10,9 +10,21 @@ const getTeacherSectionTitle = async () => {
   return data
 }
 
+const getSection = async () => {
+  const data = await requestAPI().get('/course/showCoursePage?courseId=1');
+  return data
+}
+
+const getCourseSection = async () => {
+  const data = await requestAPI().get('/course/showCourseSection?courseId=1');
+  return data;
+};
+
 const attendAPIList = {
   startAttendTimer,
-  getTeacherSectionTitle
-}
+  getTeacherSectionTitle,
+  getSection,
+  getCourseSection,
+};
 
 export default attendAPIList;
