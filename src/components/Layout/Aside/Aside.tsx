@@ -7,6 +7,10 @@ import HamburgerIcon from '@/icons/icon/HamburgerIcon';
 import CloseIcon from '@/icons/icon/CloseIcon';
 import UserIcon from '@/icons/icon/UserIcon';
 import LogoutIcon from '@/icons/icon/LogoutIcon';
+import { RoutePath, useRouter } from '@/hooks/useRouter';
+import authAPIList from '@/services/auth';
+import { loadingToast } from '@/utils';
+import useProfileStore from '@/stores/useProfileStore';
 
 type AsideProps = {
   children?: ReactNode;
@@ -14,10 +18,28 @@ type AsideProps = {
 
 const ASidebar = ({ children }: AsideProps) => {
   const [toggle, setToggle] = useState(false);
-
+  const {name:profileName} = useProfileStore()
   const toggleSidebar = () => {
     setToggle(!toggle);
   };
+  const {clear} = useProfileStore()
+  const router = useRouter()
+
+  const routeThenCloseAside = (route: RoutePath) => {
+    router.push(route);
+    setToggle(false)
+  };
+
+  const logout = async () => {
+    try {
+      const res = await authAPIList.logout();
+      if (res.status === 200) {
+        clear();
+        routeThenCloseAside('/login');
+      }
+    } catch (error) {
+    }
+  }
 
   return (
     <>
@@ -45,16 +67,16 @@ const ASidebar = ({ children }: AsideProps) => {
             <div className={styles.UserInfoWrapper}>
               <div className={styles.InfoBetweenFlex}>
                 <CloseIcon width={18} height={18} onClick={toggleSidebar} />
-                <div>이름</div>
+                <div>{profileName}님</div>
               </div>
               <div className={styles.GapFlex}>
-                <div className={styles.NeighborFlex}>
+                <div className={styles.NeighborFlex} onClick={logout}>
                   <div>로그아웃</div>
                   <div>
                     <LogoutIcon width={18} height={18} />
                   </div>
                 </div>
-                <div className={styles.NeighborFlex}>
+                <div className={styles.NeighborFlex} onClick={loadingToast}>
                   <div>마이페이지</div>
                   <div>
                     <UserIcon width={18} height={18} />
@@ -65,10 +87,18 @@ const ASidebar = ({ children }: AsideProps) => {
             <div className="Divider Aside" />
             <div className={styles.MenuInfo}>
               <ul className={styles.SemiNeighborFlex}>
-                <li>
+                <li
+                  onClick={() => {
+                    routeThenCloseAside('/main');
+                  }}
+                >
                   <span>메인페이지</span> <HomeIcon width={18} height={18} />
                 </li>
-                <li>
+                <li
+                  onClick={() => {
+                    routeThenCloseAside('/attendance');
+                  }}
+                >
                   <span>출석</span> <HomeIcon width={18} height={18} />
                 </li>
               </ul>

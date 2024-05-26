@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <Toaster
         toastOptions={{
-          duration: 2000,
+          duration: 1000,
           success: {
             style: {
               color: '#67B472',

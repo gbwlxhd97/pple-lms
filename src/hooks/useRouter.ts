@@ -31,6 +31,6 @@ export type RoutePath =
   | '/login'
   | '/sign-up'
   | '/main'
-  | '/confirmation'
+  | '/attendance'
   | '/waiting'
   | '/inquiry-complete';

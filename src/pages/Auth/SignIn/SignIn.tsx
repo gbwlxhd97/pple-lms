@@ -7,6 +7,7 @@ import authAPIList from '@/services/auth';
 import { handleKeyDown } from '@/utils';
 import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
+import useProfileStore from '@/stores/useProfileStore';
 
 const SignInPage = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -15,6 +16,7 @@ const SignInPage = () => {
   });
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const {setName} = useProfileStore()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInfo((prevContactInfo) => ({
@@ -35,6 +37,9 @@ const SignInPage = () => {
       const res = await authAPIList.login(loginInfo);
       if (res) {
         Cookies.set('memberSessionKey', res);
+        console.log(res);
+        const name= await authAPIList.profile() 
+        setName(name)
         router.push('/main');
       }
     } catch (error) {

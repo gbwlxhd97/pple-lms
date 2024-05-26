@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
+import { loadingToast } from '@/utils';
 
 type TitleProps = {
   title: string;
@@ -15,9 +16,6 @@ type TitleProps = {
  * @returns
  */
 const Title = ({ title, isMore, count }: TitleProps) => {
-  const loadingToast = () => {
-    toast.loading('준비중인 기능입니다.');
-  };
   return (
     <div className={styles.TitleFlex}>
       <div
