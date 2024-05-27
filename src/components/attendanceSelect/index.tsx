@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { ISection } from '@/interfaces/section';
+import attendAPIList from '@/services/attend';
 
 
 
@@ -17,7 +18,15 @@ const AllianceDropdown = ({
 }: AllianceDropdownProps) => {
   const [activeDropdown, setActiveDropdown] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  
+
+  // 셀렉트 박스에서 해당 차시를 선택하면 해당 차시 학생들의 정보를 조회한다.
+  const selectAttendSection =  async () => {
+    const res = await attendAPIList.getSectionAttend(1)
+  }
+  useEffect(() => {
+
+  },[])
+
   return (
     <div className={styles.AllianceDropdownWrapper}>
       <div

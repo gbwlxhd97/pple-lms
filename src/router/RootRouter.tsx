@@ -15,6 +15,7 @@ import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
 import ProtectedRoute from './ProtectedRouter';
+import CourseDetailPage from '@/pages/Course/Detail';
 
 export const RootRouter = () => {
   const router = createBrowserRouter(
@@ -36,6 +37,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <MainPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="course/*"
+          element={
+            <ProtectedRoute>
+              <CourseDetailPage />
             </ProtectedRoute>
           }
         />

@@ -40,7 +40,6 @@ const SignInPage = () => {
         console.log(res);
         const {name}= await authAPIList.profile() 
         console.log(name);
-        
         setName(name)
         router.push('/main');
       }

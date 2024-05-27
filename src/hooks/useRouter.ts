@@ -33,4 +33,5 @@ export type RoutePath =
   | '/main'
   | '/attendance'
   | '/waiting'
-  | '/inquiry-complete';
+  | '/inquiry-complete'
+  | `/course/${string}`;

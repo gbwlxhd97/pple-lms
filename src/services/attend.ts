@@ -10,21 +10,13 @@ const getTeacherSectionTitle = async () => {
   return data
 }
 
-const getSection = async () => {
-  const data = await requestAPI().get('/course/showCoursePage?courseId=1');
-  return data
-}
-
-const getCourseSection = async () => {
-  const data = await requestAPI().get('/course/showCourseSection?courseId=1');
-  return data;
-};
-
 const getShowAttendPage = async () => {
   const data = await requestAPI().get('/attend/showAttendPage')
   return data
 }
 
+
+// 각 차시의 학생들 출석정보를 조회
 const getSectionAttend = async (id:number) => {
   const data = await requestAPI().get(
     `/attend/getSectionAttend?courseSectionId=${id}`
@@ -35,8 +27,6 @@ const getSectionAttend = async (id:number) => {
 const attendAPIList = {
   startAttendTimer,
   getTeacherSectionTitle,
-  getSection,
-  getCourseSection,
   getShowAttendPage,
   getSectionAttend,
 };
