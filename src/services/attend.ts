@@ -6,7 +6,7 @@ const startAttendTimer = async (id:any) => {
 }
 
 const getTeacherSectionTitle = async () => {
-  const data = await requestAPI().get('/attend/getSectionTitle')
+  const {data} = await requestAPI().get('/attend/getSectionTitle')
   return data
 }
 
@@ -20,11 +20,25 @@ const getCourseSection = async () => {
   return data;
 };
 
+const getShowAttendPage = async () => {
+  const data = await requestAPI().get('/attend/showAttendPage')
+  return data
+}
+
+const getSectionAttend = async (id:number) => {
+  const data = await requestAPI().get(
+    `/attend/getSectionAttend?courseSectionId=${id}`
+  );
+  return data;
+}
+
 const attendAPIList = {
   startAttendTimer,
   getTeacherSectionTitle,
   getSection,
   getCourseSection,
+  getShowAttendPage,
+  getSectionAttend,
 };
 
 export default attendAPIList;

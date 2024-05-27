@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react';
 import styles from './index.module.scss';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { ISection } from '@/interfaces/section';
 
 
 
 type AllianceDropdownProps = {
   region?: string;
   setRegion: React.Dispatch<string>;
-  options: Array<any>; 
+  options: Array<ISection>; 
 };
 const AllianceDropdown = ({
   region,
@@ -41,13 +42,13 @@ const AllianceDropdown = ({
           <div className={styles.AllianceDropdownDistrictWrapper}>
             {options?.map((district, idx) => (
               <div
-                key={district + idx}
+                key={idx}
                 onClick={() => {
-                  setRegion(district);
+                  setRegion(district.title);
                 }}
                 className={styles.AllianceDropdownDistrict}
               >
-                {district}
+                {district.title}
               </div>
             ))}
           </div>

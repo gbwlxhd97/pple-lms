@@ -15,12 +15,12 @@ export interface IMainPageResponse {
   courseNameDtos: Array<{
     id: number;
     title: string;
-    writeAt: string;
+    createdAt: string;
   }>;
   lmsNoticeDtos: Array<{
     id: number;
     title: string;
-    writeAt: string;
+    createdAt: string;
   }>;
   homeworkDtos: any;
 }

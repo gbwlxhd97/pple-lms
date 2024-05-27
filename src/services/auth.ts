@@ -7,7 +7,7 @@ type loginBody = {
 
 const login = async (requestBody: loginBody) => {
   const { data } = await requestAPI().post(
-    `/auth/loginWithSessionKey`,
+    `/auth/login`,
     requestBody
   );
   return data;
@@ -19,7 +19,7 @@ const logout = async () => {
 }
 
 const profile = async () => {
-  const {data} = await requestAPI().get('/auth/name')
+  const {data} = await requestAPI().get('/auth/profile')
   return data
 }
 

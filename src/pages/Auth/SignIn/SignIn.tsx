@@ -38,7 +38,9 @@ const SignInPage = () => {
       if (res) {
         Cookies.set('memberSessionKey', res);
         console.log(res);
-        const name= await authAPIList.profile() 
+        const {name}= await authAPIList.profile() 
+        console.log(name);
+        
         setName(name)
         router.push('/main');
       }

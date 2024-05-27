@@ -40,7 +40,11 @@ const MainPage = () => {
         options={mainData?.lmsNoticeDtos || []}
         titleiIsMore={true}
       />
-      <Card title="수강중인 강의" options={[0, 2, 3]} titleiIsMore={true} />
+      <Card
+        title="수강중인 강의"
+        options={mainData?.courseNameDtos || []}
+        titleiIsMore={true}
+      />
       <div className={styles.MainMyAssignmentWrap}>
         <Title title={'나의 과제'} isMore={true} count={5} />
         <AssignmentList
