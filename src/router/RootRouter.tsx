@@ -50,10 +50,10 @@ export const RootRouter = () => {
           }
         />
         <Route  
-          path="course/*"
+          path="notice"
           element={
             <ProtectedRoute>
-              <Route path="notice" element={<NoticePage />} />
+              <NoticePage />
             </ProtectedRoute>
           }
         />
