@@ -1,0 +1,14 @@
+.MainAssignmentWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    margin-top: 10px;
+    overflow: hidden;
+    cursor: grab; /* 드래그 가능한 커서 모양 */
+  }
+  
+  .MainAssignmentWrapper:active {
+    cursor: grabbing; /* 드래그 중일 때 커서 모양 */
+  }
+  

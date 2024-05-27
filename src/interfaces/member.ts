@@ -5,4 +5,22 @@ export interface IRegister {
   email: string;
   memberRole: 'STUDENT' | 'TEACHER';
   parent_tel: string;
+  passwordConfirm: string;
+  passwordMatch?: boolean;
+}
+
+
+export interface IMainPageResponse {
+  userName: string;
+  courseNameDtos: Array<{
+    id: number;
+    title: string;
+    createdAt: string;
+  }>;
+  lmsNoticeDtos: Array<{
+    id: number;
+    title: string;
+    createdAt: string;
+  }>;
+  homeworkDtos: any;
 }

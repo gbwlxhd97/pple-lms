@@ -1,7 +1,10 @@
 import { IRegister } from '@/interfaces/member';
 import { requestAPI } from '@/utils/fetch';
 import axios from 'axios';
-
+/**
+ * api가 member와 auth로 구분되어 있는데
+ * member 라우트가 회원가입쪽 api이기 때문에 member와 auth로 분리함
+ */
 type identityCodeBody = {
   tel: string;
 };
@@ -29,8 +32,10 @@ const memberShowMyInfo = async (id: string) => {
   return data;
 };
 
-const memberShow = async (id: string) => {
-  const { data } = await requestAPI().get(`/user/showMyInfoform/${id}`);
+const memberShowMainPage = async (ssesion: string) => {
+  const { data } = await requestAPI().get(
+    `/user/showMainPage`
+  );
   return data;
 };
 
@@ -39,7 +44,7 @@ const memberAPIList = {
   memberIdentityCodeCheck,
   memberRegister,
   memberShowMyInfo,
-  memberShow,
+  memberShowMainPage,
 };
 
 export default memberAPIList;

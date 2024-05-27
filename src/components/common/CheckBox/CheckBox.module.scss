@@ -1,7 +1,8 @@
 @import '@/styles/theme.scss';
 
-button {
-  padding: 14px 60px;
+.CheckBoxContainer {
+  padding: 14px 0px;
+  text-align: center;
   border-radius: 5px;
   border: 1px solid $gray100;
   background-color: #fff;
@@ -15,7 +16,10 @@ button {
     color: $purple1;
     font-weight: 600;
   }
-  
+  &:focus {
+    border-color: $purple1; /* 포커스 시 테두리 색상 변경 */
+    outline: none; /* 기본 아웃라인 제거 */
+  }
 }
 
 .CheckBoxFlex {

@@ -6,6 +6,8 @@ import memberAPIList from '@/services/member';
 import { IRegister } from '@/interfaces/member';
 import Timer from '@/components/common/Timer/Timer';
 import CheckBox from '@/components/common/CheckBox/CheckBox';
+import { useRouter } from '@/hooks/useRouter';
+import { validateForm } from '@/utils/validate';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,10 +18,14 @@ const SignUpPage = () => {
     email: '',
     memberRole: 'STUDENT', // select default
     parent_tel: '',
+    passwordConfirm: '',
+    passwordMatch: false,
   });
   const [isSendAuthCode, setIsSendAuthCode] = useState<boolean>(false);
-  const [isValidateSignUp, setIsValidateSignUp] = useState<boolean>(false);
   const [isLoading, setIsLoadin] = useState(false);
+
+  const router = useRouter();
+
   /**
    * 하위 3개 state는 timer 관련 state입니다.
    */
@@ -28,10 +34,18 @@ const SignUpPage = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setSignUpInfo((prevContactInfo) => ({
-      ...prevContactInfo,
-      [name]: value,
-    }));
+
+    setSignUpInfo((prevState) => {
+      const updatedState = {
+        ...prevState,
+        [name]: value,
+      };
+
+      return {
+        ...updatedState,
+        passwordMatch: updatedState.password === updatedState.passwordConfirm,
+      };
+    });
   };
 
   const handleClickAuthCode = async () => {
@@ -55,12 +69,22 @@ const SignUpPage = () => {
     }
   };
 
+  const handleSubmit = async () => {
+    const res = await memberAPIList.memberRegister(signUpInfo);
+    console.log(res);
+    if (res) {
+      router.push('/main');
+    }
+  };
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
+  const isFormValid = validateForm(signUpInfo, isAuthCodeComplete);
+
   return (
-    <>
+    <div className={styles.SignUpContainer}>
       <Input
         label="이름"
         type="text"
@@ -69,33 +93,36 @@ const SignUpPage = () => {
         name="name"
         onChange={handleChange}
       />
-      <div className={styles.LabelWrap}>전화번호</div>
-      <div className={styles.Flex}>
-        <input
-          type="text"
-          placeholder="전화번호를 입력하세요"
-          className={styles.WrapInput}
-          name="tel"
-          onChange={handleChange}
-        />
-        <Button
-          className={styles.WrapButton}
-          buttonType={
-            isAuthCodeComplete
-              ? 'Disabled'
-              : signUpInfo.tel?.length > 0
-                ? 'Active'
-                : 'Disabled'
-          }
-          onClick={handleClickAuthCode}
-          isLoading={isLoading}
-        >
-          {isAuthCodeComplete
-            ? '인증완료'
-            : isSendAuthCode
-              ? '재전송'
-              : '인증번호 받기'}
-        </Button>
+      <div>
+        <div className={styles.LabelWrap}>전화번호</div>
+        <div className={styles.Flex}>
+          <input
+            type="number"
+            placeholder="전화번호를 입력하세요 (-) 제외하고 입력하세요"
+            className={styles.WrapInput}
+            name="tel"
+            onChange={handleChange}
+            disabled={isAuthCodeComplete}
+          />
+          <Button
+            className={styles.WrapButton}
+            buttonType={
+              isAuthCodeComplete
+                ? 'Disabled'
+                : signUpInfo.tel?.length > 0
+                  ? 'Active'
+                  : 'Disabled'
+            }
+            onClick={handleClickAuthCode}
+            isLoading={isLoading}
+          >
+            {isAuthCodeComplete
+              ? '인증완료'
+              : isSendAuthCode
+                ? '재전송'
+                : '인증번호 받기'}
+          </Button>
+        </div>
       </div>
       {isSendAuthCode && (
         <Timer
@@ -116,7 +143,14 @@ const SignUpPage = () => {
         label="비밀번호 확인"
         type="password"
         placeholder="비밀번호 확인"
+        name="passwordConfirm"
+        onChange={handleChange}
       />
+      {signUpInfo.passwordConfirm.length > 0 && !signUpInfo.passwordMatch && (
+        <div className={styles.PasswordMissMatch}>
+          비밀번호가 일치하지 않습니다.
+        </div>
+      )}
       <Input
         label="Email"
         name="email"
@@ -127,7 +161,7 @@ const SignUpPage = () => {
       <Input
         label="보호자 전화번호"
         type="number"
-        placeholder="보호자 전화번호를 입력하세요"
+        placeholder="보호자 전화번호를 입력하세요 (-) 제외하고 입력하세요"
         name="parent_tel"
         onChange={handleChange}
       />
@@ -160,12 +194,13 @@ const SignUpPage = () => {
         </CheckBox>
       </div>
       <Button
-        buttonType={isValidateSignUp ? 'Active' : 'Disabled'}
+        buttonType={isFormValid ? 'Active' : 'Disabled'}
         className={styles.LoginButton}
+        onClick={handleSubmit}
       >
         회원가입
       </Button>
-    </>
+    </div>
   );
 };
 

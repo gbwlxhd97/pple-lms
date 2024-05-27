@@ -9,7 +9,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6 ,
+input{
   margin: 0;
   padding: 0;
   border: 0;
@@ -64,6 +65,12 @@ button {
     width: 5px;
     border-radius: 13px;
   }
+  &.Aside {
+    border: 1px solid #494949;
+  }
+  &.Title {
+    margin: 0 0 28px 0;
+  }
 }
 
 
@@ -77,4 +84,23 @@ input::-webkit-inner-spin-button {
 /* Firefox  */
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+table {
+  border-spacing: 0;
+  border-color: transparent;
+  border-radius: 10px;
+  border-collapse: collapse;
+  border-style: hidden;
+}
+
+.ps-sidebar-root ps-toggled ps-broken css-gyb9rh {
+  position: absolute;
+  right: 0;
+}
+
+ul,li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

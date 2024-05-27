@@ -1,0 +1,69 @@
+@import '@/styles/theme.scss';
+
+.UserInfoWrapper {
+  padding: 28px 30px 24px 30px;
+  svg {
+    cursor: pointer;
+  }
+}
+
+.InfoBetweenFlex {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.GapFlex {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.TitleBetweenFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 16px 18px 16px;
+}
+
+.NeighborFlex {
+  display: flex;
+  gap: 4px;
+  margin-top: 24px;
+  justify-content: space-between;
+  color: $gray100;
+  cursor: pointer;
+
+}
+
+.container {
+  background-color: red;
+}
+
+.MenuInfoWrapper {
+  padding: 22px 30px;
+}
+
+
+.MenuInfo {
+  width: 100%;
+
+  li:hover {
+    cursor: pointer;
+    background-color: $purple1;  
+    transition: background-color .4s ease;
+  }
+  li {
+    padding: 12px 30px;
+    display: flex;
+    justify-content: flex-end;
+    span {
+      margin-left: 16px;
+      font-size: 16px;
+      font-weight: 400;
+      color: $gray0;
+    }
+  }
+}

@@ -1,6 +1,8 @@
+import toast from 'react-hot-toast';
 import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
 import Button from '@/components/common/Button/Button';
+import { loadingToast } from '@/utils';
 
 type TitleProps = {
   title: string;
@@ -31,7 +33,7 @@ const Title = ({ title, isMore, count, addBtn }: TitleProps) => {
         {count && <div className={styles.CardCount}>({count})</div>}
       </div>
       {isMore && (
-        <div className={styles.CardMoreText}>
+        <div className={styles.CardMoreText} onClick={loadingToast}>
           더 보기
           <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
         </div>
