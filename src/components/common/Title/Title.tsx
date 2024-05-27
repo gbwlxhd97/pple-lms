@@ -1,11 +1,13 @@
 import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
+import Button from '@/components/common/Button/Button';
 
 type TitleProps = {
   title: string;
   className?: string;
   isMore?: boolean;
   count?: number;
+  addBtn?: boolean;
 };
 
 /**
@@ -13,7 +15,7 @@ type TitleProps = {
  * @param param0
  * @returns
  */
-const Title = ({ title, isMore, count }: TitleProps) => {
+const Title = ({ title, isMore, count, addBtn }: TitleProps) => {
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -32,6 +34,13 @@ const Title = ({ title, isMore, count }: TitleProps) => {
         <div className={styles.CardMoreText}>
           더 보기
           <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
+        </div>
+      )}
+      {addBtn && (
+        <div className={styles.AddBtn}>
+          <Button buttonType="Active" className={styles.AddNoticeButton}>
+            + 글쓰기
+          </Button>
         </div>
       )}
     </div>
