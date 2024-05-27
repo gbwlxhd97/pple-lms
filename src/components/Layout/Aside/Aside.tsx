@@ -19,7 +19,7 @@ type AsideProps = {
 
 const ASidebar = ({ children }: AsideProps) => {
   const [toggle, setToggle] = useState(false);
-  const {name:profileName} = useProfileStore()
+  const {profile: {name}} = useProfileStore()
   const toggleSidebar = () => {
     setToggle(!toggle);
   };
@@ -69,7 +69,7 @@ const ASidebar = ({ children }: AsideProps) => {
             <div className={styles.UserInfoWrapper}>
               <div className={styles.InfoBetweenFlex}>
                 <CloseIcon width={18} height={18} onClick={toggleSidebar} />
-                <div>{profileName}님</div>
+                <div>{name}님</div>
               </div>
               <div className={styles.GapFlex}>
                 <div className={styles.NeighborFlex} onClick={logout}>
@@ -109,9 +109,13 @@ const ASidebar = ({ children }: AsideProps) => {
         </Sidebar>
       </div>
       <div className={styles.TitleBetweenFlex}>
-        <HomeIcon width={18} height={18} onClick={() => {
-          routeThenCloseAside('/main')
-        }} />
+        <HomeIcon
+          width={18}
+          height={18}
+          onClick={() => {
+            routeThenCloseAside('/main');
+          }}
+        />
         {children}
         <HamburgerIcon width={18} height={18} onClick={toggleSidebar} />
       </div>

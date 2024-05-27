@@ -16,7 +16,7 @@ const SignInPage = () => {
   });
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const {setName} = useProfileStore()
+  const {setProfile} = useProfileStore()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInfo((prevContactInfo) => ({
@@ -38,9 +38,8 @@ const SignInPage = () => {
       if (res) {
         Cookies.set('memberSessionKey', res);
         console.log(res);
-        const {name}= await authAPIList.profile() 
-        console.log(name);
-        setName(name)
+        const { name, role } = await authAPIList.profile(); 
+        setProfile({ name, role }); ;
         router.push('/main');
       }
     } catch (error) {

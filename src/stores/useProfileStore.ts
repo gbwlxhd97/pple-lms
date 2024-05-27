@@ -3,26 +3,28 @@ import { persist } from 'zustand/middleware';
 
 const STORAGE_KEY = 'profileStore';
 
-interface ProfileState {
+interface Profile {
   name: string;
-  setName: (newName: string) => void;
+  role: string;
+}
+
+interface ProfileState {
+  profile: Profile;
+  setProfile: (newProfile: Profile) => void;
   clear: () => void;
-  isRole: ''
 }
 
 const useProfileStore = create(
   persist<ProfileState>(
     (set) => ({
-      name: '',
-      isRole: '',
-      setName: (newName) => set({ name: newName }),
-      clear: () => set({ name: '' }),
+      profile: { name: '', role: '' },
+      setProfile: (newProfile) => set({ profile: newProfile }),
+      clear: () => set({ profile: { name: '', role: '' } }),
     }),
     {
       name: STORAGE_KEY,
     }
   )
 );
-
 
 export default useProfileStore;
