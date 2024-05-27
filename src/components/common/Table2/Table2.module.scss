@@ -1,0 +1,64 @@
+@import '@/styles/theme.scss';
+
+.TableHead {
+    background-color: $purple2;
+    width: 100%;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        color: $gray500;
+        > th {
+            text-align: left;
+            padding: 8px 12px;
+        }
+        .TableHead0 {
+            width: 10%;
+        }
+        .TableHead1 {
+            width: 70%;
+        }
+        .TableHead2 {
+            width: 20%;
+        }
+    }
+}
+
+.TableBody {
+    background-color: white;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        border-bottom: 1px solid $gray100;
+        > td {
+            text-align: left;
+            padding: 8px 12px;
+        }
+        .TableNum {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: $gray400;
+            width: 10%;
+        }
+        .TableTitle {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: $gray400;
+            width: 70%;
+            &.New {
+                font-weight: 700;
+                color: $black;
+            }
+        }
+        .TableDate {
+            color: $grayDefault;
+            font-size: 12px;
+            font-weight: 400;
+            width: 20%;
+        }
+    }
+}

@@ -14,6 +14,7 @@ import SignInPage from '@/pages/Auth/SignIn/SignIn';
 import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
+import NoticePage from '@/pages/Notice/Notice';
 import ProtectedRoute from './ProtectedRouter';
 import CourseDetailPage from '@/pages/Course/Detail';
 
@@ -45,6 +46,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <CourseDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route  
+          path="course/*"
+          element={
+            <ProtectedRoute>
+              <Route path="notice" element={<NoticePage />} />
             </ProtectedRoute>
           }
         />
