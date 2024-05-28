@@ -1,6 +1,9 @@
 import { useRouter } from '@/hooks/useRouter';
 import Title from '../Title/Title';
 import styles from './Card.module.scss';
+import useProfileStore from '@/stores/useProfileStore';
+import toast from 'react-hot-toast';
+import { loadingToast } from '@/utils';
 
 type CardProps = {
   title: string;
@@ -11,9 +14,13 @@ type CardProps = {
 
 const Card = ({ title, options, titleiIsMore, count }: CardProps) => {
   const router = useRouter();
-
+  const {profile} = useProfileStore()
   const onPushDetailPage = (state:any) => {
-    router.push(`/course/${state.id}`,{},state)
+    if(profile.role === 'TEACHER' && title === '수강중인 강의' ) {
+      router.push(`/course/${state.id}`,{},state)
+    } else {
+      loadingToast()
+    }
   }
   return (
     <div className={styles.CardContainer}>

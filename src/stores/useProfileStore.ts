@@ -5,7 +5,7 @@ const STORAGE_KEY = 'profileStore';
 
 interface Profile {
   name: string;
-  role: string;
+  role: 'TEACHER' | 'STUDENT' | '';
 }
 
 interface ProfileState {

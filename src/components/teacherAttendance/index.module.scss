@@ -1,7 +1,12 @@
 .TeacherAttendanceButtonWrap {
   display: flex;
   gap: 10px;
+  padding: 14px 0;
   > button {
     flex: 1;
   }
+}
+
+.TeachAttendContainer {
+  padding: 30px 0;
 }

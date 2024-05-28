@@ -7,16 +7,15 @@ import CloseIcon from '@/icons/icon/CloseIcon';
 import UserIcon from '@/icons/icon/UserIcon';
 import LogoutIcon from '@/icons/icon/LogoutIcon';
 import ASidebar from '../Aside/Aside';
+import useProfileStore from '@/stores/useProfileStore';
+import useCourseNameStore from '@/stores/useCourseName';
 
 const RootLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleAsideBar = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+  const {title} = useCourseNameStore()
   const { pathname } = useLocation();
-
   const isNotLoginPage = pathname !== '/login' && pathname !== '/sign-up';
-  const headerTitle = pathname === '/sign-up' ? '회원가입' : '과목명';
+  const headerTitle = pathname === '/sign-up' ? '회원가입' : title;
 
   return (
     <div className={styles.RootLayout}>
@@ -29,7 +28,10 @@ const RootLayout = () => {
       {pathname !== '/login' && pathname !== '/sign-up' && (
         <>
           <ASidebar>
+            {
+              pathname.startsWith('/course') &&
             <div className={styles.WithAsideTitle}>{headerTitle}</div>
+            }
           </ASidebar>
           <div className={'Divider Title'} />
         </>

@@ -117,7 +117,7 @@ const ASidebar = ({ children }: AsideProps) => {
           }}
         />
         {children}
-        <HamburgerIcon width={18} height={18} onClick={toggleSidebar} />
+        <HamburgerIcon width={28} height={28} onClick={toggleSidebar} />
       </div>
     </>
   );

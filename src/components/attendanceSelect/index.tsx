@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { ISection } from '@/interfaces/section';
 import attendAPIList from '@/services/attend';
+import { ArrowRightIcon } from '@/icons/icon';
 
 
 
@@ -42,15 +43,16 @@ const AllianceDropdown = ({
         <input
           className={styles.AllianceDropdownInput}
           value={region?.title}
-          placeholder="지역을 선택해주세요"
+          placeholder="차시를 선택해주세요"
           readOnly
           ref={inputRef}
         />
-        {/* <StaticImage
+        <ArrowRightIcon
+          width={20}
+          height={20}
+          stroke='#000'
           className={`${styles.AllianceDropdownArrow} ${activeDropdown ? styles.Active : ''} `}
-          src="../../../images/arrow_drop_down.svg"
-          alt="arrowDropDown"
-        /> */}
+        />
         {activeDropdown && (
           <div className={styles.AllianceDropdownDistrictWrapper}>
             {options?.map((district, idx) => (

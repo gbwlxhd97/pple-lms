@@ -45,9 +45,9 @@
 
     > .AllianceDropdownArrow {
       transition: transform 0.3s;
-
+      transform: rotate(90deg);
       &.Active {
-        transform: rotate(180deg);
+        transform: rotate(-90deg);
       }
     }
 

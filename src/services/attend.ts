@@ -18,7 +18,7 @@ const getShowAttendPage = async () => {
 
 // 각 차시의 학생들 출석정보를 조회
 const getSectionAttend = async (id:number) => {
-  const data = await requestAPI().get(
+  const {data} = await requestAPI().get(
     `/attend/getSectionAttend?courseSectionId=${id}`
   );
   return data;

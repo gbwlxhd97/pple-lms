@@ -20,8 +20,8 @@ const Table = ({ tableBody, tableHead }: TableProps) => {
         <tbody className={styles.TableBody}>
           {tableBody.map((row) => (
             <tr>
-              <td>{row.key}</td>
-              <td>{row.value}</td>
+              <td>{row.name}</td>
+              <td>{row.attendType}</td>
             </tr>
           ))}
         </tbody>

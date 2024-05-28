@@ -52,7 +52,7 @@ const MainPage = () => {
         options={mainData?.courseNameDtos || []}
         titleiIsMore={true}
       />
-      <div className={styles.MainMyAssignmentWrap}>
+      {/* <div className={styles.MainMyAssignmentWrap}>
         <Title title={'나의 과제'} isMore={true} count={5} />
         <AssignmentList
           dataList={[1, 2, 3, 3, 4, 5, 6]}
@@ -60,7 +60,7 @@ const MainPage = () => {
           description="수학 레포트 어쩌구 저쩌구 어쩌구 저쩌구 어쩌..."
           title="나의 과제"
         />
-      </div>
+      </div> */}
     </>
   );
 };
