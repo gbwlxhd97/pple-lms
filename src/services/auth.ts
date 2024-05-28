@@ -6,8 +6,8 @@ type loginBody = {
 };
 
 const login = async (requestBody: loginBody) => {
-  const { data } = await requestAPI().post(
-    `/auth/login`,
+  const  data  = await requestAPI().post(
+    `/auth/loginWithSessionKey`,
     requestBody
   );
   return data;

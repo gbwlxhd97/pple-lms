@@ -35,12 +35,12 @@ const SignInPage = () => {
   const handleLogin = async () => {
     try {
       const res = await authAPIList.login(loginInfo);
+      console.log(res);
       if (res) {
-        Cookies.set('memberSessionKey', res);
-        console.log(res);
+        Cookies.set('sessionKey',res.data);
+        router.push('/main');
         const { name, role } = await authAPIList.profile(); 
         setProfile({ name, role }); ;
-        router.push('/main');
       }
     } catch (error) {
       console.log(error);

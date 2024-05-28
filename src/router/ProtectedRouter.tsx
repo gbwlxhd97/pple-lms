@@ -11,7 +11,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const router = useRouter()
-  const cookieName = 'memberSessionKey'; // 쿠키 이름을 지정하세요.
+  const cookieName = 'sessionKey'; // 쿠키 이름을 지정하세요.
 
   useEffect(() => {
     const token = Cookies.get(cookieName);

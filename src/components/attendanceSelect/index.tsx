@@ -7,8 +7,8 @@ import attendAPIList from '@/services/attend';
 
 
 type AllianceDropdownProps = {
-  region?: string;
-  setRegion: React.Dispatch<string>;
+  region?: any;
+  setRegion: React.Dispatch<any>;
   options: Array<ISection>; 
 };
 const AllianceDropdown = ({
@@ -21,12 +21,16 @@ const AllianceDropdown = ({
 
   // 셀렉트 박스에서 해당 차시를 선택하면 해당 차시 학생들의 정보를 조회한다.
   const selectAttendSection =  async () => {
-    const res = await attendAPIList.getSectionAttend(1)
+    const res = await attendAPIList.getSectionAttend(region?.id)
+    console.log(res);
+    
   }
   useEffect(() => {
-
+    if(region) {
+      selectAttendSection();
+    }
   },[])
-
+  
   return (
     <div className={styles.AllianceDropdownWrapper}>
       <div
@@ -37,7 +41,7 @@ const AllianceDropdown = ({
       >
         <input
           className={styles.AllianceDropdownInput}
-          value={region}
+          value={region?.title}
           placeholder="지역을 선택해주세요"
           readOnly
           ref={inputRef}
@@ -53,7 +57,7 @@ const AllianceDropdown = ({
               <div
                 key={idx}
                 onClick={() => {
-                  setRegion(district.title);
+                  setRegion(district);
                 }}
                 className={styles.AllianceDropdownDistrict}
               >

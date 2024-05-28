@@ -13,9 +13,9 @@ const handleResponse = (response: AxiosResponse) => {
 };
 
 axiosInstance?.interceptors.request.use((config) => {
-  const session = Cookies.get('memberSessionKey');
+  const session = Cookies.get('sessionKey');
   if (session) {
-    config.headers['memberSessionKey'] = `${session}`;
+    config.headers['sessionKey'] = `${session}`;
   }
   return config;
 });

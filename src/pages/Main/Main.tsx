@@ -7,17 +7,18 @@ import AssignmentList from '@/components/common/AssignmentCardList/AssignmentCar
 import Cookies from 'js-cookie';
 import { IMainPageResponse } from '@/interfaces/member';
 import useProfileStore from '@/stores/useProfileStore';
+import authAPIList from '@/services/auth';
 
 const MainPage = () => {
   const [mainData, setMainData] = useState<IMainPageResponse>();
-  const {name} = useProfileStore()
+  const {profile,setProfile} = useProfileStore()
   /**
    * 가장 기본이 되는 get요청이며
    * 추후 react-query로 변경할 것입니다.
    */
   const getInfo = async () => {
     try {
-      const session: any = Cookies.get('memberSessionKey');
+      const session: any = Cookies.get('sessionKey');
       const res = await memberAPIList.memberShowMainPage(session);
       console.log(res);
       setMainData(res)
@@ -26,13 +27,19 @@ const MainPage = () => {
     }
   };
 
+  const getProfie = async () => {
+    const {name,role} = await authAPIList.profile()
+    setProfile({name,role})
+  }
+
   useEffect(() => {
     getInfo();
+    getProfie();
   }, []);
   return (
     <>
       <div className={styles.MainUserWelcome}>
-        <span>{name}</span>님, 환영합니다.
+        <span>{profile.name}</span>님, 환영합니다.
       </div>
       {/* TODO 아래 언디파인 고치기 */}
       <Card

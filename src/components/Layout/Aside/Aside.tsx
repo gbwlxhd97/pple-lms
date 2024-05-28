@@ -36,7 +36,7 @@ const ASidebar = ({ children }: AsideProps) => {
       const res = await authAPIList.logout();
       if (res.status === 200) {
         clear();
-        Cookies.remove('memberSessionKey');
+        Cookies.remove('sessionKey');
         routeThenCloseAside('/login');
       }
     } catch (error) {
