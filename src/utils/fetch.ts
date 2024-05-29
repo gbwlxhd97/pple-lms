@@ -13,6 +13,9 @@ const handleResponse = (response: AxiosResponse) => {
   return response;
 };
 
+/**
+ * common request
+ */
 axiosInstance?.interceptors.request.use((config) => {
   const session = Cookies.get('sessionKey');
   if (session) {
@@ -20,6 +23,22 @@ axiosInstance?.interceptors.request.use((config) => {
   }
   return config;
 });
+
+/**
+ * common response
+ * 아래는 401에러나면 세션만료로 로그아웃 시킨다.
+ * @returns 
+ */
+
+axiosInstance?.interceptors.response.use((response) => {
+  return response
+},
+  (error) => {
+    if(error.response && error.response.status === 401) {
+      Cookies.remove('sessionKey')
+    }
+  }
+)
 export const requestAPI = () => {
   const request = (method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH') => {
     return (url: string, bodyJson?: any, contentType?: string) => {

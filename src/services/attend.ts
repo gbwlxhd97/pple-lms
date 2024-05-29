@@ -10,6 +10,7 @@ const getTeacherSectionTitle = async () => {
   return data
 }
 
+// 
 const getShowAttendPage = async () => {
   const data = await requestAPI().get('/attend/showAttendPage')
   return data
