@@ -9,9 +9,10 @@ type TimerProps = {
   duration: number; // in seconds
   onComplete?: any;
   isComplete?: boolean;
+  isSignUp?: boolean;
 };
 
-const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
+const Timer = ({ duration, onComplete, isComplete, isSignUp }: TimerProps) => {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [authCode, setAuthCode] = useState('');
   const [authCodeStatus, setAuthCodeStatus] = useState<
@@ -59,7 +60,7 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
   return (
     <>
       {/* 회원가입에서 타이머 */}
-      {isComplete && (
+      {isSignUp && (
         <div className={styles.TimerContainer}>
           <div className={styles.LabelWrap}>인증번호</div>
           <div className={styles.Flex}>
@@ -96,7 +97,7 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
           </div>
         </div>
       )}
-      {!isComplete && (
+      {!isSignUp && (
         <div className={`${styles.LeftedTime} ${styles.AttendCode}`}>
           {durationFormatTime(timeLeft)}
         </div>

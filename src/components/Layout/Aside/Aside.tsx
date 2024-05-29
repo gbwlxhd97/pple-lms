@@ -47,7 +47,7 @@ const ASidebar = ({ children }: AsideProps) => {
     <>
       <div
         style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           right: 0,
         }}
@@ -57,7 +57,7 @@ const ASidebar = ({ children }: AsideProps) => {
             top: 0,
             right: 0,
             height: '100vh',
-            position: 'absolute',
+            position: 'fixed',
           }}
           toggled={toggle}
           onBackdropClick={() => setToggle(false)}

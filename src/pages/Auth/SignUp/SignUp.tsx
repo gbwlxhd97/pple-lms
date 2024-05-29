@@ -129,6 +129,7 @@ const SignUpPage = () => {
           duration={durationTime}
           onComplete={setisAuthCodeComplete}
           isComplete={isAuthCodeComplete}
+          isSignUp={true}
         />
       )}
 

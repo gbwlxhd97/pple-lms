@@ -99,7 +99,7 @@ const TeacherAttendance = ({
           출석 코드 : <span>{attendCode}</span>
           <div className={styles.AttendTimerWrap}>
             <TimeCircleIcon width={20} height={20} />
-            <Timer duration={600} isComplete={false} />
+            <Timer duration={600} isSignUp={false} />
           </div>
         </div>
       )}
