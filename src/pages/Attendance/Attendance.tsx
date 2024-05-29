@@ -11,8 +11,12 @@ import StudentAttendanceWrap from '@/components/studentAttendance/StudentAttenda
 
 const AttendancePage = () => {
 
+  // teacher 차시
   const [weekSection,setWeekSection ] = useState()
+  // 아래 상태는 학생, 선생 출석테이블 state
   const [studentAttend,setStudentAttend] = useState<Array<any>>()
+
+
   const {profile : {role}} = useProfileStore()
   const getTeacherSection = async () => {
     try {
@@ -32,16 +36,18 @@ const AttendancePage = () => {
   return (
     <>
       <Title title="출석체크" />
-      {
-        role === 'TEACHER' &&
-      <TeacherAttendance 
-        weekSection={weekSection || []} 
-        setStudentAttend={setStudentAttend}
+      {role === 'TEACHER' && (
+        <TeacherAttendance
+          weekSection={weekSection || []}
+          setStudentAttend={setStudentAttend}
         />
-      }
-      {
-        role === 'STUDENT' && <StudentAttendanceWrap />
-      }
+      )}
+      {role === 'STUDENT' && (
+        <StudentAttendanceWrap
+          studentWeekSection={studentAttend || []}
+          setStudentWeekSection={setStudentAttend}
+        />
+      )}
       <Title title="출석현황" />
       <div className={styles.AttendanceTable}>
         <Table

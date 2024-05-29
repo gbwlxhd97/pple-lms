@@ -24,11 +24,28 @@ const getSectionAttend = async (id:number) => {
   return data;
 }
 
+type RequestBody = {
+  attendCode: number;
+  courseSectionId: number;
+}
+
+const insetAttendCode = async (requestBody:RequestBody) => {
+  const data = await requestAPI().post(`/attend/attend`,requestBody)
+  return data;
+}
+
+const endAttend = async (id:number) => {
+  const data = await requestAPI().post(`/attend/endSection?courseSectionId=${id}`)
+  return data;
+}
+
 const attendAPIList = {
   startAttendTimer,
   getTeacherSectionTitle,
   getShowAttendPage,
   getSectionAttend,
+  insetAttendCode,
+  endAttend,
 };
 
 export default attendAPIList;

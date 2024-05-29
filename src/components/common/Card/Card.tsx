@@ -16,7 +16,7 @@ const Card = ({ title, options, titleiIsMore, count }: CardProps) => {
   const router = useRouter();
   const {profile} = useProfileStore()
   const onPushDetailPage = (state:any) => {
-    if(profile.role === 'TEACHER' && title === '수강중인 강의' ) {
+    if(title === '수강중인 강의' ) {
       router.push(`/course/${state.id}`,{},state)
     } else {
       loadingToast()

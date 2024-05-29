@@ -10,7 +10,7 @@ import { ArrowRightIcon } from '@/icons/icon';
 type AllianceDropdownProps = {
   region?: any;
   setRegion: React.Dispatch<any>;
-  options: Array<ISection>; 
+  options: Array<ISection>;
 };
 const AllianceDropdown = ({
   region,
@@ -21,17 +21,16 @@ const AllianceDropdown = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   // 셀렉트 박스에서 해당 차시를 선택하면 해당 차시 학생들의 정보를 조회한다.
-  const selectAttendSection =  async () => {
-    const res = await attendAPIList.getSectionAttend(region?.id)
+  const selectAttendSection = async () => {
+    const res = await attendAPIList.getSectionAttend(region?.id);
     console.log(res);
-    
-  }
+  };
   useEffect(() => {
-    if(region) {
+    if (region) {
       selectAttendSection();
     }
-  },[])
-  
+  }, []);
+
   return (
     <div className={styles.AllianceDropdownWrapper}>
       <div
@@ -50,7 +49,7 @@ const AllianceDropdown = ({
         <ArrowRightIcon
           width={20}
           height={20}
-          stroke='#000'
+          stroke="#000"
           className={`${styles.AllianceDropdownArrow} ${activeDropdown ? styles.Active : ''} `}
         />
         {activeDropdown && (

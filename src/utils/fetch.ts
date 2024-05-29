@@ -1,3 +1,4 @@
+import useProfileStore from '@/stores/useProfileStore';
 import axios, { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 

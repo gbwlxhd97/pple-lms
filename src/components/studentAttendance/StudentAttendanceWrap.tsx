@@ -1,30 +1,77 @@
 import Input from '@/components/common/Input/Input';
 import styles from './StudentAttendanceWrap.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { handleKeyDown } from '@/utils';
 import Button from '@/components/common/Button/Button';
-const StudentAttendanceWrap = () => {
-  const [attendCode, setAttendCode] = useState('');
+import attendAPIList from '@/services/attend';
 
-  const handleSubmit = async () => {};
+type StudentAttendanceProps = {
+  studentWeekSection: Array<any>;
+  setStudentWeekSection: React.Dispatch<any>;
+};
+
+const StudentAttendanceWrap = ({
+  studentWeekSection,
+  setStudentWeekSection,
+}: StudentAttendanceProps) => {
+  const [attendCode, setAttendCode] = useState('');
+  const [isCompleteAttend, setIsCompleteAttend] = useState(false);
+
+  const getAttendInfo = async () => {
+    try {
+      const res = await attendAPIList.getShowAttendPage();
+      console.log(res);
+      setStudentWeekSection(res.data.attendStatusDto);
+    } catch (error) {
+    }
+  };
+
+  const handleSubmitAttendCode = async () => {
+    const payload = {
+      attendCode: Number(attendCode),
+      courseSectionId: 7,
+    };
+    const res = await attendAPIList.insetAttendCode(payload);
+    if (res.status === 200) {
+      setIsCompleteAttend(true);
+      getAttendInfo();
+    }
+  };
+
+  useEffect(() => {
+    getAttendInfo();
+  }, []);
+
   return (
     <div className={styles.AttendanceInputWrap}>
-      <Input
-        type="number"
-        placeholder="출석코드를 입력하세요"
-        onChange={(e) => {
-          setAttendCode(e.target.value);
-        }}
-        onKeyDown={(e) => handleKeyDown(e, handleSubmit)}
-      />
+      {!isCompleteAttend && (
+        <Input
+          type="number"
+          placeholder="출석코드를 입력하세요"
+          onChange={(e) => {
+            setAttendCode(e.target.value);
+          }}
+          onKeyDown={(e) => handleKeyDown(e, handleSubmitAttendCode)}
+        />
+      )}
+      {isCompleteAttend && (
+        <div className={styles.CompleteAttend}>출석이 완료되었습니다!</div>
+      )}
       <Button
-        buttonType={attendCode?.length > 0 ? 'Active' : 'Disabled'}
+        buttonType={
+          isCompleteAttend
+            ? 'Disabled'
+            : attendCode?.length > 0
+              ? 'Active'
+              : 'Disabled'
+        }
         className={styles.AttendanceButton}
+        onClick={handleSubmitAttendCode}
       >
         출석하기
       </Button>
     </div>
   );
-}
+};
 
 export default StudentAttendanceWrap;

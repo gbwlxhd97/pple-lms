@@ -35,4 +35,17 @@
             padding: 12px 14px;
         }
     }
+    .AttendType {
+        font-size: 14px;
+        font-weight: 600;
+        &.Present {
+            color: var(--green, #67B472);
+        }
+        &.Absent {
+            color: $pink100;
+        }
+        &.Late {
+            color: #F90;
+        }
+    }
 }

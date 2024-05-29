@@ -7,8 +7,8 @@ import Button from '../Button/Button';
 
 type TimerProps = {
   duration: number; // in seconds
-  onComplete: any;
-  isComplete: boolean;
+  onComplete?: any;
+  isComplete?: boolean;
 };
 
 const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
@@ -57,41 +57,51 @@ const Timer = ({ duration, onComplete, isComplete }: TimerProps) => {
   console.log(isComplete, '인증번호ㄱ성공');
 
   return (
-    <div className={styles.TimerContainer}>
-      <div className={styles.LabelWrap}>인증번호</div>
-      <div className={styles.Flex}>
-        <input
-          type="number"
-          className={`${styles.WrapInput} ${authCodeStatus}`}
-          placeholder="인증번호를 입력해주세요"
-          onChange={(e) => {
-            setAuthCode(e.target.value);
-          }}
-          ref={inputRef}
-          disabled={isComplete}
-        />
-        <Button
-          className={styles.WrapButton}
-          buttonType={
-            isComplete
-              ? 'Disabled'
-              : authCode?.length > 0
-                ? 'Certification'
-                : 'Disabled'
-          }
-          onClick={handleClickCheckAuthCode}
-        >
-          {isComplete ? '인증완료' : '인증하기'}
-        </Button>
-      </div>
-      <div className={`${styles.LeftedTime} ${styles[authCodeStatus]}`}>
-        {authCodeStatus === 'SUCCESS'
-          ? '인증이 완료되었습니다'
-          : authCodeStatus === 'ING'
-            ? `인증번호를 입력해주세요 ${durationFormatTime(timeLeft)}`
-            : `인증번호가 일치하지 않습니다 ${durationFormatTime(timeLeft)}`}
-      </div>
-    </div>
+    <>
+      {/* 회원가입에서 타이머 */}
+      {isComplete && (
+        <div className={styles.TimerContainer}>
+          <div className={styles.LabelWrap}>인증번호</div>
+          <div className={styles.Flex}>
+            <input
+              type="number"
+              className={`${styles.WrapInput} ${authCodeStatus}`}
+              placeholder="인증번호를 입력해주세요"
+              onChange={(e) => {
+                setAuthCode(e.target.value);
+              }}
+              ref={inputRef}
+              disabled={isComplete}
+            />
+            <Button
+              className={styles.WrapButton}
+              buttonType={
+                isComplete
+                  ? 'Disabled'
+                  : authCode?.length > 0
+                    ? 'Certification'
+                    : 'Disabled'
+              }
+              onClick={handleClickCheckAuthCode}
+            >
+              {isComplete ? '인증완료' : '인증하기'}
+            </Button>
+          </div>
+          <div className={`${styles.LeftedTime} ${styles[authCodeStatus]}`}>
+            {authCodeStatus === 'SUCCESS'
+              ? '인증이 완료되었습니다'
+              : authCodeStatus === 'ING'
+                ? `인증번호를 입력해주세요 ${durationFormatTime(timeLeft)}`
+                : `인증번호가 일치하지 않습니다 ${durationFormatTime(timeLeft)}`}
+          </div>
+        </div>
+      )}
+      {!isComplete && (
+        <div className={`${styles.LeftedTime} ${styles.AttendCode}`}>
+          {durationFormatTime(timeLeft)}
+        </div>
+      )}
+    </>
   );
 };
 

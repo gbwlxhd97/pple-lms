@@ -63,4 +63,10 @@
   &.SUCCESS {
     color: $green100;
   }
+  &.AttendCode {
+    margin-top: 0;
+    color: var(--gray, #ACACAC);
+    font-size: 14px;
+    font-weight: 600;
+  }
 }

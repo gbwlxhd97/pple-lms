@@ -5,4 +5,20 @@
 
 .AttendanceButton {
     width: 100%;
+    margin-top: 12px;
+}
+
+.AttendanceInputWrap {
+    padding: 20px 0 40px 0;
+}
+
+.CompleteAttend {
+    color: var(--purple1, #7879F1);
+    text-align: center;
+    /* semi18 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 180.276%; /* 32.45px */
 }

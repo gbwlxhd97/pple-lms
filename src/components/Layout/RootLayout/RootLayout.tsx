@@ -29,7 +29,7 @@ const RootLayout = () => {
         <>
           <ASidebar>
             {
-              pathname.startsWith('/course') &&
+              (pathname.startsWith('/course') || pathname.startsWith('/attendance')) &&
             <div className={styles.WithAsideTitle}>{headerTitle}</div>
             }
           </ASidebar>
