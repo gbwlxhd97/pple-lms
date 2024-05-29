@@ -46,7 +46,7 @@ const StudentAttendanceWrap = ({
     <div className={styles.AttendanceInputWrap}>
       {!isCompleteAttend && (
         <Input
-          type="number"
+          type="tel"
           placeholder="출석코드를 입력하세요"
           onChange={(e) => {
             setAttendCode(e.target.value);

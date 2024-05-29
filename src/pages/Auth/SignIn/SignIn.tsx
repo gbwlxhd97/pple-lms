@@ -62,7 +62,7 @@ const SignInPage = () => {
         새싹인재 양성교육
       </h2>
       <Input
-        type="number"
+        type="tel"
         placeholder="전화번호를 입력하세요"
         name="tel"
         onChange={handleChange}

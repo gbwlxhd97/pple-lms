@@ -97,7 +97,7 @@ const SignUpPage = () => {
         <div className={styles.LabelWrap}>전화번호</div>
         <div className={styles.Flex}>
           <input
-            type="number"
+            type="tel"
             placeholder="(-) 제외하고 입력하세요"
             className={styles.WrapInput}
             name="tel"
@@ -161,7 +161,7 @@ const SignUpPage = () => {
       />
       <Input
         label="보호자 전화번호"
-        type="number"
+        type="tel"
         placeholder="(-) 제외하고 입력하세요"
         name="parent_tel"
         onChange={handleChange}
