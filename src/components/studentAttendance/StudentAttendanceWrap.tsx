@@ -16,7 +16,7 @@ const StudentAttendanceWrap = ({
 }: StudentAttendanceProps) => {
   const [attendCode, setAttendCode] = useState('');
   const [isCompleteAttend, setIsCompleteAttend] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const getAttendInfo = async () => {
     try {
       const res = await attendAPIList.getShowAttendPage();
@@ -27,14 +27,21 @@ const StudentAttendanceWrap = ({
   };
 
   const handleSubmitAttendCode = async () => {
-    const payload = {
-      attendCode: Number(attendCode),
-      courseSectionId: 7,
-    };
-    const res = await attendAPIList.insetAttendCode(payload);
-    if (res.status === 200) {
-      setIsCompleteAttend(true);
-      getAttendInfo();
+    try {
+      setIsLoading(true);
+      const payload = {
+        attendCode: Number(attendCode),
+        courseSectionId: 7,
+      };
+      const res = await attendAPIList.insetAttendCode(payload);
+      if (res.status === 200) {
+        setIsCompleteAttend(true);
+        getAttendInfo();
+      }
+    } catch (error) {
+      
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +74,7 @@ const StudentAttendanceWrap = ({
         }
         className={styles.AttendanceButton}
         onClick={handleSubmitAttendCode}
+        isLoading={isLoading}
       >
         출석하기
       </Button>

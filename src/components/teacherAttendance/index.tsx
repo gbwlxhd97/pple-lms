@@ -24,6 +24,7 @@ const TeacherAttendance = ({
   );
   const [attendCode, setAttendCode] = useState(0);
   const [isEndSection, setIsEndSection] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const getCourse = async () => {
     try {
       const res = await attendAPIList.getSectionAttend(
@@ -63,11 +64,15 @@ const TeacherAttendance = ({
   }
 
   const endCourse = async () => {
+    setIsLoading(true);
     try {
       const res = await attendAPIList.endAttend(studySession.courseSectionId);
       setIsEndSection(true)
+      getCourse();
     } catch (error) {
       
+    } finally {
+      setIsLoading(false)
     }
     
 
@@ -89,17 +94,21 @@ const TeacherAttendance = ({
           >
             수업 시작하기
           </Button>
-          <Button buttonType={isEndSection ? 'Disabled' : 'Abled'}>
+          <Button
+            buttonType={isEndSection ? 'Disabled' : 'Abled'}
+            onClick={endCourse}
+            isLoading={isLoading}
+          >
             수업 끝내기
           </Button>
         </div>
       )}
-      {attendCode !== 0 && (
+      {(attendCode !== 0 && !isEndSection)  && (
         <div className={styles.AttendCodeWrap}>
           출석 코드 : <span>{attendCode}</span>
           <div className={styles.AttendTimerWrap}>
             <TimeCircleIcon width={20} height={20} />
-            <Timer duration={600} isSignUp={false} />
+            <Timer duration={600} isSignUp={false} isComplete={isEndSection} />
           </div>
         </div>
       )}

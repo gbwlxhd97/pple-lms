@@ -5,7 +5,7 @@ import courseAPIList from '@/services/course';
 import useCourseNameStore from '@/stores/useCourseName';
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
+import styles from "./index.module.scss"
 const CourseDetailPage = () => {
   const {state} = useLocation()
   const router = useRouter();
@@ -40,9 +40,13 @@ const CourseDetailPage = () => {
 
   return (
     <div>
-      <Card title="강좌 공지사항" options={[1, 2, 3]} />
-      <Button buttonType="Active" onClick={onPushAttendPage}>
-        출석정보조회
+      <Card title="강좌 공지사항" emptyMsg="등록된 공지사항이 없습니다" />
+      <Button
+        buttonType="Active"
+        onClick={onPushAttendPage}
+        className={styles.AttendButton}
+      >
+        출석정보확인
       </Button>
     </div>
   );

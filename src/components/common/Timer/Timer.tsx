@@ -23,7 +23,7 @@ const Timer = ({ duration, onComplete, isComplete, isSignUp }: TimerProps) => {
     setTimeLeft(duration);
   }, [duration, isComplete]);
   useEffect(() => {
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 || isComplete) {
       return;
     }
     const intervalId = setInterval(() => {

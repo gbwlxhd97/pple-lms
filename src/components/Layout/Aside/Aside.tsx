@@ -96,13 +96,13 @@ const ASidebar = ({ children }: AsideProps) => {
                 >
                   <span>메인페이지</span> <HomeIcon width={18} height={18} />
                 </li>
-                <li
+                {/* <li
                   onClick={() => {
                     routeThenCloseAside('/attendance');
                   }}
                 >
                   <span>출석</span> <HomeIcon width={18} height={18} />
-                </li>
+                </li> */}
               </ul>
             </div>
           </Menu>
