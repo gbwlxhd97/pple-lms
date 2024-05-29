@@ -22,16 +22,18 @@ const RootLayout = () => {
       {pathname === '/sign-up' && (
         <>
           <div className={styles.HeaderTitle}>{headerTitle}</div>
-          <div className={'Divider Reservation'} />
+          <div className={styles.DividerWrap}>
+            <div className={'Divider Reservation'} />
+          </div>
         </>
       )}
       {pathname !== '/login' && pathname !== '/sign-up' && (
         <>
           <ASidebar>
-            {
-              (pathname.startsWith('/course') || pathname.startsWith('/attendance')) &&
-            <div className={styles.WithAsideTitle}>{headerTitle}</div>
-            }
+            {(pathname.startsWith('/course') ||
+              pathname.startsWith('/attendance')) && (
+              <div className={styles.WithAsideTitle}>{headerTitle}</div>
+            )}
           </ASidebar>
           <div className={'Divider Title'} />
         </>
