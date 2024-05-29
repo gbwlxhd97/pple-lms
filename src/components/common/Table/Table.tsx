@@ -21,7 +21,7 @@ const Table = ({ tableBody, tableHead }: TableProps) => {
         </thead>
         <tbody className={styles.TableBody}>
           {tableBody.map((row,index) => (
-            <tr>
+            <tr key={index}>
               <td>{role=== 'TEACHER' ? row.name : `Session ${index + 1}`}</td>
               <td className={`${styles.AttendType} ${row.attendType === 'PRESENT' ? styles.Present : row.attendType === 'ABSENT' ? styles.Absent : row.attendType === 'LATE' ? styles.Late : ''} `}>
                 {row.attendType}
