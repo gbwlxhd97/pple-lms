@@ -65,7 +65,6 @@ const Timer = ({ duration, onComplete, isComplete, isSignUp }: TimerProps) => {
           <div className={styles.LabelWrap}>인증번호</div>
           <div className={styles.Flex}>
             <input
-              type="tel"
               className={`${styles.WrapInput} ${authCodeStatus}`}
               placeholder="인증번호를 입력해주세요"
               onChange={(e) => {
