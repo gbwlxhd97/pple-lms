@@ -9,7 +9,7 @@ type TitleProps = {
   className?: string;
   isMore?: boolean;
   count?: number;
-  addBtn?: boolean;
+  isShowButton?: boolean;
 };
 
 /**
@@ -17,7 +17,8 @@ type TitleProps = {
  * @param param0
  * @returns
  */
-const Title = ({ title, isMore, count, addBtn }: TitleProps) => {
+
+const Title = ({ title, isMore, count, isShowButton }: TitleProps) => {
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -38,7 +39,7 @@ const Title = ({ title, isMore, count, addBtn }: TitleProps) => {
           <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
         </div>
       )}
-      {addBtn && (
+      {isShowButton && (
         <div className={styles.AddBtn}>
           <Button buttonType="Active" className={styles.AddNoticeButton}>
             + 글쓰기
