@@ -18,7 +18,7 @@ type identiyCodeCheckBody = {
 };
 
 const memberIdentityCodeCheck = async (authCode: identiyCodeCheckBody) => {
-  const { data } = await requestAPI().post(`/user/identityCodeCheck`, authCode);
+  const data  = await requestAPI().post(`/user/identityCodeCheck`, authCode);
   return data;
 };
 
@@ -32,7 +32,7 @@ const memberShowMyInfo = async (id: string) => {
   return data;
 };
 
-const memberShowMainPage = async (ssesion: string) => {
+const memberShowMainPage = async () => {
   const { data } = await requestAPI().get(
     `/user/showMainPage`
   );

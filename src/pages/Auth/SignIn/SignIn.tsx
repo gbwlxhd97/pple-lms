@@ -8,6 +8,7 @@ import { handleKeyDown } from '@/utils';
 import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
 import useProfileStore from '@/stores/useProfileStore';
+import { SESSION_KEY } from '@/utils/constant';
 
 const SignInPage = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -35,9 +36,8 @@ const SignInPage = () => {
   const handleLogin = async () => {
     try {
       const res = await authAPIList.login(loginInfo);
-      console.log(res);
       if (res) {
-        Cookies.set('sessionKey',res.data);
+        Cookies.set(SESSION_KEY, res.data);
         router.push('/main');
         const { name, role } = await authAPIList.profile(); 
         setProfile({ name, role }); ;
@@ -67,7 +67,6 @@ const SignInPage = () => {
         name="tel"
         onChange={handleChange}
         label="전화번호"
-        ref={inputRef}
       />
       <Input
         type="password"

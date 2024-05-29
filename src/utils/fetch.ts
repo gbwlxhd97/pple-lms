@@ -1,6 +1,7 @@
 import useProfileStore from '@/stores/useProfileStore';
 import axios, { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
+import { SESSION_KEY } from './constant';
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,9 +18,9 @@ const handleResponse = (response: AxiosResponse) => {
  * common request
  */
 axiosInstance?.interceptors.request.use((config) => {
-  const session = Cookies.get('sessionKey');
+  const session = Cookies.get(SESSION_KEY);
   if (session) {
-    config.headers['sessionKey'] = `${session}`;
+    config.headers[SESSION_KEY] = `${session}`;
   }
   return config;
 });
@@ -35,7 +36,7 @@ axiosInstance?.interceptors.response.use((response) => {
 },
   (error) => {
     if(error.response && error.response.status === 401) {
-      Cookies.remove('sessionKey')
+      Cookies.remove(SESSION_KEY);
     }
   }
 )

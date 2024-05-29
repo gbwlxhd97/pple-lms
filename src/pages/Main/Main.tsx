@@ -18,8 +18,7 @@ const MainPage = () => {
    */
   const getInfo = async () => {
     try {
-      const session: any = Cookies.get('sessionKey');
-      const res = await memberAPIList.memberShowMainPage(session);
+      const res = await memberAPIList.memberShowMainPage();
       console.log(res);
       setMainData(res)
     } catch (error) {
