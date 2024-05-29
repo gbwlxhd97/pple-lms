@@ -3,13 +3,14 @@ import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
 import Button from '@/components/common/Button/Button';
 import { loadingToast } from '@/utils';
+import useProfileStore from '@/stores/useProfileStore';
 
 type TitleProps = {
   title: string;
   className?: string;
   isMore?: boolean;
   count?: number;
-  addBtn?: boolean;
+  isShowButton?: boolean;
 };
 
 /**
@@ -17,7 +18,12 @@ type TitleProps = {
  * @param param0
  * @returns
  */
-const Title = ({ title, isMore, count, addBtn }: TitleProps) => {
+
+const Title = ({ title, isMore, count, isShowButton }: TitleProps) => {
+  const {
+    profile: { role },
+  } = useProfileStore();
+
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -38,7 +44,7 @@ const Title = ({ title, isMore, count, addBtn }: TitleProps) => {
           <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
         </div>
       )}
-      {addBtn && (
+      {isShowButton && role === 'TEACHER' && (
         <div className={styles.AddBtn}>
           <Button buttonType="Active" className={styles.AddNoticeButton}>
             + 글쓰기
