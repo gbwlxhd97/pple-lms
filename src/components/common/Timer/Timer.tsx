@@ -73,6 +73,7 @@ const Timer = ({ duration, onComplete, isComplete, isSignUp }: TimerProps) => {
               autoComplete="one-time-code"
               ref={inputRef}
               disabled={isComplete}
+              type="text"
             />
             <Button
               className={styles.WrapButton}
