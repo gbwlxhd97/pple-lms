@@ -1,0 +1,25 @@
+@import "@/styles/theme.scss";
+
+.EditContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.LabelWrap {
+    text-align: left;
+    color: $gray300;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.FlexCheckBoxWrap {
+    display: flex;
+    flex-direction: column; 
+}
+
+.EditButton {
+    width: 100%;
+    margin-top: 10px;
+}

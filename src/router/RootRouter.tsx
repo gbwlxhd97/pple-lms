@@ -15,6 +15,7 @@ import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
 import NoticePage from '@/pages/Notice/Notice';
+import NoticeEditPage from '@/pages/NoticeEdit/NoticeEdit';
 import ProtectedRoute from './ProtectedRouter';
 import CourseDetailPage from '@/pages/Course/Detail';
 
@@ -49,11 +50,19 @@ export const RootRouter = () => {
             </ProtectedRoute>
           }
         />
-        <Route  
+        <Route
           path="notice"
           element={
             <ProtectedRoute>
               <NoticePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="notice/edit"
+          element={
+            <ProtectedRoute>
+              <NoticeEditPage />
             </ProtectedRoute>
           }
         />
