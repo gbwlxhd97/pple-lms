@@ -17,7 +17,7 @@ const SignInPage = () => {
   });
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const {setProfile} = useProfileStore()
+  const { setProfile } = useProfileStore();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInfo((prevContactInfo) => ({
@@ -37,10 +37,10 @@ const SignInPage = () => {
     try {
       const res = await authAPIList.login(loginInfo);
       if (res) {
-        Cookies.set(SESSION_KEY, res.data);
+        Cookies.set(SESSION_KEY, res);
         router.push('/main');
-        const { name, role } = await authAPIList.profile(); 
-        setProfile({ name, role }); ;
+        const { name, role } = await authAPIList.profile();
+        setProfile({ name, role });
       }
     } catch (error) {
       console.log(error);

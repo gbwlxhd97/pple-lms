@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { handleKeyDown } from '@/utils';
 import Button from '@/components/common/Button/Button';
 import attendAPIList from '@/services/attend';
+import toast from 'react-hot-toast';
 
 type StudentAttendanceProps = {
   studentWeekSection: Array<any>;
@@ -22,8 +23,7 @@ const StudentAttendanceWrap = ({
       const res = await attendAPIList.getShowAttendPage();
       console.log(res);
       setStudentWeekSection(res.data.attendStatusDto);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleSubmitAttendCode = async () => {
@@ -39,7 +39,7 @@ const StudentAttendanceWrap = ({
         getAttendInfo();
       }
     } catch (error) {
-      
+      toast.error('출석 코드가 일치하지 않습니다');
     } finally {
       setIsLoading(false);
     }

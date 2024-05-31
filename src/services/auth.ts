@@ -6,7 +6,7 @@ type loginBody = {
 };
 
 const login = async (requestBody: loginBody) => {
-  const  data  = await requestAPI().post(
+  const { data } = await requestAPI().post(
     `/auth/loginWithSessionKey`,
     requestBody
   );
@@ -14,19 +14,19 @@ const login = async (requestBody: loginBody) => {
 };
 
 const logout = async () => {
-  const data = await requestAPI().post('/auth/logout')
-  return data
-}
+  const data = await requestAPI().post('/auth/logout');
+  return data;
+};
 
 const profile = async () => {
-  const {data} = await requestAPI().get('/auth/profile')
-  return data
-}
+  const { data } = await requestAPI().get('/auth/profile');
+  return data;
+};
 
 const authAPIList = {
   login,
   logout,
-  profile
+  profile,
 };
 
 export default authAPIList;
