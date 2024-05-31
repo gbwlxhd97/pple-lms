@@ -10,26 +10,24 @@ import { INotice } from '@/interfaces/notice';
 const NoticeEditPage = () => {
   const [noticeEdit, setNoticeEdit] = useState<INotice>({
     title: '',
-    contents: '',
-    sendMessage: '',
+    content: '',
+    sendType: '',
   });
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
     setNoticeEdit((prev) => ({
       ...prev,
-      title: e.target.value,
-    }));
-  };
-
-  const handleContentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNoticeEdit((prev) => ({
-      ...prev,
-      contents: e.target.value,
+      [name]: value,
     }));
   };
 
   const isValidateButton =
-    noticeEdit.title.length > 0 && noticeEdit.contents.length > 0;
+    noticeEdit.title.length > 0 &&
+    noticeEdit.content.length > 0 &&
+    (noticeEdit.sendType === 'STUDENT' || noticeEdit.sendType === 'PARENTS');
 
   return (
     <>
@@ -40,24 +38,24 @@ const NoticeEditPage = () => {
           name="title"
           type="text"
           placeholder="제목을 입력하세요"
-          onChange={handleTitleChange}
+          onChange={handleChange}
         />
         <TextArea
           label="내용"
           placeholder="내용을 입력하세요"
-          name="contents"
-          onChange={handleContentsChange}
+          name="content"
+          onChange={handleChange}
         />
         <div className={styles.FlexCheckBoxWrap}>
           <CheckBox
             className={styles.CheckBox}
             checkBoxType={
-              noticeEdit.sendMessage === 'STUDENT' ? 'Active' : 'Default'
+              noticeEdit.sendType === 'STUDENT' ? 'Active' : 'Default'
             }
             onClick={() => {
               setNoticeEdit((prev) => ({
                 ...prev,
-                sendMessage: 'STUDENT',
+                sendType: 'STUDENT',
               }));
             }}
           >
@@ -66,12 +64,12 @@ const NoticeEditPage = () => {
           <CheckBox
             className={styles.CheckBox}
             checkBoxType={
-              noticeEdit.sendMessage === 'PARENTS' ? 'Active' : 'Default'
+              noticeEdit.sendType === 'PARENTS' ? 'Active' : 'Default'
             }
             onClick={() => {
               setNoticeEdit((prev) => ({
                 ...prev,
-                sendMessage: 'PARENTS',
+                sendType: 'PARENTS',
               }));
             }}
           >

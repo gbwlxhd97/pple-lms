@@ -7,7 +7,6 @@ type TextAreaProps = {
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   label?: string;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 };
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
