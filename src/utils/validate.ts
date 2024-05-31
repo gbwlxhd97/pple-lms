@@ -6,7 +6,6 @@ export function validateForm(info: IRegister, phoneAuthorization: boolean) {
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(info.email);
   const isPasswordValid = info.password.length >= 6;
   const isPasswordConfirmValid = info.password === info.passwordConfirm;
-  const isParentTelValid = info.parent_tel.trim() !== '';
 
   return (
     isNameValid &&
@@ -14,7 +13,6 @@ export function validateForm(info: IRegister, phoneAuthorization: boolean) {
     isEmailValid &&
     isPasswordValid &&
     isPasswordConfirmValid &&
-    isParentTelValid &&
     phoneAuthorization
   );
 }

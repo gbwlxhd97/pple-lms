@@ -17,7 +17,6 @@ const SignUpPage = () => {
     password: '',
     email: '',
     memberRole: 'STUDENT', // select default
-    parent_tel: '',
     passwordConfirm: '',
     passwordMatch: false,
   });
@@ -70,11 +69,13 @@ const SignUpPage = () => {
   };
 
   const handleSubmit = async () => {
-    const res = await memberAPIList.memberRegister(signUpInfo);
-    console.log(res);
-    if (res) {
-      router.push('/main');
-    }
+    try {
+      const res = await memberAPIList.memberRegister(signUpInfo);
+      console.log(res);
+      if (res) {
+        router.push('/main');
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -157,13 +158,6 @@ const SignUpPage = () => {
         name="email"
         type="text"
         placeholder="Email을 입력하세요"
-        onChange={handleChange}
-      />
-      <Input
-        label="보호자 전화번호"
-        type="tel"
-        placeholder="(-) 제외하고 입력하세요"
-        name="parent_tel"
         onChange={handleChange}
       />
       <div className={styles.FlexCheckBoxWrap}>

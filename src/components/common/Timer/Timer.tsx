@@ -74,6 +74,7 @@ const Timer = ({ duration, onComplete, isComplete, isSignUp }: TimerProps) => {
               ref={inputRef}
               disabled={isComplete}
               type="text"
+              name="authCode"
             />
             <Button
               className={styles.WrapButton}
