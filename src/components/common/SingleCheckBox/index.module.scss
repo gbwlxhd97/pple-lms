@@ -1,0 +1,23 @@
+@import '@/styles/theme.scss';
+
+.CheckBoxFlex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 8px;
+  cursor: pointer;
+  > div {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 1px solid $gray100;
+    transition: border 0.3s;
+      &.Active {
+      border: 5px solid $purple1;
+      background-color: $purple2;
+      color: $purple1;
+      font-weight: 600;
+    }
+  }
+}

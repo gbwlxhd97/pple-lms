@@ -6,6 +6,7 @@ import CheckBox from '@/components/common/CheckBox/CheckBox';
 import Button from '@/components/common/Button/Button';
 import { useState } from 'react';
 import { INotice } from '@/interfaces/notice';
+import SingleCheckBox from '@/components/common/SingleCheckBox';
 
 const NoticeEditPage = () => {
   const [noticeEdit, setNoticeEdit] = useState<INotice>({
@@ -47,7 +48,7 @@ const NoticeEditPage = () => {
           onChange={handleChange}
         />
         <div className={styles.FlexCheckBoxWrap}>
-          <CheckBox
+          <SingleCheckBox
             className={styles.CheckBox}
             checkBoxType={
               noticeEdit.sendType === 'STUDENT' ? 'Active' : 'Default'
@@ -60,8 +61,8 @@ const NoticeEditPage = () => {
             }}
           >
             학생에게 문자 보내기
-          </CheckBox>
-          <CheckBox
+          </SingleCheckBox>
+          <SingleCheckBox
             className={styles.CheckBox}
             checkBoxType={
               noticeEdit.sendType === 'PARENTS' ? 'Active' : 'Default'
@@ -74,7 +75,7 @@ const NoticeEditPage = () => {
             }}
           >
             부모님에게 문자 보내기
-          </CheckBox>
+          </SingleCheckBox>
         </div>
         <Button
           buttonType={isValidateButton ? 'Active' : 'Disabled'}
