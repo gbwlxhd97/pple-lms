@@ -8,6 +8,7 @@ import Timer from '@/components/common/Timer/Timer';
 import CheckBox from '@/components/common/CheckBox/CheckBox';
 import { useRouter } from '@/hooks/useRouter';
 import { validateForm } from '@/utils/validate';
+import toast from 'react-hot-toast';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,7 +76,10 @@ const SignUpPage = () => {
       if (res) {
         router.push('/main');
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      toast.error('이미 존재하는 전화번호입니다.');
+    }
   };
 
   useEffect(() => {
@@ -153,6 +157,11 @@ const SignUpPage = () => {
           비밀번호가 일치하지 않습니다.
         </div>
       )}
+      {signUpInfo.password.length > 0 && signUpInfo.passwordConfirm.length >0 && signUpInfo.passwordConfirm.length < 6 && signUpInfo.password.length < 6 && (
+        <div className={styles.PasswordMissMatch}>
+          비밀번호는 6자리 이상 입력해주세요.
+        </div>
+      )}
       <Input
         label="Email"
         name="email"
@@ -178,12 +187,12 @@ const SignUpPage = () => {
           checkBoxType={
             signUpInfo.memberRole === 'TEACHER' ? 'Active' : 'Default'
           }
-          onClick={() => {
-            setSignUpInfo((prev) => ({
-              ...prev,
-              memberRole: 'TEACHER',
-            }));
-          }}
+          // onClick={() => {
+          //   setSignUpInfo((prev) => ({
+          //     ...prev,
+          //     memberRole: 'TEACHER',
+          //   }));
+          // }}
         >
           선생님
         </CheckBox>
