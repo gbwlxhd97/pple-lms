@@ -20,10 +20,12 @@ const Table = ({ tableBody, tableHead }: TableProps) => {
           </tr>
         </thead>
         <tbody className={styles.TableBody}>
-          {tableBody.map((row,index) => (
+          {tableBody.map((row, index) => (
             <tr key={index}>
-              <td>{role=== 'TEACHER' ? row.name : `Session ${index + 1}`}</td>
-              <td className={`${styles.AttendType} ${row.attendType === 'PRESENT' ? styles.Present : row.attendType === 'ABSENT' ? styles.Absent : row.attendType === 'LATE' ? styles.Late : ''} `}>
+              <td>{role === 'TEACHER' ? row.name : row.session}</td>
+              <td
+                className={`${styles.AttendType} ${row.attendType === 'PRESENT' ? styles.Present : row.attendType === 'ABSENT' ? styles.Absent : row.attendType === 'LATE' ? styles.Late : ''} `}
+              >
                 {row.attendType}
               </td>
             </tr>
