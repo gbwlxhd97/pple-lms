@@ -16,6 +16,7 @@ import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
 import NoticePage from '@/pages/Notice/Notice';
 import NoticeEditPage from '@/pages/NoticeEdit/NoticeEdit';
+import NoticeDetailPage from '@/pages/NoticeDetail/NoticeDetail';
 import ProtectedRoute from './ProtectedRouter';
 import CourseDetailPage from '@/pages/Course/Detail';
 import { useEffect } from 'react';
@@ -82,6 +83,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <NoticeEditPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="notice/detail/:id"
+          element={
+            <ProtectedRoute>
+              <NoticeDetailPage />
             </ProtectedRoute>
           }
         />
