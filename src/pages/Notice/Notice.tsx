@@ -28,6 +28,7 @@ const NoticePage = () => {
           tableHead={['번호', '제목', '날짜']}
           tableBody={noticeList}
           isShowNew={true}
+          path="/notice/detail"
         />
       </div>
     </>

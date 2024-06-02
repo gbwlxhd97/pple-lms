@@ -57,6 +57,11 @@ button {
     color: $white;
     background-color: $gray400;
   }
+  &.List {
+    background-color: $white;
+    border: 1px solid $gray100;
+    color: $gray500;
+  }
   &:hover {
     opacity: 0.8;
   }

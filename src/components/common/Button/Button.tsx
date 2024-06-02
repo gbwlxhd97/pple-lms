@@ -14,7 +14,8 @@ type ButtonProps = {
     | 'Abled'
     | 'TimeDisabled'
     | 'Certification'
-    | 'Spacing';
+    | 'Spacing'
+    | 'List';
   children?: ReactNode;
   className?: string;
   onClick?: () => void;

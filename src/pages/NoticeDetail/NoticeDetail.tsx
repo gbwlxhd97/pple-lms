@@ -1,6 +1,6 @@
 import styles from './NoticeDetail.module.scss';
 import Button from '@/components/common/Button/Button';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const NoticeDetailPage = () => {
   const { id } = useParams();
@@ -26,9 +26,13 @@ const NoticeDetailPage = () => {
           </div>
           <p className={styles.content}>{notice.content}</p>
         </div>
-        <Button buttonType="White" className={styles.ListButton}>
-          목록
-        </Button>
+        <div className={styles.Buttoncontainer}>
+          <Link to="/notice">
+            <Button buttonType="List" className={styles.ListButton}>
+              목록
+            </Button>
+          </Link>
+        </div>
       </div>
     </>
   );
