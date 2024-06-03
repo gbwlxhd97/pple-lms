@@ -1,0 +1,25 @@
+@import '@/styles/theme.scss';
+
+.MypageContainer {
+    display: flex;
+    flex-direction: column;
+}
+  
+.InfoRow {
+    width: 100%;
+    text-align: left;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.InfoLabel {
+    color: $gray300;
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.EditButton {
+    margin-top: 20px;
+}
