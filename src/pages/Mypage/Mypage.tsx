@@ -33,53 +33,47 @@ const MyPage = () => {
   return (
     <>
       <div className={styles.MypageContainer}>
-        <table className={styles.InfoTable}>
-          <tr>
-            <th>이름</th>
-            <td>{userInfo.name}</td>
-          </tr>
-          <tr>
-            <th>핸드폰</th>
-            <td>{userInfo.phoneNumber}</td>
-          </tr>
-          <tr>
-            <th>이메일</th>
-            <td>{userInfo.email}</td>
-          </tr>
-          <tr>
-            <th>비밀번호 변경</th>
-            <td>
-              <Input
-                name="currentPassword"
-                type="password"
-                placeholder="기존 비밀번호"
-                onChange={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <th></th>
-            <td>
-              <Input
-                name="newPassword"
-                type="password"
-                placeholder="새 비밀번호"
-                onChange={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <th></th>
-            <td>
-              <Input
-                name="confirmPassword"
-                type="password"
-                placeholder="새 비밀번호 확인"
-                onChange={handleChange}
-              />
-            </td>
-          </tr>
-        </table>
+        <div className={styles.Info}>
+          <div className={styles.InfoRow}>
+            <span className={styles.InfoLabel}>이름</span>
+            <span>{userInfo.name}</span>
+          </div>
+          <div className={styles.InfoRow}>
+            <span className={styles.InfoLabel}>핸드폰</span>
+            <span>{userInfo.phoneNumber}</span>
+          </div>
+          <div className={styles.InfoRow}>
+            <span className={styles.InfoLabel}>이메일</span>
+            <span>{userInfo.email}</span>
+          </div>
+          <div className={styles.InfoRow}>
+            <span className={styles.InfoLabel}>비밀번호 변경</span>
+            <Input
+              name="currentPassword"
+              type="password"
+              placeholder="기존 비밀번호"
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.InfoRow}>
+            <span className={styles.InfoLabel}> </span>
+            <Input
+              name="newPassword"
+              type="password"
+              placeholder="새 비밀번호"
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.InfoRow}>
+            <span className={styles.InfoLabel}> </span>
+            <Input
+              name="confirmPassword"
+              type="password"
+              placeholder="새 비밀번호 확인"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
         <Button
           buttonType={isValidateButton ? 'Active' : 'Disabled'}
           className={styles.EditButton}

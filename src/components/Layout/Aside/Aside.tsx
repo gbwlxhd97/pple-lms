@@ -20,16 +20,18 @@ type AsideProps = {
 
 const ASidebar = ({ children }: AsideProps) => {
   const [toggle, setToggle] = useState(false);
-  const {profile: {name}} = useProfileStore()
+  const {
+    profile: { name },
+  } = useProfileStore();
   const toggleSidebar = () => {
     setToggle(!toggle);
   };
-  const {clear} = useProfileStore()
-  const router = useRouter()
+  const { clear } = useProfileStore();
+  const router = useRouter();
 
   const routeThenCloseAside = (route: RoutePath) => {
     router.push(route);
-    setToggle(false)
+    setToggle(false);
   };
 
   const logout = async () => {
@@ -40,9 +42,8 @@ const ASidebar = ({ children }: AsideProps) => {
         Cookies.remove(SESSION_KEY);
         routeThenCloseAside('/login');
       }
-    } catch (error) {
-    }
-  }
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -79,7 +80,12 @@ const ASidebar = ({ children }: AsideProps) => {
                     <LogoutIcon width={18} height={18} />
                   </div>
                 </div>
-                <div className={styles.NeighborFlex} onClick={loadingToast}>
+                <div
+                  className={styles.NeighborFlex}
+                  onClick={() => {
+                    routeThenCloseAside('/mypage');
+                  }}
+                >
                   <div>마이페이지</div>
                   <div>
                     <UserIcon width={18} height={18} />
