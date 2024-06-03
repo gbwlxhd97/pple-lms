@@ -7,7 +7,7 @@ interface Table2Props {
   tableHead: string[]; // 테이블의 각 열 제목
   tableBody: { id: number; title: string; createdAt: string }[]; // 각 행의 데이터 배열
   isShowNew?: boolean;
-  path: string;
+  path?: string;
 }
 
 const Table2 = ({ tableBody, tableHead, isShowNew, path }: Table2Props) => {
