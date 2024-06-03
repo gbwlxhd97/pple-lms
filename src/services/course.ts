@@ -24,10 +24,22 @@ const insertNote = async (requestbody: RequestInsertBody) => {
   return data;
 };
 
+const getCourseReferenceList = async (id:number) => {
+  const {data} = await requestAPI().get(`/note/readList?courseId=${id}`)
+  return data;
+}
+
+const getCourseReferenceDetail = async (id:number) => {
+  const {data} = await requestAPI().get(`/note/read?noteId=${id}`)
+  return data
+}
+
 const courseAPIList = {
   getCoursePage,
   getCourseSection,
   insertNote,
+  getCourseReferenceList,
+  getCourseReferenceDetail,
 };
 
 export default courseAPIList;

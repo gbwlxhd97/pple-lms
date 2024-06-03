@@ -2,7 +2,9 @@ import useProfileStore from '@/stores/useProfileStore';
 import styles from './index.module.scss';
 import Title from '@/components/common/Title/Title';
 import Table2 from '@/components/common/Table2/Table2';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
+import courseAPIList from '@/services/course';
+import { useEffect } from 'react';
 
 const CourseReferencePage = () => {
   const {
@@ -22,14 +24,27 @@ const CourseReferencePage = () => {
     { id: 10, title: '이것은 공지사항입니다.', createdAt: '2024.04.18' },
   ];
 
+  const getReferList = async () => {
+    const res = await courseAPIList.getCourseReferenceList(Number(id));
+    console.log(res);
+    
+  }
+
+  useEffect(() => {
+    getReferList()
+  },[])
+
   return (
     <>
-      <Title title="공지사항" isShowButton={role === 'TEACHER'} />
+      <div className="SpacingWrapper">
+        <Title title="강의 자료" isShowButton={role === 'TEACHER'} />
+      </div>
       <div className={styles.NoticeTable}>
         <Table2
           tableHead={['번호', '제목', '날짜']}
           tableBody={noticeList}
           isShowNew={true}
+          path='/course/reference/detail'
         />
       </div>
     </>
