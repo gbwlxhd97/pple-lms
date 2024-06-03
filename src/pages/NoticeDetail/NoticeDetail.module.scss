@@ -1,0 +1,44 @@
+@import '@/styles/theme.scss';
+
+.DetailContainer {
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+}
+  
+h2 {
+  font-size: 20px;
+  font-weight: 600; 
+}  
+
+.WriterAndDate {
+  margin-top: 10px; 
+  font-size: 14px; 
+  font-style: normal;
+  font-weight: 300;
+  color: $gray300;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $gray100;
+}
+
+.content {
+  font-size: 16px; 
+  font-style: normal;
+  font-weight: 400;
+  color: $gray300;
+}
+
+.Buttoncontainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ListButton {
+  width: 60px;
+  height: 40px;
+  font-size: 16px; 
+  font-weight: 500;
+  padding: 8px 10px;
+  margin-top: 10px;
+}
+

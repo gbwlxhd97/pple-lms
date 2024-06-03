@@ -6,6 +6,7 @@ import useCourseNameStore from '@/stores/useCourseName';
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from "./index.module.scss"
+import Title from '@/components/common/Title/Title';
 const CourseDetailPage = () => {
   const {state} = useLocation()
   const router = useRouter();
@@ -13,7 +14,8 @@ const CourseDetailPage = () => {
   const onPushAttendPage = () => {
     router.push('/attendance', {} ,{state})
   }
-
+  console.log(state,"state란?");
+  
   // 해당 과목 공지사항 및 과목명 반환
   const getCourseDatas = async () => {
     try {
@@ -41,13 +43,26 @@ const CourseDetailPage = () => {
   return (
     <div>
       <Card title="강좌 공지사항" emptyMsg="등록된 공지사항이 없습니다" />
-      <Button
-        buttonType="Active"
-        onClick={onPushAttendPage}
-        className={styles.AttendButton}
-      >
-        출석정보확인
-      </Button>
+      <div className={styles.CommonWrapper}>
+        <Title title="출석정보" />
+        <Button
+          buttonType="Active"
+          onClick={onPushAttendPage}
+          className={styles.AttendButton}
+        >
+          출석정보확인
+        </Button>
+      </div>
+      <div className={styles.CommonWrapper}>
+        <Title title="강의자료" />
+        <Button buttonType="Active" className={styles.AttendButton}
+        onClick={() => {
+          router.push(`/course/reference/${state.id}`)
+        }}
+        >
+          강의자료확인
+        </Button>
+      </div>
     </div>
   );
 }

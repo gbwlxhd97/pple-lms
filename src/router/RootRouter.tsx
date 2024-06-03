@@ -16,9 +16,11 @@ import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
 import NoticePage from '@/pages/Notice/Notice';
 import NoticeEditPage from '@/pages/NoticeEdit/NoticeEdit';
+import NoticeDetailPage from '@/pages/NoticeDetail/NoticeDetail';
 import ProtectedRoute from './ProtectedRouter';
 import CourseDetailPage from '@/pages/Course/Detail';
 import { useEffect } from 'react';
+import CourseReferencePage from '@/pages/Course/Reference';
 
 export const RootRouter = () => {
   useEffect(() => {
@@ -62,10 +64,18 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="course/*"
+          path="course/:id"
           element={
             <ProtectedRoute>
               <CourseDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="course/reference/:id"
+          element={
+            <ProtectedRoute>
+              <CourseReferencePage />
             </ProtectedRoute>
           }
         />
@@ -82,6 +92,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <NoticeEditPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="notice/detail/:id"
+          element={
+            <ProtectedRoute>
+              <NoticeDetailPage />
             </ProtectedRoute>
           }
         />

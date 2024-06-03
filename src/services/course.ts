@@ -12,9 +12,22 @@ const getCourseSection = async (id:string) => {
   return data;
 };
 
+type RequestInsertBody = {
+  title: string;
+  main: string;
+  courseId: number;
+  files?: any;
+};
+
+const insertNote = async (requestbody: RequestInsertBody) => {
+  const data = await requestAPI().post(`/note/write`, requestbody);
+  return data;
+};
+
 const courseAPIList = {
   getCoursePage,
   getCourseSection,
+  insertNote,
 };
 
 export default courseAPIList;
