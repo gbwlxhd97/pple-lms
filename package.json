@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-drag-drop-files": "^2.3.10",
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^6.1.6",
     "react-pro-sidebar": "^1.1.0",
