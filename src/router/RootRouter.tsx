@@ -24,6 +24,7 @@ import CourseReferencePage from '@/pages/Course/Reference';
 import MyPage from '@/pages/Mypage/Mypage';
 import CourseReferenceDetailPage from '@/pages/Course/Reference/Detail';
 import CourseReferenceEditPage from '@/pages/Course/Reference/Edit';
+import AssignmentPage from '@/pages/Assignment/Assignment';
 
 export const RootRouter = () => {
   useEffect(() => {
@@ -127,6 +128,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <MyPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="assignment"
+          element={
+            <ProtectedRoute>
+              <AssignmentPage />
             </ProtectedRoute>
           }
         />
