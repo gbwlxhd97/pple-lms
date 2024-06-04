@@ -23,6 +23,7 @@ import { useEffect } from 'react';
 import CourseReferencePage from '@/pages/Course/Reference';
 import MyPage from '@/pages/Mypage/Mypage';
 import CourseReferenceDetailPage from '@/pages/Course/Reference/Detail';
+import CourseReferenceEditPage from '@/pages/Course/Reference/Edit';
 
 export const RootRouter = () => {
   useEffect(() => {
@@ -86,6 +87,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <CourseReferenceDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="course/reference/edit"
+          element={
+            <ProtectedRoute>
+              <CourseReferenceEditPage />
             </ProtectedRoute>
           }
         />

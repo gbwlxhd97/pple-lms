@@ -27,7 +27,7 @@ const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
     <div className={styles.CardContainer}>
       <Title title={title} isMore={titleiIsMore} count={count} />
       <div className={styles.CardWrap}>
-        {emptyMsg && <div className={styles.EmptyMsgWrap}>{emptyMsg}</div>}
+        {options?.length == 0 && emptyMsg && <div className={styles.EmptyMsgWrap}>{emptyMsg}</div>}
         {options?.map((item: any, i: number) => (
           <div
             className={styles.Flex}

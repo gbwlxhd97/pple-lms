@@ -3,6 +3,7 @@ import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
 import Button from '@/components/common/Button/Button';
 import { loadingToast } from '@/utils';
+import { Link } from 'react-router-dom';
 
 type TitleProps = {
   title: string;
@@ -10,6 +11,7 @@ type TitleProps = {
   isMore?: boolean;
   count?: number;
   isShowButton?: boolean;
+  path?: string;
 };
 
 /**
@@ -18,7 +20,7 @@ type TitleProps = {
  * @returns
  */
 
-const Title = ({ title, isMore, count, isShowButton }: TitleProps) => {
+const Title = ({ title, isMore, count, isShowButton ,path}: TitleProps) => {
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -42,7 +44,7 @@ const Title = ({ title, isMore, count, isShowButton }: TitleProps) => {
       {isShowButton && (
         <div className={styles.AddBtn}>
           <Button buttonType="Active" className={styles.AddNoticeButton}>
-            + 글쓰기
+            <Link to={`${path}`}>+ 글쓰기</Link>
           </Button>
         </div>
       )}
