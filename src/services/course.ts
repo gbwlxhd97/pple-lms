@@ -20,7 +20,11 @@ type RequestInsertBody = {
 };
 
 const insertNote = async (requestbody: RequestInsertBody) => {
-  const data = await requestAPI().post(`/note/write`, requestbody);
+  const data = await requestAPI().post(
+    `/note/write`,
+    requestbody,
+    'multipart/form-data'
+  );
   return data;
 };
 
