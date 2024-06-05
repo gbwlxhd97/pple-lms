@@ -9,6 +9,8 @@ import Button from '@/components/common/Button/Button';
 import useProfileStore from '@/stores/useProfileStore';
 import courseAPIList from '@/services/course';
 import styles from './index.module.scss';
+import { FileIcon } from '@/icons/icon';
+import DeleteIcon from '@/icons/icon/DeleteIcon';
 
 interface IinsertBody {
   title: string;
@@ -65,6 +67,14 @@ const CourseReferenceEditPage: React.FC = () => {
     }
   };
 
+  const handleFileRemove = (index: number) => {
+    setInfo((prevState) => ({
+      ...prevState,
+      files: prevState.files.filter((_, i) => i !== index),
+    }));
+  };
+
+
   const fileTypes = ['JPEG', 'PNG', 'GIF','PDF'];
 
   const validation = info.title?.length > 0 && info.main.length > 0
@@ -99,7 +109,22 @@ const CourseReferenceEditPage: React.FC = () => {
           <div className={styles.PreviewContainer}>
             {info.files.map((file, index) => (
               <div key={index} className={styles.PreviewItem}>
-                <p>업로드된 파일: {file.name}</p>
+                <div className={styles.FileWrap}>
+                  <div className={styles.Flex}>
+                    <div>
+                      <FileIcon width={24} height={24} />{' '}
+                    </div>
+                    <div>{file.name}</div>
+                  </div>
+                  <div
+                    className={styles.DeleteButton}
+                    onClick={() => {
+                      handleFileRemove(index);
+                    }}
+                  >
+                    <DeleteIcon width={18} height={18} />
+                  </div>
+                </div>
               </div>
             ))}
           </div>

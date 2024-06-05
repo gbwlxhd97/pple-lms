@@ -19,7 +19,13 @@ const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
   const onPushDetailPage = (state: any) => {
     if (title === '수강중인 강의') {
       router.push(`/course/${state.id}`, {}, state);
-    } else {
+      return
+    }
+    if (title === '강좌 공지사항') {
+      router.push(`/notice/detail/${state.id}`);
+      return
+    }
+    else {
       loadingToast();
     }
   };

@@ -10,14 +10,20 @@ const insertNotice = async (requestBody: insertRequestBody) => {
   return data;
 }
 
-const getNoticeList = async (courseId: number) => {
+const getNoticeList = async () => {
   const data = await requestAPI().get('/notice/readList')
   return data;
 }
 
+const getDetailNotice = async (noticeId: number) => {
+  const data = await requestAPI().get(`/notice/read?noticeId=${noticeId}`);
+  return data;
+};
+
 const noticeAPIList = {
   insertNotice,
-  getNoticeList
-}
+  getNoticeList,
+  getDetailNotice,
+};
 
 export default noticeAPIList

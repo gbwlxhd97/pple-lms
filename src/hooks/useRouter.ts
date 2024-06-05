@@ -36,4 +36,6 @@ export type RoutePath =
   | '/inquiry-complete'
   | `/course/${string}`
   | `/course/reference/${string}`
-  | '/mypage';
+  | '/mypage'
+  | `/notice/detail/${string}`
+  | '/notice';
