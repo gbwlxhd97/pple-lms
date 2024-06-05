@@ -15,12 +15,16 @@ const getCourseSection = async (id:string) => {
 type RequestInsertBody = {
   title: string;
   main: string;
-  courseId: number;
+  courseId?: number;
   files?: any;
 };
 
 const insertNote = async (requestbody: RequestInsertBody) => {
-  const data = await requestAPI().post(`/note/write`, requestbody);
+  const data = await requestAPI().post(
+    `/note/write`,
+    requestbody,
+    'multipart/form-data'
+  );
   return data;
 };
 
