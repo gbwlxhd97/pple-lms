@@ -65,7 +65,7 @@ const CourseReferenceEditPage: React.FC = () => {
     }
   };
 
-  const fileTypes = ['JPEG', 'PNG', 'GIF'];
+  const fileTypes = ['JPEG', 'PNG', 'GIF','PDF'];
 
   const validation = info.title?.length > 0 && info.main.length > 0
   return (

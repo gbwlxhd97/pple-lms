@@ -5,6 +5,8 @@ import styles from './index.module.scss';
 import { IReferenceDetail } from '@/interfaces/course';
 import Button from '@/components/common/Button/Button';
 import { useRouter } from '@/hooks/useRouter';
+import { FileIcon } from '@/icons/icon';
+import { downloadFile } from '@/utils';
 
 
 const CourseReferenceDetailPage = () => {
@@ -30,14 +32,42 @@ const CourseReferenceDetailPage = () => {
         <span>・</span>
         <div>{detailInfo?.createdAt}</div>
       </div>
+      <div className="SpacingDividerWrapper">
+        <div className="Divider"></div>
+      </div>
+      <div className={styles.FileContainer}>
+        {detailInfo?.noteFileDtos?.map((item, idx) => (
+          <div className={styles.FileColumnWrapper} key={idx}>
+            <div className={styles.FileWrap}>
+              <div className={styles.Flex}>
+                <div>
+                  <FileIcon width={24} height={24} />
+                </div>
+                <div className={styles.Name}>{item.fileName}</div>
+              </div>
+              <div>
+                <Button
+                  className={styles.DownloadButton}
+                  buttonType="TimeActive"
+                  onClick={() => {
+                    downloadFile(item.filePath);
+                  }}
+                >
+                  다운로드
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
       <div className={styles.ListButtonWrap}>
-        <Button 
-          className={styles.ListButton} 
+        <Button
+          className={styles.ListButton}
           buttonType="List"
           onClick={() => {
             router.back(1);
           }}
-          >
+        >
           목록
         </Button>
       </div>

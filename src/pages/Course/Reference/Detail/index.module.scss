@@ -26,6 +26,38 @@
   }
 }
 
+
+.FileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  .FileColumnWrapper {
+    background-color: $purple2;
+    padding: 14px 12px;
+    border-radius: 10px;
+    .FileWrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .Flex {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .Name {
+          color: $gray400;
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+
+.DownloadButton {
+  padding: 8px 14px;
+}
+
 .ListButtonWrap {
   text-align: right;
 }
