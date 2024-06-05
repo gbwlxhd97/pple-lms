@@ -27,8 +27,8 @@ const MainPage = () => {
   };
 
   const getProfie = async () => {
-    const {name,role} = await authAPIList.profile()
-    setProfile({name,role})
+    const {name,role,tel,email} = await authAPIList.profile()
+    setProfile({name,role,tel,email})
   }
 
   useEffect(() => {

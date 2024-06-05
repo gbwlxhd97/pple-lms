@@ -1,0 +1,35 @@
+@import '@/styles/theme.scss';
+
+.Title {
+  color: $black;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.InfoWrap {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  > div {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  > div:first-child {
+    color: $gray300;
+  }
+
+  > div:last-child {
+    color: $grayDefault;
+  }
+  > span {
+    color: $gray200;
+  }
+}
+
+.ListButtonWrap {
+  text-align: right;
+}
+.ListButton {
+  padding: 6px 14px;
+  margin-top: 24px;
+}

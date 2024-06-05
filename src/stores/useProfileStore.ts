@@ -6,6 +6,8 @@ const STORAGE_KEY = 'profileStore';
 interface Profile {
   name: string;
   role: 'TEACHER' | 'STUDENT' | '';
+  email: string;
+  tel: string;
 }
 
 interface ProfileState {
@@ -17,9 +19,9 @@ interface ProfileState {
 const useProfileStore = create(
   persist<ProfileState>(
     (set) => ({
-      profile: { name: '', role: '' },
+      profile: { name: '', role: '', email: '', tel: '' },
       setProfile: (newProfile) => set({ profile: newProfile }),
-      clear: () => set({ profile: { name: '', role: '' } }),
+      clear: () => set({ profile: { name: '', role: '', email: '', tel: '' } }),
     }),
     {
       name: STORAGE_KEY,

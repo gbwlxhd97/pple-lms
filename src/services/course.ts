@@ -15,7 +15,6 @@ const getCourseSection = async (id:string) => {
 type RequestInsertBody = {
   title: string;
   main: string;
-  courseId?: number;
   files?: any;
 };
 

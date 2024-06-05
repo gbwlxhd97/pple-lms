@@ -39,8 +39,8 @@ const SignInPage = () => {
       if (res) {
         Cookies.set(SESSION_KEY, res);
         router.push('/main');
-        const { name, role } = await authAPIList.profile();
-        setProfile({ name, role });
+        const { name, role,tel,email } = await authAPIList.profile();
+        setProfile({ name, role, tel, email });
       }
     } catch (error) {
       console.log(error);
