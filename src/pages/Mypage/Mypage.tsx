@@ -2,20 +2,16 @@ import styles from './Mypage.module.scss';
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
 import { useState } from 'react';
+import useProfileStore from '@/stores/useProfileStore';
 
 const MyPage = () => {
-  const [userInfo, setUserInfo] = useState({
-    name: '이세영',
-    phoneNumber: '01063536353',
-    email: 'lsy1234@naver.com',
-  });
 
   const [password, setPassword] = useState({
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
-
+  const {profile} = useProfileStore()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPassword((prev) => ({
@@ -36,15 +32,15 @@ const MyPage = () => {
         <div className={styles.Info}>
           <div className={styles.InfoRow}>
             <span className={styles.InfoLabel}>이름</span>
-            <span>{userInfo.name}</span>
+            <span>{profile.name}</span>
           </div>
           <div className={styles.InfoRow}>
             <span className={styles.InfoLabel}>핸드폰</span>
-            <span>{userInfo.phoneNumber}</span>
+            <span>{profile.tel}</span>
           </div>
           <div className={styles.InfoRow}>
             <span className={styles.InfoLabel}>이메일</span>
-            <span>{userInfo.email}</span>
+            <span>{profile.email}</span>
           </div>
           <div className={styles.InfoRow}>
             <span className={styles.InfoLabel}>비밀번호 변경</span>

@@ -50,7 +50,7 @@ const CourseReferenceDetailPage = () => {
                   className={styles.DownloadButton}
                   buttonType="TimeActive"
                   onClick={() => {
-                    downloadFile(item.filePath);
+                    downloadFile(item.filePath,item.fileName);
                   }}
                 >
                   다운로드

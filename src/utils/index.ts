@@ -21,7 +21,7 @@ export const loadingToast = () => {
   toast.loading('준비중인 기능입니다.');
 };
 
-export const downloadFile = async (url: string) => {
+export const downloadFile = async (url: string, fileName?: string) => {
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -38,7 +38,7 @@ export const downloadFile = async (url: string) => {
     const downloadUrl = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = downloadUrl;
-    a.download = url.split('/').pop() || 'download';
+    a.download = fileName || url.split('/').pop() || 'download';
     document.body.appendChild(a);
     a.click();
     a.remove();
