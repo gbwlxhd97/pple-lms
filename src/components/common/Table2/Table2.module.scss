@@ -12,7 +12,7 @@
         color: $gray500;
         > th {
             text-align: left;
-            padding: 8px 12px;
+            padding: 12px 12px;
         }
         .TableHead0 {
             width: 10%;
@@ -33,8 +33,7 @@
         align-items: flex-start;
         border-bottom: 1px solid $gray100;
         > td {
-            text-align: left;
-            padding: 8px 12px;
+            padding: 12px 12px;
         }
         .TableNum {
             font-size: 14px;
@@ -42,6 +41,7 @@
             font-weight: 400;
             color: $gray400;
             width: 10%;
+            margin: auto 0;
         }
         .TableTitle {
             font-size: 14px;
@@ -50,6 +50,12 @@
             color: $gray400;
             width: 70%;
             display: flex;
+            flex-direction: column; 
+            align-items: flex-start;
+            .Title {
+              display: flex;
+              flex-direction: row;
+            }
             a {
               color: inherit;
               text-decoration: none;
@@ -57,12 +63,47 @@
             .NewIcon {
                 margin-left: 5px;
             }
+            .TitleDetails {
+                display: flex;
+                flex-direction: row; 
+                align-items: center; 
+                margin-top: 5px; 
+                color: $grayDefault; 
+                .Status {
+                    font-size: 12px;
+                    font-weight: 400;
+                    &.InProgress {
+                        color: $green100; 
+                    }
+                    &.Ended {
+                        color: $grayDefault; 
+                    }
+                }
+                .Submit {
+                    font-size: 12px;
+                    font-weight: 400;
+                    &.Submit {
+                        color: $grayDefault; 
+                    }
+                    &.NotSubmitted {
+                        color: $spacing400; 
+                    }
+                }
+                .DueDate {
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: $grayDefault;
+                }
+            }
         }
-        .TableDate {
+        .CreatedAt {
             color: $grayDefault;
             font-size: 12px;
             font-weight: 400;
             width: 20%;
         }
+    }
+    .EndedRow{
+        background-color: $gray0;
     }
 }
