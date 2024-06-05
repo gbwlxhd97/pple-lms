@@ -15,8 +15,8 @@ import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
 import AttendancePage from '@/pages/Attendance/Attendance';
 import NoticePage from '@/pages/Notice/Notice';
-import NoticeEditPage from '@/pages/NoticeEdit/NoticeEdit';
-import NoticeDetailPage from '@/pages/NoticeDetail/NoticeDetail';
+import NoticeEditPage from '@/pages/Notice/Edit/NoticeEdit';
+import NoticeDetailPage from '@/pages/Notice/Detail/NoticeDetail';
 import ProtectedRoute from './ProtectedRouter';
 import CourseDetailPage from '@/pages/Course/Detail';
 import { useEffect } from 'react';
@@ -25,6 +25,7 @@ import MyPage from '@/pages/Mypage/Mypage';
 import CourseReferenceDetailPage from '@/pages/Course/Reference/Detail';
 import CourseReferenceEditPage from '@/pages/Course/Reference/Edit';
 import AssignmentPage from '@/pages/Assignment/Assignment';
+import AssignmentDetailPage from '@/pages/Assignment/Detail/AssignmentDetail';
 
 export const RootRouter = () => {
   useEffect(() => {
@@ -136,6 +137,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <AssignmentPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="assignment/:id"
+          element={
+            <ProtectedRoute>
+              <AssignmentDetailPage />
             </ProtectedRoute>
           }
         />

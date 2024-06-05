@@ -62,6 +62,14 @@ button {
     border: 1px solid $gray100;
     color: $gray500;
   }
+  &.File {
+    background-color: $gray800;
+    color: $white;
+    font-size: 12px;
+    font-weight: 300;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
   &:hover {
     opacity: 0.8;
   }
