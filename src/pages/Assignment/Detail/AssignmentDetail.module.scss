@@ -1,0 +1,59 @@
+@import '@/styles/theme.scss';
+
+.DetailContainer {
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+}
+  
+h2 {
+  font-size: 20px;
+  font-weight: 600; 
+}  
+
+.SubjectAndWriter {
+  margin-top: 10px; 
+  font-size: 14px; 
+  font-style: normal;
+  font-weight: 300;
+  color: $gray300;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $gray100;
+}
+
+.Date {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 5px 0;
+  border-bottom: 1px solid $gray100;
+}
+
+.InfoRow {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.InfoLabel {
+  color: $gray200;
+  min-width: 120px;
+}
+
+.Info {
+  color: $gray300;
+}
+
+.content {
+  font-size: 16px; 
+  font-style: normal;
+  font-weight: 400;
+  color: $gray300;
+}
+
+.Space {
+    height: 20px; 
+    background-color: $gray0;
+    margin: 20px 0 30px 0;
+}
