@@ -22,7 +22,7 @@ const NoticePage = () => {
   ];
   return (
     <>
-      <Title title="공지사항" isShowButton={role === 'TEACHER'} />
+      <Title title="공지사항" isShowButton={role === 'TEACHER'} path='/notice/edit' />
       <div className={styles.NoticeTable}>
         <Table2
           tableHead={['번호', '제목', '날짜']}

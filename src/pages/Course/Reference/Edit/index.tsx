@@ -85,12 +85,12 @@ const CourseReferenceEditPage: React.FC = () => {
         type="text"
         name="title"
         onChange={handleInputChange}
-        placeholder="Title"
+        placeholder="제목"
       />
       <TextArea
         name="main"
         onChange={handleInputChange}
-        placeholder="Main Content"
+        placeholder="내용"
       />
       <div className={styles.FileUploaderContainer}>
         <FileUploader
