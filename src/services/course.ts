@@ -12,13 +12,12 @@ const getCourseSection = async (id:string) => {
   return data;
 };
 
-type RequestInsertBody = {
-  title: string;
-  main: string;
-  files?: any;
-};
-
-const insertNote = async (requestbody: RequestInsertBody) => {
+/**
+ * 
+ * @param requestbody formData
+ * @returns 
+ */
+const insertNote = async (requestbody: any) => {
   const data = await requestAPI().post(
     `/note/write`,
     requestbody,

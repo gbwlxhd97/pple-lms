@@ -38,29 +38,23 @@ const CourseReferenceEditPage: React.FC = () => {
     }));
   };
 
-  const handleFileChange = (file: File) => {
+  const handleFileChange = (files: FileList) => {
     setInfo((prevState) => ({
       ...prevState,
-      files: [...prevState.files, file],
+      files: [...prevState.files, ...Array.from(files)],
     }));
   };
 
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
-      
-      if (info.files.length > 0) {
-        for (let i = 0; i < info.files.length; i++) {
-          formData.append('files', info.files[i]);
-        }
-      }
-      const payload ={
-        title: info.title,
-        main: info.main,
-        files: info.files.length > 0 ? formData : []
-      }
-      const response = await courseAPIList.insertNote(payload);
+      info.files.forEach((file) => {
+        formData.append('files', file);
+      });
+      formData.append('title', info.title);
+      formData.append('main', info.main);
 
+      const response = await courseAPIList.insertNote(formData);
       if (response) {
         toast.success('등록이 완료되었습니다.');
         router.back(1);
@@ -73,8 +67,7 @@ const CourseReferenceEditPage: React.FC = () => {
 
   const fileTypes = ['JPEG', 'PNG', 'GIF'];
 
-  console.log(info);
-  
+  const validation = info.title?.length > 0 && info.main.length > 0
   return (
     <div className="SpacingWrapper">
       <Title title="강의 자료 업로드" />
@@ -106,14 +99,14 @@ const CourseReferenceEditPage: React.FC = () => {
           <div className={styles.PreviewContainer}>
             {info.files.map((file, index) => (
               <div key={index} className={styles.PreviewItem}>
-                <p>업로드된 파일: {file?.name}</p>
+                <p>업로드된 파일: {file.name}</p>
               </div>
             ))}
           </div>
         )}
       </div>
       <Button
-        buttonType="Active"
+        buttonType={validation ? 'Active' : 'Disabled'}
         className={styles.UploadButton}
         onClick={handleSubmit}
       >
