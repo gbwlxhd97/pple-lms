@@ -3,8 +3,9 @@ import Button from '@/components/common/Button/Button';
 import { Link, useParams } from 'react-router-dom';
 
 const NoticeDetailPage = () => {
-  const { id } = useParams();
-
+  const { courseId,noticeId } = useParams();
+  console.log(courseId,noticeId);
+  
   const notice = {
     id: 1,
     title: '이것은 공지사항입니다.',
@@ -27,7 +28,7 @@ const NoticeDetailPage = () => {
           <p className={styles.content}>{notice.content}</p>
         </div>
         <div className={styles.Buttoncontainer}>
-          <Link to="/notice">
+          <Link to={`/course/${courseId}/notice`}>
             <Button buttonType="List" className={styles.ListButton}>
               목록
             </Button>

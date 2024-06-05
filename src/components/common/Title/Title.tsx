@@ -3,7 +3,8 @@ import styles from './Title.module.scss';
 import { ArrowRightIcon } from '@/icons/icon';
 import Button from '@/components/common/Button/Button';
 import { loadingToast } from '@/utils';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useRouter } from '@/hooks/useRouter';
 
 type TitleProps = {
   title: string;
@@ -21,6 +22,16 @@ type TitleProps = {
  */
 
 const Title = ({ title, isMore, count, isShowButton ,path}: TitleProps) => {
+  
+  const router = useRouter();
+  const {courseId,noticeId} = useParams()
+  const onPushPage = () => {
+    if(title === '강좌 공지사항') {
+      router.push(`/course/${courseId}/notice`)
+    } else {
+      loadingToast();
+    }
+  }
   return (
     <div className={styles.TitleFlex}>
       <div
@@ -36,7 +47,7 @@ const Title = ({ title, isMore, count, isShowButton ,path}: TitleProps) => {
         {count && <div className={styles.CardCount}>({count})</div>}
       </div>
       {isMore && (
-        <div className={styles.CardMoreText} onClick={loadingToast}>
+        <div className={styles.CardMoreText} onClick={onPushPage}>
           더 보기
           <ArrowRightIcon width={6} height={10} stroke="#7879F1" />
         </div>

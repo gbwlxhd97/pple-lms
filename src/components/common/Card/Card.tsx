@@ -4,6 +4,7 @@ import styles from './Card.module.scss';
 import useProfileStore from '@/stores/useProfileStore';
 import toast from 'react-hot-toast';
 import { loadingToast } from '@/utils';
+import { useParams } from 'react-router';
 
 type CardProps = {
   title: string;
@@ -16,13 +17,15 @@ type CardProps = {
 const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
   const router = useRouter();
   const { profile } = useProfileStore();
+  const {courseId} = useParams()
+  
   const onPushDetailPage = (state: any) => {
     if (title === '수강중인 강의') {
       router.push(`/course/${state.id}`, {}, state);
       return
     }
     if (title === '강좌 공지사항') {
-      router.push(`/notice/detail/${state.id}`);
+      router.push(`/course/${courseId}/notice/detail/${state.id}`);
       return
     }
     else {

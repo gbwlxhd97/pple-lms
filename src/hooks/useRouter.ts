@@ -37,5 +37,5 @@ export type RoutePath =
   | `/course/${string}`
   | `/course/reference/${string}`
   | '/mypage'
-  | `/notice/detail/${string}`
-  | '/notice';
+  | `/course/${string}/notice/detail/${string}`
+  | `/course/${string}/notice`;

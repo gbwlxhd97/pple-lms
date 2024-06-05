@@ -69,7 +69,7 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="course/:id"
+          path="course/:courseId"
           element={
             <ProtectedRoute>
               <CourseDetailPage />
@@ -101,7 +101,7 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="notice"
+          path="course/:courseId/notice"
           element={
             <ProtectedRoute>
               <NoticePage />
@@ -117,7 +117,7 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="notice/detail/:id"
+          path="course/:courseId/notice/detail/:noticeId"
           element={
             <ProtectedRoute>
               <NoticeDetailPage />
