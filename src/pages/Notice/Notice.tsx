@@ -10,16 +10,20 @@ const NoticePage = () => {
   const {
     profile: { role },
   } = useProfileStore();
-  const [noticeList,setNoticeList] = useState<Array<INoticeList>>()
-  
+  const [noticeList, setNoticeList] = useState<Array<INoticeList>>();
+
   const getNoticeList = async () => {
-    const res = await noticeAPIList.getNoticeList()
-    setNoticeList(res);
-  }
+    try {
+      const res = await noticeAPIList.getNoticeList();
+      console.log(res);
+      setNoticeList(res);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getNoticeList();
-  },[])
+  }, []);
+
   return (
     <>
       <Title title="공지사항" isShowButton={role === 'TEACHER'} path='/notice/edit' />
