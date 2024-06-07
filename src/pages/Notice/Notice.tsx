@@ -11,7 +11,8 @@ const NoticePage = () => {
   const {
     profile: { role },
   } = useProfileStore();
-  const { courseId, noticeId } = useParams();
+  const { courseId } = useParams();
+
   const [noticeList, setNoticeList] = useState<Array<INoticeList>>();
 
   const getNoticeList = async () => {
@@ -38,7 +39,7 @@ const NoticePage = () => {
           tableHead={['번호', '제목', '날짜']}
           tableBody={noticeList || []}
           isShowNew={true}
-          path={`/course/${courseId}/notice/detail/${noticeId}`}
+          path={`/course/${courseId}/notice/detail`}
         />
       </div>
     </>
