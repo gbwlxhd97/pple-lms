@@ -54,7 +54,6 @@ const AssignmentPage = () => {
         <Table2
           tableHead={['번호', '제목']}
           tableBody={assignmentList}
-          isShowNew={true}
           path="/assignment"
         />
       </div>

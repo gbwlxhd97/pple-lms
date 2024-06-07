@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import noticeAPIList from '@/services/notice';
 import { INoticeList } from '@/interfaces/notice';
 import { useParams } from 'react-router';
+import { today } from '@/utils/date';
 
 const NoticePage = () => {
   const {
@@ -18,8 +19,12 @@ const NoticePage = () => {
   const getNoticeList = async () => {
     try {
       const res = await noticeAPIList.getNoticeList();
-      console.log(res);
-      setNoticeList(res);
+      const updatedData = res.map((item: INoticeList) => ({
+        ...item,
+        isNew: item.createdAt === today,
+      }));
+      console.log(updatedData);
+      setNoticeList(updatedData);
     } catch (error) {}
   };
 
@@ -38,7 +43,6 @@ const NoticePage = () => {
         <Table2
           tableHead={['번호', '제목', '날짜']}
           tableBody={noticeList || []}
-          isShowNew={true}
           path={`/course/${courseId}/notice/detail`}
         />
       </div>
