@@ -5,6 +5,7 @@ import { useState } from 'react';
 import useProfileStore from '@/stores/useProfileStore';
 import authAPIList from '@/services/auth';
 import toast from 'react-hot-toast';
+import { validateChangePassword } from '@/utils/validate';
 
 const MyPage = () => {
   const [password, setPassword] = useState({
@@ -42,12 +43,7 @@ const MyPage = () => {
       toast.error('에러 발생 비밀번호를 확인해주세요.');
     }
   };
-
-  const isValidateButton =
-    password.prePassword.length >= 6 &&
-    password.newPassword.length >= 6 &&
-    password.confirmPassword.length >= 6 &&
-    password.newPassword === password.confirmPassword;
+  const isValidateButton = validateChangePassword(password);
 
   return (
     <>
