@@ -24,11 +24,10 @@ const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
       router.push(`/course/${state.id}`, {}, state);
       return;
     }
-    // if (title === '강좌 공지사항') {
-    //   router.push(`/course/${courseId}/notice/detail/${state.id}`);
-    //   return
-    // }
-    else {
+    if (title === '강좌 공지사항') {
+      router.push(`/course/${courseId}/notice/detail/${state.id}`);
+      return;
+    } else {
       loadingToast();
     }
   };

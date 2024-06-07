@@ -5,11 +5,13 @@ import useProfileStore from '@/stores/useProfileStore';
 import { useEffect, useState } from 'react';
 import noticeAPIList from '@/services/notice';
 import { INoticeList } from '@/interfaces/notice';
+import { useParams } from 'react-router';
 
 const NoticePage = () => {
   const {
     profile: { role },
   } = useProfileStore();
+  const { courseId, noticeId } = useParams();
   const [noticeList, setNoticeList] = useState<Array<INoticeList>>();
 
   const getNoticeList = async () => {
@@ -26,13 +28,17 @@ const NoticePage = () => {
 
   return (
     <>
-      <Title title="공지사항" isShowButton={role === 'TEACHER'} path='/notice/edit' />
+      <Title
+        title="공지사항"
+        isShowButton={role === 'TEACHER'}
+        path="/notice/edit"
+      />
       <div className={styles.NoticeTable}>
         <Table2
           tableHead={['번호', '제목', '날짜']}
           tableBody={noticeList || []}
           isShowNew={true}
-          path="/notice/detail"
+          path={`/course/${courseId}/notice/detail/${noticeId}`}
         />
       </div>
     </>
