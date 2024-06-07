@@ -4,9 +4,12 @@ import Input from '@/components/common/Input/Input';
 import TextArea from '@/components/common/TextArea/TextArea';
 import CheckBox from '@/components/common/CheckBox/CheckBox';
 import Button from '@/components/common/Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { INotice } from '@/interfaces/notice';
 import SingleCheckBox from '@/components/common/SingleCheckBox';
+import useProfileStore from '@/stores/useProfileStore';
+import { useRouter } from '@/hooks/useRouter';
+import toast from 'react-hot-toast';
 
 const NoticeEditPage = () => {
   const [noticeEdit, setNoticeEdit] = useState<INotice>({
@@ -14,7 +17,10 @@ const NoticeEditPage = () => {
     content: '',
     sendType: '',
   });
-
+  const {
+    profile: { role },
+  } = useProfileStore();
+  const router = useRouter();
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -29,6 +35,13 @@ const NoticeEditPage = () => {
     noticeEdit.title.length > 0 &&
     noticeEdit.content.length > 0 &&
     (noticeEdit.sendType === 'STUDENT' || noticeEdit.sendType === 'PARENTS');
+
+  useEffect(() => {
+    if (role !== 'TEACHER') {
+      toast.error('권한이 없습니다.');
+      router.push('/main', { replace: true });
+    }
+  }, []);
 
   return (
     <>
