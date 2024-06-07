@@ -14,6 +14,7 @@ interface TableRow {
   id: number;
   title: string;
   createdAt?: string;
+  isNew?: boolean;
   titleDetails?: {
     status?: string;
     submit?: string;
@@ -45,7 +46,7 @@ const Table2 = ({ tableBody, tableHead, isShowNew, path }: Table2Props) => {
             <td className={styles.TableTitle}>
               <div className={styles.Title}>
                 <Link to={`${path}/${row.id}`}>{row.title}</Link>
-                {isShowNew && (
+                {row.isNew && (
                   <div className={styles.NewIcon}>
                     <NewIcon width={12} height={12} />
                   </div>

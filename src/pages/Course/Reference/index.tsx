@@ -5,27 +5,34 @@ import Table2 from '@/components/common/Table2/Table2';
 import { useParams } from 'react-router-dom';
 import courseAPIList from '@/services/course';
 import { useEffect, useState } from 'react';
+import { IReferenceList } from '@/interfaces/course';
+import { today } from '@/utils/date';
 
 const CourseReferencePage = () => {
   const {
     profile: { role },
   } = useProfileStore();
-  const {id} = useParams()
-  const [referenceList, setReferenceList] = useState()
+  const { id } = useParams();
+  const [referenceList, setReferenceList] = useState<
+    IReferenceList[] | undefined
+  >();
   const getReferList = async () => {
     try {
       const res = await courseAPIList.getCourseReferenceList(Number(id));
-      console.log(res);
-      setReferenceList(res);
-    } catch (error) {
-      
-    }
-    
-  }
+      // isNew 필드 추가
+      const updatedData = res.map((item: IReferenceList) => ({
+        ...item,
+        isNew: item.createdAt === today,
+      }));
+      console.log(updatedData);
+
+      setReferenceList(updatedData);
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    getReferList()
-  },[])
+    getReferList();
+  }, []);
 
   return (
     <>
@@ -40,12 +47,11 @@ const CourseReferencePage = () => {
         <Table2
           tableHead={['번호', '제목', '날짜']}
           tableBody={referenceList || []}
-          isShowNew={true}
           path="/course/reference/detail"
         />
       </div>
     </>
   );
-}
+};
 
-export default CourseReferencePage
+export default CourseReferencePage;

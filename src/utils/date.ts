@@ -18,3 +18,5 @@ export function durationFormatTime(seconds: number) {
   const remainingSeconds = seconds % 60;
   return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
+
+export const today = new Date().toISOString().split('T')[0];

@@ -1,7 +1,7 @@
 interface notieFileDto {
   fileName: string;
-  filePath: string
-  fileSize: number
+  filePath: string;
+  fileSize: number;
   id: number;
 }
 
@@ -12,4 +12,13 @@ export interface IReferenceDetail {
   writerName: string;
   createdAt: string;
   noteFileDtos?: Array<notieFileDto>;
+}
+
+export interface IReferenceList {
+  id: number;
+  title: string;
+  writerName: string;
+  createdAt: string;
+  num: number;
+  isNew?: boolean;
 }
