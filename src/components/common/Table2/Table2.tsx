@@ -41,7 +41,7 @@ const Table2 = ({ tableBody, tableHead, path }: Table2Props) => {
               row.titleDetails?.status === '종료' ? styles.EndedRow : ''
             }
           >
-            <td className={styles.TableNum}>{rowIndex + 1}</td>
+            <td className={styles.TableNum}>{tableBody.length - rowIndex}</td>
             <td className={styles.TableTitle}>
               <div
                 className={`${styles.Title} ${row.isNew ? `${styles.isNew}` : ''}`}
