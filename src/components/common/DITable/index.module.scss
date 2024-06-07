@@ -1,0 +1,60 @@
+@import '@/styles/theme.scss';
+
+.TableContainer {
+    border-radius: 7px 7px 0px 0px;
+}
+
+.TableHead {
+    border-radius: 10px;
+    background: #F3F5FF;
+    width: 100%;
+    color: $gray300;
+    font-size: 14px;
+    font-weight: 600;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        > th {
+            // flex: 1;
+            padding: 12px 14px;
+        }
+    }
+}
+.IndexWithTitle {
+    display: flex;
+    gap: 30px;
+    flex: 8;
+}
+
+.TableBody {
+    color:$gray400;
+    font-weight: 600;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        >th {
+            border-bottom: 1px solid $gray0;
+            padding: 12px 14px;
+        }
+        
+    }
+    .AttendType {
+        font-size: 14px;
+        font-weight: 600;
+        &.Present {
+            color: var(--green, #67B472);
+        }
+        &.Absent {
+            color: $pink100;
+        }
+        &.Late {
+            color: #F90;
+        }
+    }
+}
+.CreatedAt {
+    flex: 2;
+    text-align: left;
+}
