@@ -27,7 +27,7 @@ const CourseReferenceEditPage: React.FC = () => {
     main: '',
     files: [],
   });
-
+  const [isLoading,setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleInputChange = (
@@ -49,6 +49,7 @@ const CourseReferenceEditPage: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
+      setIsLoading(true);
       const formData = new FormData();
       info.files.forEach((file) => {
         formData.append('files', file);
@@ -64,6 +65,8 @@ const CourseReferenceEditPage: React.FC = () => {
     } catch (error) {
       toast.error('등록에 실패했습니다.');
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,7 +84,7 @@ const CourseReferenceEditPage: React.FC = () => {
     }
   }, []);
 
-  const fileTypes = ['JPEG', 'PNG', 'GIF', 'PDF'];
+  // const fileTypes = ['JPEG', 'PNG', 'GIF', 'PDF'];
 
   const validation = info.title?.length > 0 && info.main.length > 0;
   return (
@@ -98,7 +101,7 @@ const CourseReferenceEditPage: React.FC = () => {
         <FileUploader
           handleChange={handleFileChange}
           name="files"
-          types={fileTypes}
+          // types={fileTypes}
           classes={styles.CustomUploader}
           hoverTitle=" "
           multiple={true}
@@ -136,6 +139,7 @@ const CourseReferenceEditPage: React.FC = () => {
         buttonType={validation ? 'Active' : 'Disabled'}
         className={styles.UploadButton}
         onClick={handleSubmit}
+        isLoading={isLoading}
       >
         업로드
       </Button>
