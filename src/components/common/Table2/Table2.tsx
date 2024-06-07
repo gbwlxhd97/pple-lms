@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 interface Table2Props {
   tableHead: string[]; // 테이블의 각 열 제목
   tableBody: TableRow[]; // 각 행의 데이터 배열
-  isShowNew?: boolean;
   path?: string;
 }
 
@@ -22,7 +21,7 @@ interface TableRow {
   };
 }
 
-const Table2 = ({ tableBody, tableHead, isShowNew, path }: Table2Props) => {
+const Table2 = ({ tableBody, tableHead, path }: Table2Props) => {
   return (
     <table style={{ width: '100%' }}>
       <thead className={styles.TableHead}>
@@ -44,7 +43,9 @@ const Table2 = ({ tableBody, tableHead, isShowNew, path }: Table2Props) => {
           >
             <td className={styles.TableNum}>{rowIndex + 1}</td>
             <td className={styles.TableTitle}>
-              <div className={styles.Title}>
+              <div
+                className={`${styles.Title} ${row.isNew ? `${styles.isNew}` : ''}`}
+              >
                 <Link to={`${path}/${row.id}`}>{row.title}</Link>
                 {row.isNew && (
                   <div className={styles.NewIcon}>

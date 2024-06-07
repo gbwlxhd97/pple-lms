@@ -56,7 +56,10 @@
             .Title {
               display: flex;
               flex-direction: row;
-              
+              &.isNew {
+                font-weight: 700;
+                color:$black;
+              }
             }
             a {
               color: inherit;
