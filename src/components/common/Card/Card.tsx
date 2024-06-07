@@ -17,17 +17,17 @@ type CardProps = {
 const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
   const router = useRouter();
   const { profile } = useProfileStore();
-  const {courseId} = useParams()
-  
+  const { courseId } = useParams();
+
   const onPushDetailPage = (state: any) => {
     if (title === '수강중인 강의') {
       router.push(`/course/${state.id}`, {}, state);
-      return
+      return;
     }
-    if (title === '강좌 공지사항') {
-      router.push(`/course/${courseId}/notice/detail/${state.id}`);
-      return
-    }
+    // if (title === '강좌 공지사항') {
+    //   router.push(`/course/${courseId}/notice/detail/${state.id}`);
+    //   return
+    // }
     else {
       loadingToast();
     }
@@ -36,7 +36,9 @@ const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
     <div className={styles.CardContainer}>
       <Title title={title} isMore={titleiIsMore} count={count} />
       <div className={styles.CardWrap}>
-        {options?.length == 0 && emptyMsg && <div className={styles.EmptyMsgWrap}>{emptyMsg}</div>}
+        {options?.length == 0 && emptyMsg && (
+          <div className={styles.EmptyMsgWrap}>{emptyMsg}</div>
+        )}
         {options?.map((item: any, i: number) => (
           <div
             className={styles.Flex}

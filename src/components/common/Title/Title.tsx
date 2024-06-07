@@ -21,17 +21,17 @@ type TitleProps = {
  * @returns
  */
 
-const Title = ({ title, isMore, count, isShowButton ,path}: TitleProps) => {
-  
+const Title = ({ title, isMore, count, isShowButton, path }: TitleProps) => {
   const router = useRouter();
-  const {courseId,noticeId} = useParams()
+  const { courseId, noticeId } = useParams();
   const onPushPage = () => {
-    if(title === '강좌 공지사항') {
-      router.push(`/course/${courseId}/notice`)
+    if (title === '강좌 공지사항') {
+      // router.push(`/course/${courseId}/notice`)
+      loadingToast();
     } else {
       loadingToast();
     }
-  }
+  };
   return (
     <div className={styles.TitleFlex}>
       <div
