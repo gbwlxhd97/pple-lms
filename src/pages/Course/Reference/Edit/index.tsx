@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import toast from 'react-hot-toast';
 import { useRouter } from '@/hooks/useRouter';
@@ -74,10 +74,16 @@ const CourseReferenceEditPage: React.FC = () => {
     }));
   };
 
+  useEffect(() => {
+    if (role !== 'TEACHER') {
+      toast.error('권한이 없습니다.');
+      router.push('/main');
+    }
+  }, []);
 
-  const fileTypes = ['JPEG', 'PNG', 'GIF','PDF'];
+  const fileTypes = ['JPEG', 'PNG', 'GIF', 'PDF'];
 
-  const validation = info.title?.length > 0 && info.main.length > 0
+  const validation = info.title?.length > 0 && info.main.length > 0;
   return (
     <div className="SpacingWrapper">
       <Title title="강의 자료 업로드" />
@@ -87,11 +93,7 @@ const CourseReferenceEditPage: React.FC = () => {
         onChange={handleInputChange}
         placeholder="제목"
       />
-      <TextArea
-        name="main"
-        onChange={handleInputChange}
-        placeholder="내용"
-      />
+      <TextArea name="main" onChange={handleInputChange} placeholder="내용" />
       <div className={styles.FileUploaderContainer}>
         <FileUploader
           handleChange={handleFileChange}

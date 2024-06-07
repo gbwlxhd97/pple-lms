@@ -39,7 +39,7 @@ const NoticeEditPage = () => {
   useEffect(() => {
     if (role !== 'TEACHER') {
       toast.error('권한이 없습니다.');
-      router.push('/main', { replace: true });
+      router.push('/main');
     }
   }, []);
 
