@@ -25,8 +25,8 @@ const Card = ({ title, options, titleiIsMore, count, emptyMsg }: CardProps) => {
       return;
     }
     if (title === '강좌 공지사항') {
-      // router.push(`/course/${courseId}/notice/detail/${state.id}`);
-      loadingToast();
+      router.push(`/course/${courseId}/notice/detail/${state.id}`);
+      // loadingToast();
       return;
     } else {
       loadingToast();

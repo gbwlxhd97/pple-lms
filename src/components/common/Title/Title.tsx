@@ -26,8 +26,8 @@ const Title = ({ title, isMore, count, isShowButton, path }: TitleProps) => {
   const { courseId, noticeId } = useParams();
   const onPushPage = () => {
     if (title === '강좌 공지사항') {
-      // router.push(`/course/${courseId}/notice`);
-      loadingToast();
+      router.push(`/course/${courseId}/notice`);
+      // loadingToast();
     } else {
       loadingToast();
     }
