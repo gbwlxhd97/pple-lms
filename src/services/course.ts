@@ -1,11 +1,13 @@
 import { requestAPI } from '@/utils/fetch';
 
 const getCoursePage = async (id: string) => {
-  const {data} = await requestAPI().get(`/course/showCoursePage?courseId=${id}`);
+  const { data } = await requestAPI().get(
+    `/course/showCoursePage?courseId=${id}`
+  );
   return data;
 };
 
-const getCourseSection = async (id:string) => {
+const getCourseSection = async (id: string) => {
   const { data } = await requestAPI().get(
     `/course/showCourseSection?courseId=${id}`
   );
@@ -13,9 +15,9 @@ const getCourseSection = async (id:string) => {
 };
 
 /**
- * 
+ *
  * @param requestbody formData
- * @returns 
+ * @returns
  */
 const insertNote = async (requestbody: any) => {
   const data = await requestAPI().post(
@@ -26,15 +28,20 @@ const insertNote = async (requestbody: any) => {
   return data;
 };
 
-const getCourseReferenceList = async (id:number) => {
-  const {data} = await requestAPI().get(`/note/readList?courseId=${id}`)
+const getCourseReferenceList = async (id: number) => {
+  const { data } = await requestAPI().get(`/note/readList?courseId=${id}`);
   return data;
-}
+};
 
-const getCourseReferenceDetail = async (id:number) => {
-  const {data} = await requestAPI().get(`/note/read?noteId=${id}`)
-  return data
-}
+const getCourseReferenceDetail = async (id: number) => {
+  const { data } = await requestAPI().get(`/note/read?noteId=${id}`);
+  return data;
+};
+
+const deleteCourseReference = async (id: number) => {
+  const data = await requestAPI().delete(`/note/delete?noteId=${id}`);
+  return data;
+};
 
 const courseAPIList = {
   getCoursePage,
@@ -42,6 +49,7 @@ const courseAPIList = {
   insertNote,
   getCourseReferenceList,
   getCourseReferenceDetail,
+  deleteCourseReference,
 };
 
 export default courseAPIList;

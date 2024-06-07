@@ -7,22 +7,38 @@ import Button from '@/components/common/Button/Button';
 import { useRouter } from '@/hooks/useRouter';
 import { FileIcon } from '@/icons/icon';
 import { downloadFile } from '@/utils';
-
+import toast from 'react-hot-toast';
+import useProfileStore from '@/stores/useProfileStore';
 
 const CourseReferenceDetailPage = () => {
   const { id } = useParams();
   const [detailInfo, setDetailInfo] = useState<IReferenceDetail>();
   const getReferDetail = async () => {
-    const res = await courseAPIList.getCourseReferenceDetail(Number(id))
+    const res = await courseAPIList.getCourseReferenceDetail(Number(id));
     console.log(res);
     setDetailInfo(res);
-  }
-
+  };
+  const {
+    profile: { role },
+  } = useProfileStore();
   useEffect(() => {
-    getReferDetail()
-  },[])
+    getReferDetail();
+  }, []);
 
-  const router = useRouter()
+  const router = useRouter();
+
+  const deleteNote = async () => {
+    if (confirm('삭제 하시겠습니까? (추후 예쁘게 변경예정..)')) {
+      try {
+        const res = await courseAPIList.deleteCourseReference(Number(id));
+        console.log(res);
+        if (res) {
+          toast.success('삭제 완료');
+          router.back(1);
+        }
+      } catch (error) {}
+    }
+  };
 
   return (
     <>
@@ -50,7 +66,7 @@ const CourseReferenceDetailPage = () => {
                   className={styles.DownloadButton}
                   buttonType="TimeActive"
                   onClick={() => {
-                    downloadFile(item.filePath,item.fileName);
+                    downloadFile(item.filePath, item.fileName);
                   }}
                 >
                   다운로드
@@ -70,9 +86,18 @@ const CourseReferenceDetailPage = () => {
         >
           목록
         </Button>
+        {role === 'TEACHER' && (
+          <Button
+            buttonType="Active"
+            className={styles.ListButton}
+            onClick={deleteNote}
+          >
+            삭제
+          </Button>
+        )}
       </div>
     </>
   );
-}
+};
 
 export default CourseReferenceDetailPage;
