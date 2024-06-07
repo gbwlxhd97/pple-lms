@@ -9,6 +9,7 @@ type InputProps = {
   name?: string;
   label?: string;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  value?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {

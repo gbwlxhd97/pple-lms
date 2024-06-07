@@ -23,10 +23,20 @@ const profile = async () => {
   return data;
 };
 
+type updatePasswordBody = {
+  prePassword: string;
+  newPassword: string;
+};
+const changePassword = async (requestBody: updatePasswordBody) => {
+  const data = await requestAPI().post(`/auth/changePassword`, requestBody);
+  return data;
+};
+
 const authAPIList = {
   login,
   logout,
   profile,
+  changePassword,
 };
 
 export default authAPIList;

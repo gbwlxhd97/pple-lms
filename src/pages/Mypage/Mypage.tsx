@@ -3,15 +3,16 @@ import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
 import { useState } from 'react';
 import useProfileStore from '@/stores/useProfileStore';
+import authAPIList from '@/services/auth';
+import toast from 'react-hot-toast';
 
 const MyPage = () => {
-
   const [password, setPassword] = useState({
-    currentPassword: '',
+    prePassword: '',
     newPassword: '',
     confirmPassword: '',
   });
-  const {profile} = useProfileStore()
+  const { profile } = useProfileStore();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPassword((prev) => ({
@@ -20,10 +21,32 @@ const MyPage = () => {
     }));
   };
 
+  const handleUpdatePassword = async () => {
+    try {
+      const payload = {
+        prePassword: password.prePassword,
+        newPassword: password.newPassword,
+      };
+      const res = await authAPIList.changePassword(payload);
+      console.log(res);
+      if (res) {
+        toast.success('비밀번호 변경 완료!');
+        setPassword({
+          prePassword: '',
+          newPassword: '',
+          confirmPassword: '',
+        });
+      }
+    } catch (error) {
+      // TODO: 비밀번호 틀린거 코드 받기
+      toast.error('에러 발생 비밀번호를 확인해주세요.');
+    }
+  };
+
   const isValidateButton =
-    password.currentPassword.length > 0 &&
-    password.newPassword.length > 0 &&
-    password.confirmPassword.length > 0 &&
+    password.prePassword.length >= 6 &&
+    password.newPassword.length >= 6 &&
+    password.confirmPassword.length >= 6 &&
     password.newPassword === password.confirmPassword;
 
   return (
@@ -45,10 +68,11 @@ const MyPage = () => {
           <div className={styles.InfoRow}>
             <span className={styles.InfoLabel}>비밀번호 변경</span>
             <Input
-              name="currentPassword"
+              name="prePassword"
               type="password"
               placeholder="기존 비밀번호"
               onChange={handleChange}
+              value={password.prePassword}
             />
           </div>
           <div className={styles.InfoRow}>
@@ -58,6 +82,7 @@ const MyPage = () => {
               type="password"
               placeholder="새 비밀번호"
               onChange={handleChange}
+              value={password.newPassword}
             />
           </div>
           <div className={styles.InfoRow}>
@@ -67,12 +92,22 @@ const MyPage = () => {
               type="password"
               placeholder="새 비밀번호 확인"
               onChange={handleChange}
+              value={password.confirmPassword}
             />
           </div>
         </div>
+        {password.newPassword.length > 0 &&
+          password.confirmPassword.length > 0 &&
+          password.confirmPassword.length < 6 &&
+          password.newPassword.length < 6 && (
+            <div className={styles.PasswordMissMatch}>
+              비밀번호는 6자리 이상 입력해주세요.
+            </div>
+          )}
         <Button
           buttonType={isValidateButton ? 'Active' : 'Disabled'}
           className={styles.EditButton}
+          onClick={handleUpdatePassword}
         >
           확인
         </Button>
