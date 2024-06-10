@@ -1,6 +1,6 @@
 export interface INotice {
   title: string;
-  content: string;
+  main: string;
   sendType: '' | 'STUDENT' | 'PARENTS';
 }
 

@@ -10,17 +10,21 @@ import SingleCheckBox from '@/components/common/SingleCheckBox';
 import useProfileStore from '@/stores/useProfileStore';
 import { useRouter } from '@/hooks/useRouter';
 import toast from 'react-hot-toast';
+import noticeAPIList from '@/services/notice';
 
 const NoticeEditPage = () => {
   const [noticeEdit, setNoticeEdit] = useState<INotice>({
     title: '',
-    content: '',
+    main: '',
     sendType: '',
   });
+
   const {
     profile: { role },
   } = useProfileStore();
+
   const router = useRouter();
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -31,9 +35,29 @@ const NoticeEditPage = () => {
     }));
   };
 
+  const handlePost = async () => {
+    try {
+      const requestBody = {
+        title: noticeEdit.title,
+        main: noticeEdit.main,
+        toStudent: noticeEdit.sendType === 'STUDENT',
+        toParent: noticeEdit.sendType === 'PARENTS',
+      };
+
+      const response = await noticeAPIList.insertNotice(requestBody);
+      if (response) {
+        toast.success('등록이 완료되었습니다.');
+        router.back(1);
+      }
+    } catch (error) {
+      toast.error('등록에 실패했습니다.');
+      console.error(error);
+    }
+  };
+
   const isValidateButton =
     noticeEdit.title.length > 0 &&
-    noticeEdit.content.length > 0 &&
+    noticeEdit.main.length > 0 &&
     (noticeEdit.sendType === 'STUDENT' || noticeEdit.sendType === 'PARENTS');
 
   useEffect(() => {
@@ -57,7 +81,7 @@ const NoticeEditPage = () => {
         <TextArea
           label="내용"
           placeholder="내용을 입력하세요"
-          name="content"
+          name="main"
           onChange={handleChange}
         />
         <div className={styles.FlexCheckBoxWrap}>
@@ -93,6 +117,7 @@ const NoticeEditPage = () => {
         <Button
           buttonType={isValidateButton ? 'Active' : 'Disabled'}
           className={styles.EditButton}
+          onClick={handlePost}
         >
           게시하기
         </Button>
