@@ -28,6 +28,8 @@ const Title = ({ title, isMore, count, isShowButton, path }: TitleProps) => {
     if (title === '강좌 공지사항') {
       router.push(`/course/${courseId}/notice`);
       // loadingToast();
+    } else if (title === '출석 학생 통계') {
+      router.push(`/course/${courseId}/statistics`);
     } else {
       loadingToast();
     }

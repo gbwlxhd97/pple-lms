@@ -38,4 +38,6 @@ export type RoutePath =
   | `/course/reference/${string}`
   | '/mypage'
   | `/course/${string}/notice/detail/${string}`
-  | `/course/${string}/notice`;
+  | `/course/${string}/notice`
+  | `/course/${string}/statistics`
+  | `/course/${string}/statistics/detail/${string}`;

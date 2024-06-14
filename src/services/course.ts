@@ -43,6 +43,11 @@ const deleteCourseReference = async (id: number) => {
   return data;
 };
 
+const getCourseStudents = async (id: number) => {
+  const data = await requestAPI().get(`/course/students?courseId=${id}`);
+  return data;
+};
+
 const courseAPIList = {
   getCoursePage,
   getCourseSection,
@@ -50,6 +55,7 @@ const courseAPIList = {
   getCourseReferenceList,
   getCourseReferenceDetail,
   deleteCourseReference,
+  getCourseStudents,
 };
 
 export default courseAPIList;

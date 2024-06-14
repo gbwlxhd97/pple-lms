@@ -26,6 +26,8 @@ import CourseReferenceDetailPage from '@/pages/Course/Reference/Detail';
 import CourseReferenceEditPage from '@/pages/Course/Reference/Edit';
 import AssignmentPage from '@/pages/Assignment/Assignment';
 import AssignmentDetailPage from '@/pages/Assignment/Detail/AssignmentDetail';
+import StudentStaticsPage from '@/pages/StudentStatistics';
+import StudentStatisticsDetailPage from '@/pages/StudentStatistics/Detail';
 
 export const RootRouter = () => {
   useEffect(() => {
@@ -145,6 +147,22 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <AssignmentDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="course/:courseId/statistics"
+          element={
+            <ProtectedRoute>
+              <StudentStaticsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="course/:courseId/statistics/detail/:studentId"
+          element={
+            <ProtectedRoute>
+              <StudentStatisticsDetailPage />
             </ProtectedRoute>
           }
         />
