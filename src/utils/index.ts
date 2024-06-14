@@ -16,7 +16,6 @@ export const handleKeyDown = (
   }
 };
 
-
 export const loadingToast = () => {
   toast.loading('준비중인 기능입니다.');
 };
@@ -35,14 +34,20 @@ export const downloadFile = async (url: string, fileName?: string) => {
     }
 
     const blob = await response.blob();
-    const downloadUrl = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = downloadUrl;
-    a.download = fileName || url.split('/').pop() || 'download';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    window.URL.revokeObjectURL(downloadUrl); // 메모리 해제
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const downloadUrl = reader.result as string;
+
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = fileName || url.split('/').pop() || 'download';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    reader.readAsDataURL(blob);
   } catch (error) {
     console.error('파일 다운로드에 실패했습니다.', error);
   }
