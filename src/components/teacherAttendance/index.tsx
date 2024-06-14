@@ -7,6 +7,7 @@ import attendAPIList from '@/services/attend';
 import { ISection } from '@/interfaces/section';
 import TimeCircleIcon from '@/icons/icon/TimeCircle';
 import Timer from '../common/Timer/Timer';
+import toast from 'react-hot-toast';
 
 type TeacherAttendanceProps = {
   weekSection: Array<ISection>;
@@ -18,7 +19,7 @@ const TeacherAttendance = ({
   setStudentAttend,
 }: TeacherAttendanceProps) => {
   const { state } = useLocation();
-  
+
   const [studySession, setStudySession] = useState<any>(
     state ?? '차시를 골라주세요'
   );
@@ -31,10 +32,8 @@ const TeacherAttendance = ({
         studySession.courseSectionId
       );
       console.log(res);
-      setStudentAttend(res)
-    } catch (error) {
-      
-    }
+      setStudentAttend(res);
+    } catch (error) {}
   };
 
   const getAttendInfo = async () => {
@@ -43,10 +42,9 @@ const TeacherAttendance = ({
       console.log(res, '레스레스');
     } catch (error) {
       console.log(error);
-      
     }
   };
-  
+
   useEffect(() => {
     // getAttendInfo();
     if (studySession.courseSectionId) {
@@ -55,28 +53,29 @@ const TeacherAttendance = ({
   }, [studySession]);
 
   const setStartCourse = async () => {
-    const res = await attendAPIList.startAttendTimer(
-      studySession.courseSectionId
-    );
-    setAttendCode(res.attendCode)
-    console.log(res,"수업시작번호");
-    
-  }
+    try {
+      const res = await attendAPIList.startAttendTimer(
+        studySession.courseSectionId
+      );
+      setAttendCode(res.attendCode);
+      console.log(res, '수업시작번호');
+    } catch (error: any) {
+      console.log(error);
+      toast.error('출석 에러 발생');
+    }
+  };
 
   const endCourse = async () => {
     setIsLoading(true);
     try {
       const res = await attendAPIList.endAttend(studySession.courseSectionId);
-      setIsEndSection(true)
+      setIsEndSection(true);
       getCourse();
     } catch (error) {
-      
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-    
-
-  }
+  };
 
   const isValidateStartButton = studySession.courseSectionId;
   return (
@@ -103,12 +102,20 @@ const TeacherAttendance = ({
           </Button>
         </div>
       )}
-      {(attendCode !== 0 && !isEndSection)  && (
+      {attendCode !== 0 && !isEndSection && (
         <div className={styles.AttendCodeWrap}>
           출석 코드 : <span>{attendCode}</span>
           <div className={styles.AttendTimerWrap}>
             <TimeCircleIcon width={20} height={20} />
             <Timer duration={600} isSignUp={false} isComplete={isEndSection} />
+          </div>
+          <div className={styles.AttendButtonWrap}>
+            <Button
+              buttonType={isEndSection ? 'Disabled' : 'Abled'}
+              onClick={getCourse}
+            >
+              출석정보 조회
+            </Button>
           </div>
         </div>
       )}
