@@ -3,20 +3,55 @@ import Card from '@/components/common/Card/Card';
 import { useRouter } from '@/hooks/useRouter';
 import courseAPIList from '@/services/course';
 import useCourseNameStore from '@/stores/useCourseName';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import styles from "./index.module.scss"
+import styles from './index.module.scss';
 import Title from '@/components/common/Title/Title';
 import noticeAPIList from '@/services/notice';
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Sector,
+  Tooltip,
+} from 'recharts';
+import useProfileStore from '@/stores/useProfileStore';
+
+const data02 = {
+  attendInfo: {
+    attendCount: 35,
+    notAttendCount: 8,
+  },
+  assignmentInfo: {
+    submitCount: 35,
+    notSubmitCount: 8,
+  },
+};
+
+const pieData = [
+  { name: 'Attended', value: data02.attendInfo.attendCount },
+  { name: 'Not Attended', value: data02.attendInfo.notAttendCount },
+];
+
+const pieData2 = [
+  { name: 'SubmitCount', value: data02.assignmentInfo.submitCount },
+  { name: 'Not SubmitCount', value: data02.assignmentInfo.notSubmitCount },
+];
+
 const CourseDetailPage = () => {
-  const {state} = useLocation()
+  const { state } = useLocation();
   const router = useRouter();
   const { setTitle } = useCourseNameStore();
-  const [courseData,setCourseData] = useState<any>()
+  const {
+    profile: { role },
+  } = useProfileStore();
+  const [courseData, setCourseData] = useState<any>();
   const onPushAttendPage = () => {
-    router.push('/attendance', {} ,{state})
-  }
-  
+    router.push('/attendance', {}, { state });
+  };
+
   // 해당 과목 공지사항 및 과목명 반환
   const getCourseDatas = async () => {
     try {
@@ -24,23 +59,25 @@ const CourseDetailPage = () => {
       console.log(res);
       setTitle(res.courseName);
       setCourseData(res);
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   // 해당 과목 차시 데이터 생성
   const getCourseSection = async () => {
-    const res = await courseAPIList.getCourseSection(state.id)
-    
-  }
-  
+    const res = await courseAPIList.getCourseSection(state.id);
+  };
 
   useEffect(() => {
     getCourseDatas();
-    getCourseSection()
-  },[])
+    getCourseSection();
+  }, []);
 
+  const total = pieData.reduce((sum, entry) => sum + entry.value, 0);
+  const attendanceRate = (pieData[0].value / total) * 100;
+  const barLegendData = [
+    { value: '정상 (18v~26v)', type: 'circle', color: '#42b686' },
+    { value: '화재 발생 (0v~6v)', type: 'circle', color: 'red' },
+  ];
   return (
     <div>
       <Card
@@ -49,6 +86,77 @@ const CourseDetailPage = () => {
         options={courseData?.getNoticeListDTOList}
         titleiIsMore={true}
       />
+      {role === 'TEACHER' && (
+        <>
+          <Title title="출석 학생 통계" isMore={true} />
+          <div className={styles.CardWrap}>
+            <PieChart width={500} height={200}>
+              <Pie
+                data={pieData}
+                cx="16%"
+                cy="30%"
+                innerRadius={30}
+                outerRadius={40}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {pieData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
+                  />
+                ))}
+              </Pie>
+              <text
+                x="11%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                y="32%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                style={{ fontSize: '12px', fontWeight: 'bold' }}
+              >
+                {`${attendanceRate.toFixed(2)}%`}
+              </text>
+              <Tooltip />
+              <Legend
+                layout="vertical"
+                align="right"
+                verticalAlign="middle"
+                wrapperStyle={{ top: 20, right: 20 }}
+                formatter={(value, entry: any) => (
+                  <span style={{ color: entry.color }}>
+                    {` (${entry.payload.name}) ${entry.payload.value}`}
+                  </span>
+                )}
+              />
+              <Pie
+                dataKey="value"
+                data={pieData2}
+                cx="16%"
+                cy="80%"
+                innerRadius={30}
+                outerRadius={40}
+                fill="#82ca9d"
+              >
+                {pieData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
+                  />
+                ))}
+              </Pie>
+              <text
+                x="11%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                y="79%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                style={{ fontSize: '12px', fontWeight: 'bold' }}
+              >
+                {`${attendanceRate.toFixed(2)}%`}
+              </text>
+            </PieChart>
+          </div>
+        </>
+      )}
       <div className={styles.CommonWrapper}>
         <Title title="출석정보" />
         <Button
@@ -73,6 +181,6 @@ const CourseDetailPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CourseDetailPage;

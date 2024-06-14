@@ -1,3 +1,5 @@
+@import '@/styles/theme.scss';
+
 .AttendButton {
   width: 100%;
   margin-top: 12px;
@@ -5,4 +7,29 @@
 
 .CommonWrapper {
   padding: 40px 0;
+}
+
+.CardWrap {
+	border-radius: 10px;
+	border: 1px solid $gray100;
+	padding: 16px 20px; 
+	margin-top: 12px;
+	.Flex:not(:first-child) {
+			margin-top: 11px; /* 원하는 margin-top 값 */
+	}
+	.CardContent {
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		color: $gray400;
+		&.New {
+			font-weight: 700;
+			color: $black;
+		}
+	}
+	.CardDate {
+		color: $grayDefault;
+		font-size: 12px;
+		font-weight: 400;
+	}
 }
