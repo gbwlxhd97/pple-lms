@@ -4,6 +4,7 @@ import commentAPIList from './comment';
 import courseAPIList from './course';
 import memberAPIList from './member';
 import noticeAPIList from './notice';
+import statisticsAPIList from './statistics';
 
 export default {
   memberAPIList,
@@ -12,4 +13,5 @@ export default {
   courseAPIList,
   noticeAPIList,
   commentAPIList,
+  statisticsAPIList
 };

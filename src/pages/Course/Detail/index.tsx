@@ -18,6 +18,8 @@ import {
   Tooltip,
 } from 'recharts';
 import useProfileStore from '@/stores/useProfileStore';
+import statisticsAPIList from '@/services/statistics';
+import { ITotalStudent } from '@/interfaces/statistics';
 
 const data02 = {
   attendInfo: {
@@ -48,6 +50,7 @@ const CourseDetailPage = () => {
     profile: { role },
   } = useProfileStore();
   const [courseData, setCourseData] = useState<any>();
+  const [statisticsData, setStatisticsData] = useState<ITotalStudent>();
   const onPushAttendPage = () => {
     router.push('/attendance', {}, { state });
   };
@@ -67,17 +70,39 @@ const CourseDetailPage = () => {
     const res = await courseAPIList.getCourseSection(state.id);
   };
 
+  // 전체 학생 통계
+  const getTotalStatistics = async () => {
+    const res = await statisticsAPIList.getTotalStudentStatistics(state.id)
+    console.log(res,"출석정보");
+    setStatisticsData(res);
+    
+  }
+
   useEffect(() => {
     getCourseDatas();
     getCourseSection();
+    getTotalStatistics();
   }, []);
 
-  const total = pieData.reduce((sum, entry) => sum + entry.value, 0);
-  const attendanceRate = (pieData[0].value / total) * 100;
-  const barLegendData = [
-    { value: '정상 (18v~26v)', type: 'circle', color: '#42b686' },
-    { value: '화재 발생 (0v~6v)', type: 'circle', color: 'red' },
+  const statisPie = [
+    { name: '출석', value: statisticsData?.attendStatisticsDto.present! },
+    { name: '결석', value: statisticsData?.attendStatisticsDto.absent! },
   ];
+  const assignmentPie = [
+    { name: '제출', value: statisticsData?.homeworkStatisticsDto.submitted! },
+    { name: '제출', value: statisticsData?.homeworkStatisticsDto.notSubmitted! },
+  ];
+  const totalObject = {
+    statisticsTotal: statisPie.reduce((sum, entry:any) => sum + entry.value, 0),
+    assignmentTotal: assignmentPie.reduce((sum, entry:any) => sum + entry.value, 0),
+  };
+  
+  const totalRateObject = {
+    statisticsRate: (statisPie[0]?.value / totalObject.statisticsTotal) * 100,
+    assignmentRate: (assignmentPie[0]?.value / totalObject.statisticsTotal) * 100,
+  };
+
+
   return (
     <div>
       <Card
@@ -92,7 +117,7 @@ const CourseDetailPage = () => {
           <div className={styles.CardWrap}>
             <PieChart width={500} height={200}>
               <Pie
-                data={pieData}
+                data={statisPie}
                 cx="16%"
                 cy="30%"
                 innerRadius={30}
@@ -100,7 +125,7 @@ const CourseDetailPage = () => {
                 fill="#8884d8"
                 dataKey="value"
               >
-                {pieData.map((entry, index) => (
+                {statisPie.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
@@ -108,13 +133,13 @@ const CourseDetailPage = () => {
                 ))}
               </Pie>
               <text
-                x="11%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                x="13%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
                 y="32%"
                 textAnchor="middle"
                 dominantBaseline="middle"
                 style={{ fontSize: '12px', fontWeight: 'bold' }}
               >
-                {`${attendanceRate.toFixed(2)}%`}
+                {`${totalRateObject.statisticsRate.toFixed(2)}%`}
               </text>
               <Tooltip />
               <Legend
@@ -130,14 +155,14 @@ const CourseDetailPage = () => {
               />
               <Pie
                 dataKey="value"
-                data={pieData2}
+                data={assignmentPie}
                 cx="16%"
                 cy="80%"
                 innerRadius={30}
                 outerRadius={40}
                 fill="#82ca9d"
               >
-                {pieData.map((entry, index) => (
+                {assignmentPie.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
@@ -145,13 +170,13 @@ const CourseDetailPage = () => {
                 ))}
               </Pie>
               <text
-                x="11%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                x="13%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
                 y="79%"
                 textAnchor="middle"
                 dominantBaseline="middle"
                 style={{ fontSize: '12px', fontWeight: 'bold' }}
               >
-                {`${attendanceRate.toFixed(2)}%`}
+                {`${totalRateObject.assignmentRate.toFixed(2)}%`}
               </text>
             </PieChart>
           </div>
