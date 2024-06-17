@@ -99,7 +99,8 @@ const CourseDetailPage = () => {
   
   const totalRateObject = {
     statisticsRate: (statisPie[0]?.value / totalObject.statisticsTotal) * 100,
-    assignmentRate: (assignmentPie[0]?.value / totalObject.statisticsTotal) * 100,
+    assignmentRate:
+      (assignmentPie[0]?.value / totalObject.assignmentTotal) * 100,
   };
 
 
