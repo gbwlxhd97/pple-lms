@@ -10,6 +10,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import useProfileStore from '@/stores/useProfileStore';
 import SignInPage from '@/pages/Auth/SignIn/SignIn';
 import SignUpPage from '@/pages/Auth/SignUp/SignUp';
 import MainPage from '@/pages/Main/Main';
@@ -29,8 +30,14 @@ import AssignmentDetailPage from '@/pages/Assignment/Detail/AssignmentDetail';
 import StudentStaticsPage from '@/pages/StudentStatistics';
 import StudentStatisticsDetailPage from '@/pages/StudentStatistics/Detail';
 import SurveyDetailPage from '@/pages/Survey/SurveyDetail';
+import SurveyTeacherPage from '@/pages/Survey/Teacher/Survey';
+import SurveyStudentPage from '@/pages/Survey/Student/Survey';
 
 export const RootRouter = () => {
+  const {
+    profile: { role },
+  } = useProfileStore();
+
   useEffect(() => {
     const setViewportHeight = () => {
       let vh = window.innerHeight * 0.01;
@@ -172,6 +179,18 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <SurveyDetailPage />
+            </ProtectedRoute>
+            }
+          />
+        <Route
+          path="course/:courseId/survey"
+          element={
+            <ProtectedRoute>
+              {role === 'TEACHER' ? (
+                <SurveyTeacherPage />
+              ) : (
+                <SurveyStudentPage />
+              )}
             </ProtectedRoute>
           }
         />

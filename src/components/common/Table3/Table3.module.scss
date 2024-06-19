@@ -1,0 +1,71 @@
+@import '@/styles/theme.scss';
+
+.TableHead {
+    background-color: $purple2;
+    width: 100%;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        color: $gray500;
+        > th {
+            text-align: left;
+            padding: 12px 12px;
+        }
+        .TableHead0 {
+            width: 70%;
+        }
+        .TableHead1 {
+            width: 30%;
+        }
+    }
+}
+
+.TableBody {
+    background-color: white;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        border-bottom: 1px solid $gray100;
+        cursor: pointer;
+        > td {
+            padding: 12px 12px;
+        }
+        .TableTitle {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: $gray400;
+            width: 70%;
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start;
+            .Title {
+              display: flex;
+              flex-direction: row;
+              &.isNew {
+                font-weight: 700;
+                color:$black;
+              }
+            }
+            a {
+              color: inherit;
+              text-decoration: none;
+            }
+            .NewIcon {
+                margin-left: 5px;
+            }
+        }
+        .EndAt {
+            color: $grayDefault;
+            font-size: 12px;
+            font-weight: 400;
+            width: 30%;
+        }
+    }
+    .EndedRow{
+        background-color: $gray0;
+    }
+}
