@@ -28,6 +28,7 @@ import AssignmentPage from '@/pages/Assignment/Assignment';
 import AssignmentDetailPage from '@/pages/Assignment/Detail/AssignmentDetail';
 import StudentStaticsPage from '@/pages/StudentStatistics';
 import StudentStatisticsDetailPage from '@/pages/StudentStatistics/Detail';
+import SurveyDetailPage from '@/pages/Survey/SurveyDetail';
 
 export const RootRouter = () => {
   useEffect(() => {
@@ -163,6 +164,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <StudentStatisticsDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="course/:courseId/survey/:surveyId/take-survey"
+          element={
+            <ProtectedRoute>
+              <SurveyDetailPage />
             </ProtectedRoute>
           }
         />
