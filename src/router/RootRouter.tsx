@@ -29,6 +29,7 @@ import AssignmentPage from '@/pages/Assignment/Assignment';
 import AssignmentDetailPage from '@/pages/Assignment/Detail/AssignmentDetail';
 import StudentStaticsPage from '@/pages/StudentStatistics';
 import StudentStatisticsDetailPage from '@/pages/StudentStatistics/Detail';
+import SurveyDetailPage from '@/pages/Survey/SurveyDetail';
 import SurveyTeacherPage from '@/pages/Survey/Teacher/Survey';
 import SurveyStudentPage from '@/pages/Survey/Student/Survey';
 
@@ -173,6 +174,14 @@ export const RootRouter = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="course/:courseId/survey/:surveyId/take-survey"
+          element={
+            <ProtectedRoute>
+              <SurveyDetailPage />
+            </ProtectedRoute>
+            }
+          />
         <Route
           path="course/:courseId/survey"
           element={
