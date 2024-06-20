@@ -1,0 +1,17 @@
+.Wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Input {
+  border: none;
+  border-bottom: 2px solid #000;  // 원하는 색상으로 변경
+  border-radius: 0;
+  padding: 8px 0;
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid #007bff; // 포커스 시 색상 변경
+  }
+  width: 100%;
+}
