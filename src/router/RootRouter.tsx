@@ -29,10 +29,11 @@ import AssignmentPage from '@/pages/Assignment/Assignment';
 import AssignmentDetailPage from '@/pages/Assignment/Detail/AssignmentDetail';
 import StudentStaticsPage from '@/pages/StudentStatistics';
 import StudentStatisticsDetailPage from '@/pages/StudentStatistics/Detail';
-import SurveyDetailPage from '@/pages/Survey/SurveyDetail';
 import SurveyTeacherPage from '@/pages/Survey/Teacher/Survey';
 import SurveyStudentPage from '@/pages/Survey/Student/Survey';
 import SurveyEditPage from '@/pages/Course/Survey/Edit';
+import SurveyDetailPage from '@/pages/Survey/Student/SurveyDetail';
+import SurveyTeacherDetailPage from '@/pages/Survey/Teacher/Detail';
 
 export const RootRouter = () => {
   const {
@@ -200,6 +201,14 @@ export const RootRouter = () => {
           element={
             <ProtectedRoute>
               <SurveyEditPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path='course/:courseId/survey/:surveyId'
+          element={
+            <ProtectedRoute>
+              <SurveyTeacherDetailPage />
             </ProtectedRoute>
           }
         />

@@ -4,10 +4,10 @@ import Button from '@/components/common/Button/Button';
 import { Link, useParams } from 'react-router-dom';
 import { useRouter } from '@/hooks/useRouter';
 import toast from 'react-hot-toast';
-import MultipleChoicePage from './MultipleChoice';
-import ShortAnswerPage from './ShortAnswer';
+import ShortAnswerPage from '../ShortAnswer';
 import surveyAPIList from '@/services/survey';
 import { IQuestions } from '@/interfaces/survey';
+import MultipleChoicePage from '../MultipleChoice';
 
 export interface ISurvey {
   id: number;
@@ -26,7 +26,11 @@ export interface ISurvey {
     }[];
   }[];
 }
-
+/**
+ * 학생들이 설문을 응답하는 페이지이다.
+ * @returns 
+ * 
+ */
 const SurveyDetailPage = () => {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState<any>({

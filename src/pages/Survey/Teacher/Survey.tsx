@@ -44,13 +44,13 @@ const SurveyTeacherPage = () => {
       <Title
         title="설문조사"
         isShowButton={role === 'TEACHER'}
-        path="/survey/edit"
+        path={`/course/${courseId}/survey/edit`}
       />
       <div className={styles.SurveyTable}>
         <Table3
           tableHead={['제목', '날짜']}
           tableBody={surveyList || []}
-          path={`/course/${courseId}/survey/${surveyId}/take-survey`}
+          path={`/course/${courseId}/survey`}
         />
       </div>
     </>
