@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import MultipleChoicePage from './MultipleChoice';
 import ShortAnswerPage from './ShortAnswer';
 import surveyAPIList from '@/services/survey';
+import { IQuestions } from '@/interfaces/survey';
 
 export interface ISurvey {
   id: number;
@@ -52,42 +53,6 @@ const SurveyDetailPage = () => {
 
   const router = useRouter();
 
-  const renderQuestions = () => {
-    return surveyData.questions.map(
-      (question: {
-        id: number;
-        num: number;
-        text: string;
-        questionType: 'MULTIPLE_CHOICE' | 'SHORT_ANSWER';
-        choices?: {
-          id: number;
-          num: number;
-          text: string;
-        }[];
-      }) => {
-        if (question.questionType === 'MULTIPLE_CHOICE') {
-          return (
-            <div key={question.id} className={styles.Survey}>
-              <MultipleChoicePage
-                question={question.text}
-                choices={question.choices}
-              />
-              <div className={styles.Space}></div>
-            </div>
-          );
-        } else if (question.questionType === 'SHORT_ANSWER') {
-          return (
-            <div key={question.id} className={styles.Survey}>
-              <ShortAnswerPage question={question.text} />
-              <div className={styles.Space}></div>
-            </div>
-          );
-        }
-        return null;
-      }
-    );
-  };
-
   //   const handlePost = async () => {
   //     try {
   //       const requestBody = {
@@ -121,7 +86,23 @@ const SurveyDetailPage = () => {
         </div>
       </div>
       <div className={styles.Space}></div>
-      {renderQuestions()}
+      {/* {renderQuestions()} */}
+      {surveyData?.questions.map((question: IQuestions, idx: number) =>
+        question.questionType === 'MULTIPLE_CHOICE' ? (
+          <div key={question.id} className={styles.Survey}>
+            <MultipleChoicePage
+              questions={question}
+              choices={question.choices}
+            />
+            <div className={styles.Space}></div>
+          </div>
+        ) : (
+          <div key={question.id} className={styles.Survey}>
+            <ShortAnswerPage question={question.text} />
+            <div className={styles.Space}></div>
+          </div>
+        )
+      )}
       <Button
         buttonType={isValidateButton ? 'Active' : 'Disabled'}
         className={styles.SubmitButton}

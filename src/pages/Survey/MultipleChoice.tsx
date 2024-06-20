@@ -4,7 +4,10 @@ import { useRouter } from '@/hooks/useRouter';
 import SingleCheckBox from '@/components/common/SingleCheckBox';
 
 interface IMultipleChoice {
-  question: string;
+  questions: {
+    id: number;
+    text: string;
+  }
   choices?: {
     id: number;
     num: number;
@@ -13,7 +16,7 @@ interface IMultipleChoice {
 }
 
 const MultipleChoicePage: React.FC<IMultipleChoice> = ({
-  question,
+  questions,
   choices,
 }) => {
   const router = useRouter();
@@ -26,7 +29,10 @@ const MultipleChoicePage: React.FC<IMultipleChoice> = ({
 
   return (
     <div className={styles.SpacingWrapper}>
-      <p className={styles.Question}>{question}</p>
+      <p className={styles.Question}>
+        Q{questions.id}. {" "}
+        {questions.text}
+        </p>
       {choices &&
         choices.map((choice) => (
           <SingleCheckBox

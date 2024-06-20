@@ -24,6 +24,8 @@ const SurveyTeacherPage = () => {
         ...item,
         isNew: item.createdAt === today,
       }));
+      console.log(res);
+      
       console.log(updatedData);
       setSurveyList(updatedData);
     } catch (error) {}
@@ -31,6 +33,8 @@ const SurveyTeacherPage = () => {
 
   useEffect(() => {
     if (courseId) {
+      console.log('hihi');
+      
       getSurveyList(parseInt(courseId));
     }
   }, [courseId]);
