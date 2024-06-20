@@ -32,6 +32,7 @@ import StudentStatisticsDetailPage from '@/pages/StudentStatistics/Detail';
 import SurveyDetailPage from '@/pages/Survey/SurveyDetail';
 import SurveyTeacherPage from '@/pages/Survey/Teacher/Survey';
 import SurveyStudentPage from '@/pages/Survey/Student/Survey';
+import SurveyEditPage from '@/pages/Course/Survey/Edit';
 
 export const RootRouter = () => {
   const {
@@ -191,6 +192,14 @@ export const RootRouter = () => {
               ) : (
                 <SurveyStudentPage />
               )}
+              </ProtectedRoute>
+              }
+              />
+            <Route
+          path="course/:courseId/survey/edit"
+          element={
+            <ProtectedRoute>
+              <SurveyEditPage />
             </ProtectedRoute>
           }
         />
