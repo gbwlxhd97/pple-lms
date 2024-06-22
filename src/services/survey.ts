@@ -26,12 +26,12 @@ const getSurveyList = async (courseId: number) => {
 };
 
 const getDetailSurvey = async (surveyId: number) => {
-  const data = await requestAPI().get(`/surveys/survey/${surveyId}`);
+  const {data} = await requestAPI().get(`/surveys/survey/${surveyId}`);
   return data;
 };
 
 const registerSurvey = async (courseId:number,body:any) => {
-  const data = await requestAPI().post(`/surveys/course/${courseId}/survey`,body)
+  const data = await requestAPI().post(`/surveys/courses/${courseId}/survey`,body)
   return data
 }
 

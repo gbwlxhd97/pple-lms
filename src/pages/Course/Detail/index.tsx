@@ -205,6 +205,18 @@ const CourseDetailPage = () => {
           강의자료확인
         </Button>
       </div>
+      <div className={styles.CommonWrapper}>
+        <Title title="설문조사" />
+        <Button
+          buttonType="Active"
+          className={styles.AttendButton}
+          onClick={() => {
+            router.push(`/course/${state.id}/survey`);
+          }}
+        >
+          설 문
+        </Button>
+      </div>
     </div>
   );
 };

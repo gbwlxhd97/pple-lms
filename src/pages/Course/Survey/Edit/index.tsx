@@ -13,9 +13,12 @@ import { TrashIcon } from '@/icons/icon';
 import { questionTypeList } from '@/utils/constant';
 import { useParams } from 'react-router';
 import surveyAPIList from '@/services/survey';
+import SingleCheckBox from '@/components/common/SingleCheckBox';
+import { useRouter } from '@/hooks/useRouter';
 
 const SurveyEditPage: React.FC = () => {
   const { courseId } = useParams();
+  const router = useRouter()
   const [questions, setQuestions] = useState([
     {
       id: 1,
@@ -200,13 +203,18 @@ const SurveyEditPage: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(endValues);
-    console.log(surveyInfo);
-    const res = await surveyAPIList.registerSurvey(
-      Number(courseId),
-      surveyInfo
-    );
-    console.log(res);
+    try {
+      const res = await surveyAPIList.registerSurvey(
+        Number(courseId),
+        surveyInfo
+      );
+      console.log(res);
+      if(res) {
+        router.push(`/course/${courseId}/survey`)
+      }
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -301,6 +309,10 @@ const SurveyEditPage: React.FC = () => {
         질문 추가
       </Button>
       <div className="Space"></div>
+      <div className={styles.FlexAnonymous}>
+        <SingleCheckBox checkBoxType="Active">익명으로 받기</SingleCheckBox>
+        <SingleCheckBox checkBoxType="Active">실명으로 받기</SingleCheckBox>
+      </div>
       <Button
         buttonType={isSubmitEnabled ? 'Active' : 'Disabled'}
         className={styles.SubmitButton}

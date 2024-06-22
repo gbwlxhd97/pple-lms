@@ -2,13 +2,22 @@ import surveyAPIList from '@/services/survey';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './index.module.scss';
+import { today } from '@/utils/date';
 const SurveyTeacherDetailPage = () => {
   const {surveyId} = useParams()
   const [surveyData,setSurveyData] = useState<any>()
   const getSurveyData = async () => {
-      const res =await surveyAPIList.getDetailSurvey(Number(surveyId));
-      console.log(res);
-      setSurveyData(res.data);
+    try {
+      const res = await surveyAPIList.getDetailSurvey(Number(surveyId));
+      const updatedData = res.map((item: any) => ({
+        ...item,
+        isNew: item.createdAt === today,
+      }));
+      console.log(updatedData);
+      setSurveyData(updatedData);
+    } catch (error) {
+      
+    } 
   }
   useEffect(() => {
     getSurveyData();
