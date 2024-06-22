@@ -6,10 +6,11 @@ type SelectProps = {
   placeholder: string;
   options: Array<any>;
   label?: string;
-}
-const Select = ({placeholder,options,label} : SelectProps) => {
+  values: any;
+  setValues: any;
+};
+const Select = ({placeholder,options,label,values,setValues} : SelectProps) => {
   const [activeDropdown, setActiveDropdown] = useState(false);
-  const [values, setValues] = useState();
   return (
     <>
       <div className={styles.InputLabel}>{label}</div>
@@ -38,11 +39,11 @@ const Select = ({placeholder,options,label} : SelectProps) => {
                 <div
                   key={idx}
                   onClick={() => {
-                    setValues(district);
+                    setValues(district.label);
                   }}
                   className={styles.AllianceDropdownDistrict}
                 >
-                  {district}
+                  {district.label}
                 </div>
               ))}
             </div>

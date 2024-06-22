@@ -1,0 +1,36 @@
+@import '@/styles/theme.scss';
+
+.Flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 10px 0;
+
+  .LeftValue {
+    color: $gray300;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .RightValue {
+    cursor: pointer;
+  }
+}
+
+.AddButton {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.AddOptionText {
+  padding: 14px 0;
+  color: $purple1;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.SubmitButton {
+  width: 100%;
+  margin-top: 10px;
+}

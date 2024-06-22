@@ -30,10 +30,16 @@ const getDetailSurvey = async (surveyId: number) => {
   return data;
 };
 
+const registerSurvey = async (courseId:number,body:any) => {
+  const data = await requestAPI().post(`/surveys/course/${courseId}/survey`,body)
+  return data
+}
+
 const surveyAPIList = {
   insertSurvey,
   getSurveyList,
   getDetailSurvey,
+  registerSurvey,
 };
 
 export default surveyAPIList;

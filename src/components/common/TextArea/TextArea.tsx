@@ -7,6 +7,7 @@ type TextAreaProps = {
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   label?: string;
+  value?: string;
 };
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
