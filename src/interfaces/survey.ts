@@ -20,7 +20,7 @@ export interface IQuestions {
   id: number;
   num: number;
   text: string;
-  questionType: 'MULTIPLE_CHOICE' | 'SHORT_ANSWER';
+  questionType: 'MULTIPLE_CHOICE' | 'SHORT_ANSWER' | 'SINGLE_CHOICE';
   choices?: {
     id: number;
     num: number;

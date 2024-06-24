@@ -24,7 +24,11 @@ const getSurveyList = async (courseId: number) => {
   );
   return data;
 };
-
+/**
+ * 학생들이 설문조사 상세페이지
+ * @param surveyId 
+ * @returns 
+ */
 const getDetailSurvey = async (surveyId: number) => {
   const {data} = await requestAPI().get(`/surveys/survey/${surveyId}`);
   return data;
@@ -35,11 +39,17 @@ const registerSurvey = async (courseId:number,body:any) => {
   return data
 }
 
+const getStudentSurveyList = async (courseId: number) => {
+  const {data} = await requestAPI().get(`/surveys/course/${courseId}/surveys`)
+  return data
+}
+
 const surveyAPIList = {
   insertSurvey,
   getSurveyList,
   getDetailSurvey,
   registerSurvey,
+  getStudentSurveyList
 };
 
 export default surveyAPIList;

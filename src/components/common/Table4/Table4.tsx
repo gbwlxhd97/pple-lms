@@ -55,7 +55,9 @@ const Table4 = ({ tableBody, tableHead, path }: Table4Props) => {
                 <div
                   className={`${styles.Title} ${row.isNew ? `${styles.isNew}` : ''}`}
                 >
-                  <Link to={`${path}/${row.id}`}>{row.title}</Link>
+                  <Link to={`${path}/${row.id}/take-survey`}>
+                    {row.title}
+                  </Link>
                 </div>
                 {row.titleDetails && (
                   <div className={styles.TitleDetails}>

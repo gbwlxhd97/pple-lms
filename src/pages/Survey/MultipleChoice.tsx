@@ -13,11 +13,13 @@ interface IMultipleChoice {
     num: number;
     text: string;
   }[];
+  index:number;
 }
 
 const MultipleChoicePage: React.FC<IMultipleChoice> = ({
   questions,
   choices,
+  index,
 }) => {
   const router = useRouter();
 
@@ -30,9 +32,8 @@ const MultipleChoicePage: React.FC<IMultipleChoice> = ({
   return (
     <div className={styles.SpacingWrapper}>
       <p className={styles.Question}>
-        Q{questions.id}. {" "}
-        {questions.text}
-        </p>
+        Q{index + 1}. {questions.text}
+      </p>
       {choices &&
         choices.map((choice) => (
           <SingleCheckBox

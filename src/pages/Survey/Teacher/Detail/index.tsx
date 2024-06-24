@@ -26,9 +26,9 @@ const SurveyTeacherDetailPage = () => {
     <>
       <div className={styles.DetailContainer}>
         <div className={styles.SurveyDetail}>
-          <h2>{surveyData.title}</h2>
+          <h2>{surveyData?.title}</h2>
           <div className={styles.Date}>
-            <span className={styles.EndAt}>마감일 {surveyData.endAt}</span>
+            <span className={styles.EndAt}>마감일 {surveyData?.endAt}</span>
           </div>
         </div>
       </div>

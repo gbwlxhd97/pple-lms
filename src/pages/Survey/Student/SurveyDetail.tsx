@@ -33,7 +33,7 @@ export interface ISurvey {
  */
 const SurveyDetailPage = () => {
   const { surveyId } = useParams();
-  const [surveyData, setSurveyData] = useState<any>({
+  const [surveyData, setSurveyData] = useState({
     id: '',
     title: '',
     description: '',
@@ -43,11 +43,9 @@ const SurveyDetailPage = () => {
 
   const getDetailSurvey = async () => {
     try {
-      if (surveyId) {
-        const res = await surveyAPIList.getDetailSurvey(parseInt(surveyId));
-        console.log(res.data);
-        setSurveyData(res.data);
-      }
+      const res = await surveyAPIList.getDetailSurvey(Number(surveyId));
+      console.log(res);
+      setSurveyData(res);
     } catch (error) {}
   };
 
@@ -83,20 +81,21 @@ const SurveyDetailPage = () => {
     <>
       <div className={styles.DetailContainer}>
         <div className={styles.SurveyDetail}>
-          <h2>{surveyData.title}</h2>
+          <h2>{surveyData?.title}</h2>
           <div className={styles.Date}>
-            <span className={styles.EndAt}>마감일 {surveyData.endAt}</span>
+            <span className={styles.EndAt}>마감일 {surveyData?.endAt}</span>
           </div>
         </div>
       </div>
       <div className={styles.Space}></div>
       {/* {renderQuestions()} */}
       {surveyData?.questions.map((question: IQuestions, idx: number) =>
-        question.questionType === 'MULTIPLE_CHOICE' ? (
+        question.questionType === "SINGLE_CHOICE" ? (
           <div key={question.id} className={styles.Survey}>
             <MultipleChoicePage
               questions={question}
               choices={question.choices}
+              index={idx}
             />
             <div className={styles.Space}></div>
           </div>
