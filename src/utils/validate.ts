@@ -37,11 +37,28 @@ export function validateChangePassword(password: passwordInfo) {
   );
 }
 
-export const validateSurveyAnswerForm = (answer: IAnswerSurvey): boolean => {
+export const validateSurveyAnswerForm = (
+  answer: IAnswerSurvey,
+  questions: IQuestions[]
+): boolean => {
   return answer.answerDtos.every((dto) => {
-    if (dto.choiceIds?.length > 0 || dto.text.trim().length > 0) {
-      return true;
+    const question = questions.find((q) => q.id === dto.questionId);
+
+    if (!question) {
+      return false;
     }
+
+    if (question.questionType === 'SHORT_ANSWER') {
+      return dto.text.trim().length > 0;
+    }
+
+    if (
+      question.questionType === 'MULTIPLE_CHOICE' ||
+      question.questionType === 'SINGLE_CHOICE'
+    ) {
+      return dto.choiceIds.length > 0;
+    }
+
     return false;
   });
 };

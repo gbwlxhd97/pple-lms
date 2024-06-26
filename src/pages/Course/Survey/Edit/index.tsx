@@ -217,6 +217,13 @@ const SurveyEditPage: React.FC = () => {
     }
   };
 
+  const handleAnonymous = (isAnonymous: boolean) => {
+    setSurveyInfo((prev) => ({
+      ...prev,
+      anonymous: isAnonymous,
+    }));
+  }
+
   return (
     <>
       <Title title="설문 만들기" />
@@ -310,8 +317,22 @@ const SurveyEditPage: React.FC = () => {
       </Button>
       <div className="Space"></div>
       <div className={styles.FlexAnonymous}>
-        <SingleCheckBox checkBoxType="Active">익명으로 받기</SingleCheckBox>
-        <SingleCheckBox checkBoxType="Active">실명으로 받기</SingleCheckBox>
+        <SingleCheckBox
+          checkBoxType={surveyInfo.anonymous ? 'Active' : 'Default'}
+          onClick={() => {
+            handleAnonymous(true);
+          }}
+        >
+          익명으로 받기
+        </SingleCheckBox>
+        <SingleCheckBox
+          checkBoxType={surveyInfo.anonymous ? 'Default' : 'Active'}
+          onClick={() => {
+            handleAnonymous(false);
+          }}
+        >
+          실명으로 받기
+        </SingleCheckBox>
       </div>
       <Button
         buttonType={isSubmitEnabled ? 'Active' : 'Disabled'}
