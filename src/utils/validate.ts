@@ -1,4 +1,5 @@
 import { IRegister } from '@/interfaces/member';
+import { IAnswerSurvey, IQuestions, ISurvey } from '@/interfaces/survey';
 
 export function validateForm(info: IRegister, phoneAuthorization: boolean) {
   const isNameValid = info.name.trim() !== '';
@@ -35,3 +36,12 @@ export function validateChangePassword(password: passwordInfo) {
     isMatch
   );
 }
+
+export const validateSurveyAnswerForm = (answer: IAnswerSurvey): boolean => {
+  return answer.answerDtos.every((dto) => {
+    if (dto.choiceIds?.length > 0 || dto.text.trim().length > 0) {
+      return true;
+    }
+    return false;
+  });
+};

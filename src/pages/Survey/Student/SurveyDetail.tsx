@@ -8,6 +8,7 @@ import ShortAnswerPage from '../ShortAnswer';
 import surveyAPIList from '@/services/survey';
 import { IAnswerSurvey, IQuestions } from '@/interfaces/survey';
 import MultipleChoicePage from '../MultipleChoice';
+import { validateSurveyAnswerForm } from '@/utils/validate';
 
 export interface ISurvey {
   id: number;
@@ -49,6 +50,8 @@ const SurveyDetailPage = () => {
       text: ''
     }],
   });
+
+  const [isValidateButton, setIsValidateButton] = useState(false);
   const getDetailSurvey = async () => {
     try {
       const res = await surveyAPIList.getDetailSurvey(Number(surveyId));
@@ -66,8 +69,8 @@ const SurveyDetailPage = () => {
   }, []);
   
   useEffect(() => {
-    console.log(answer,"앤서의향연");
-  },[answer])
+    setIsValidateButton(validateSurveyAnswerForm(answer, surveyData.questions));
+  }, [answer, surveyData.questions]);
 
   const router = useRouter();
 
@@ -95,8 +98,6 @@ const SurveyDetailPage = () => {
       console.error(error);
     }
   };
-
-  const isValidateButton = true;
 
   return (
     <>

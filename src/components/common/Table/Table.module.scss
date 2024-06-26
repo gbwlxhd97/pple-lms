@@ -11,10 +11,10 @@
     color: $gray300;
     font-size: 14px;
     font-weight: 600;
-    > th {
+    > tr {
         display: flex;
         align-items: flex-start;
-        > tr {
+        > th {
             flex: 1;
             text-align: left;
             padding: 12px 14px;
