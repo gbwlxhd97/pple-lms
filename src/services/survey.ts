@@ -1,3 +1,4 @@
+import { IAnswerSurvey } from '@/interfaces/survey';
 import { requestAPI } from '@/utils/fetch';
 
 type insertRequestBody = {
@@ -44,12 +45,21 @@ const getStudentSurveyList = async (courseId: number) => {
   return data
 }
 
+const answerSurvey = async (surveyId: number, requestBody: IAnswerSurvey) => {
+  const data = await requestAPI().post(
+    `/surveys/${surveyId}/answers`,
+    requestBody
+  );
+  return data;
+};
+
 const surveyAPIList = {
   insertSurvey,
   getSurveyList,
   getDetailSurvey,
   registerSurvey,
-  getStudentSurveyList
+  getStudentSurveyList,
+  answerSurvey,
 };
 
 export default surveyAPIList;

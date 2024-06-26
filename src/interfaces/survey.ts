@@ -27,3 +27,13 @@ export interface IQuestions {
     text: string;
   }[];
 }
+
+
+export interface IAnswerSurvey {
+  surveyId: number;
+  answerDtos:Array<{
+    questionId: number,
+    choiceIds: Array<number>,
+    text: string
+  }>
+}

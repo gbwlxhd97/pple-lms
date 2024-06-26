@@ -6,7 +6,7 @@ import { useRouter } from '@/hooks/useRouter';
 import toast from 'react-hot-toast';
 import ShortAnswerPage from '../ShortAnswer';
 import surveyAPIList from '@/services/survey';
-import { IQuestions } from '@/interfaces/survey';
+import { IAnswerSurvey, IQuestions } from '@/interfaces/survey';
 import MultipleChoicePage from '../MultipleChoice';
 
 export interface ISurvey {
@@ -41,41 +41,62 @@ const SurveyDetailPage = () => {
     questions: [],
   });
 
+  const [answer, setAnswer] = useState<IAnswerSurvey>({
+    surveyId: Number(surveyId),
+    answerDtos: [{
+      questionId: 0,
+      choiceIds:[],
+      text: ''
+    }],
+  });
   const getDetailSurvey = async () => {
     try {
       const res = await surveyAPIList.getDetailSurvey(Number(surveyId));
       console.log(res);
       setSurveyData(res);
+      setAnswer({
+        surveyId: Number(surveyId),
+        answerDtos: res.questions,
+      });
     } catch (error) {}
   };
 
   useEffect(() => {
     getDetailSurvey();
   }, []);
+  
+  useEffect(() => {
+    console.log(answer,"앤서의향연");
+  },[answer])
 
   const router = useRouter();
 
-  //   const handlePost = async () => {
-  //     try {
-  //       const requestBody = {
-  //         id: surveyData.id,
-  //         title: surveyData.title,
-  //         description: surveyData.description,
-  //         endAt: surveyData.endAt
-  //       };
+  const handleSubmit = async () => {
+    try {
+      const requestBody = {
+        surveyId: answer.surveyId,
+        answerDtos: answer.answerDtos.map((a: any) => ({
+          questionId: a.id,
+          choiceIds: a.questionType === 'SINGLE_CHOICE' ? a.choiceIds : [],
+          text: a.text,
+        })),
+      };
 
-  //       const response = await surveyAPIList.insertSurvey(courseId, requestBody);
-  //       if (response) {
-  //         toast.success('등록이 완료되었습니다.');
-  //         router.back(1);
-  //       }
-  //     } catch (error) {
-  //       toast.error('등록에 실패했습니다.');
-  //       console.error(error);
-  //     }
-  //   };
+      const response = await surveyAPIList.answerSurvey(
+        Number(surveyId),
+        requestBody
+      );
+      if (response) {
+        toast.success('등록이 완료되었습니다.');
+        router.back(1);
+      }
+    } catch (error) {
+      toast.error('등록에 실패했습니다.');
+      console.error(error);
+    }
+  };
 
-  const isValidateButton = false;
+  const isValidateButton = true;
 
   return (
     <>
@@ -88,20 +109,21 @@ const SurveyDetailPage = () => {
         </div>
       </div>
       <div className={styles.Space}></div>
-      {/* {renderQuestions()} */}
       {surveyData?.questions.map((question: IQuestions, idx: number) =>
-        question.questionType === "SINGLE_CHOICE" ? (
+        question.questionType === 'SINGLE_CHOICE' ||
+        question.questionType === 'MULTIPLE_CHOICE' ? (
           <div key={question.id} className={styles.Survey}>
             <MultipleChoicePage
               questions={question}
               choices={question.choices}
               index={idx}
+              setAnswer={setAnswer}
             />
             <div className={styles.Space}></div>
           </div>
         ) : (
           <div key={question.id} className={styles.Survey}>
-            <ShortAnswerPage question={question.text} />
+            <ShortAnswerPage question={question} setAnswer={setAnswer} />
             <div className={styles.Space}></div>
           </div>
         )
@@ -109,7 +131,7 @@ const SurveyDetailPage = () => {
       <Button
         buttonType={isValidateButton ? 'Active' : 'Disabled'}
         className={styles.SubmitButton}
-        //   onClick={handlePost}
+        onClick={handleSubmit}
       >
         완료
       </Button>
