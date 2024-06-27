@@ -8,13 +8,9 @@ const SurveyTeacherDetailPage = () => {
   const [surveyData,setSurveyData] = useState<any>()
   const getSurveyData = async () => {
     try {
-      const res = await surveyAPIList.getDetailSurvey(Number(surveyId));
-      const updatedData = res.map((item: any) => ({
-        ...item,
-        isNew: item.createdAt === today,
-      }));
-      console.log(updatedData);
-      setSurveyData(updatedData);
+      const res = await surveyAPIList.getSurveySummaryList(Number(surveyId));
+      console.log(res);
+      setSurveyData(res);
     } catch (error) {
       
     } 

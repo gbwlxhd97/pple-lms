@@ -22,7 +22,7 @@ const CourseReferencePage = () => {
       // isNew 필드 추가
       const updatedData = res.map((item: IReferenceList) => ({
         ...item,
-        isNew: item.createdAt === today,
+        isNew: item.createdAt === today(),
       }));
       console.log(updatedData);
 

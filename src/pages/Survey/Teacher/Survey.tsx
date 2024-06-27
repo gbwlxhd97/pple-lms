@@ -22,7 +22,7 @@ const SurveyTeacherPage = () => {
       const res = await surveyAPIList.getSurveyList(courseId);
       const updatedData = res.map((item: ISurveyTeacherList) => ({
         ...item,
-        isNew: item.createdAt === today,
+        isNew: item.createdAt === today(),
       }));
       console.log(res);
       
@@ -33,8 +33,6 @@ const SurveyTeacherPage = () => {
 
   useEffect(() => {
     if (courseId) {
-      console.log('hihi');
-      
       getSurveyList(parseInt(courseId));
     }
   }, [courseId]);

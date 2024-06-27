@@ -24,31 +24,20 @@ const MultipleChoicePage: React.FC<IMultipleChoice> = ({
   index,
   setAnswer,
 }) => {
-  const router = useRouter();
 
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-
-  const handleCheckBoxClick = (choiceId: number) => {
-  };
   
   const handleChoiceChange = (questionId: number, choiceId: number) => {
     setSelectedAnswer(choiceId);
     setAnswer((prevAnswer) => {
-      console.log(prevAnswer,choiceId,"prev");
-      
       const updatedAnswerDtos = prevAnswer.answerDtos.map((answerDto:any) =>
         answerDto.id === questionId
           ? {
               ...answerDto,
-              // choiceIds: answerDto.choiceIds.includes(choiceId)
-              //   ? answerDto.choiceIds.filter((id) => id !== choiceId)
-              //   : [...answerDto.choiceIds, choiceId],
               choiceIds: [choiceId]
             }
           : answerDto
       );
-      console.log(updatedAnswerDtos,"updated");
-      
       return { ...prevAnswer, answerDtos: updatedAnswerDtos };
     });
   };

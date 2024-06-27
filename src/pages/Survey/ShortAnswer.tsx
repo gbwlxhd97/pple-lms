@@ -30,10 +30,8 @@ const ShortAnswerPage: React.FC<IinsertBody> = ({
       console.log(prevAnswer,"prev");
       
       const updatedAnswerDtos = prevAnswer.answerDtos.map((answerDto:any) =>
-        answerDto.id === questionId ? { ...answerDto, text } : answerDto
+        answerDto.id === questionId ? { ...answerDto, text,answerText: text } : answerDto
       );
-      console.log(updatedAnswerDtos,"newDto");
-      
       return { ...prevAnswer, answerDtos: updatedAnswerDtos };
     });
   };

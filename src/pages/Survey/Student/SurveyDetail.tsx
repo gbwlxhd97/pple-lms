@@ -69,8 +69,12 @@ const SurveyDetailPage = () => {
   }, []);
   
   useEffect(() => {
-    setIsValidateButton(validateSurveyAnswerForm(answer, surveyData.questions));
-  }, [answer, surveyData.questions]);
+    if (answer.answerDtos.length > 0) {
+      setIsValidateButton(
+        validateSurveyAnswerForm(answer, surveyData.questions)
+      );
+    }
+  }, [answer]);
 
   const router = useRouter();
 
@@ -90,7 +94,7 @@ const SurveyDetailPage = () => {
         requestBody
       );
       if (response) {
-        toast.success('등록이 완료되었습니다.');
+        toast.success('제출이 완료되었습니다.');
         router.back(1);
       }
     } catch (error) {

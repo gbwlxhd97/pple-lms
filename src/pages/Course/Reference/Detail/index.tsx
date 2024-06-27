@@ -42,7 +42,7 @@ const CourseReferenceDetailPage = () => {
 
   return (
     <>
-      <div className={styles.Title}>{detailInfo?.main}</div>
+      <div className={styles.Title}>{detailInfo?.title}</div>
       <div className={styles.InfoWrap}>
         <div>{detailInfo?.writerName}</div>
         <span>・</span>
@@ -51,6 +51,7 @@ const CourseReferenceDetailPage = () => {
       <div className="SpacingDividerWrapper">
         <div className="Divider"></div>
       </div>
+      <div className={styles.content}>{detailInfo?.main}</div>
       <div className={styles.FileContainer}>
         {detailInfo?.noteFileDtos?.map((item, idx) => (
           <div className={styles.FileColumnWrapper} key={idx}>

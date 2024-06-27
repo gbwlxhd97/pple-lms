@@ -22,31 +22,37 @@ export function durationFormatTime(seconds: number) {
  * 
  * return YYYY-MM-DD
  */
-export const today = new Date().toISOString().split('T')[0];
+export const today = () => {
+  const kstOffset = 9 * 60 * 60 * 1000; // KST의 시간 오프셋 (밀리초 단위)
+    const now = new Date(Date.now() + kstOffset);
+    return now.toISOString().split('T')[0];
+}
 
 
 export const endDate = () => {
   const list = [];
-  // 날짜 범위 설정
-  const startDate = new Date(2024, 5, 21); // 2024년 6월 21일
-  const endDate = new Date(2024, 6, 31); // 2024년 7월 31일
+  const kstOffset = 9 * 60 * 60 * 1000;
+  const today = new Date(Date.now() + kstOffset);
+  const startDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+  const endDate = new Date(startDate);
+  endDate.setMonth(endDate.getMonth() + 1);
 
-  // 현재 날짜를 시작 날짜로 설정
   let currentDate = startDate;
 
   while (currentDate <= endDate) {
-    // 날짜를 YYYY-MM-DD 형식으로 변환
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
 
-    // list에 추가
     list.push({
       label: `${year}-${month}-${day}`,
       type: `${year}-${month}-${day}`,
     });
 
-    // 다음 날짜로 이동
     currentDate.setDate(currentDate.getDate() + 1);
   }
   return list;

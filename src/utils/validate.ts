@@ -41,22 +41,23 @@ export const validateSurveyAnswerForm = (
   answer: IAnswerSurvey,
   questions: IQuestions[]
 ): boolean => {
-  return answer.answerDtos.every((dto) => {
-    const question = questions.find((q) => q.id === dto.questionId);
-
+  console.log(answer,"앤서의향연ㄴ");
+  
+  return answer.answerDtos.every((dto:any) => {
+    const question = questions.find((q) => q.id === dto.id);
     if (!question) {
       return false;
     }
-
+    
     if (question.questionType === 'SHORT_ANSWER') {
-      return dto.text.trim().length > 0;
+      return dto.answerText?.trim()?.length > 0;
     }
 
     if (
       question.questionType === 'MULTIPLE_CHOICE' ||
       question.questionType === 'SINGLE_CHOICE'
     ) {
-      return dto.choiceIds.length > 0;
+      return dto.choiceIds?.length > 0;
     }
 
     return false;

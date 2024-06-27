@@ -210,6 +210,7 @@ const SurveyEditPage: React.FC = () => {
       );
       console.log(res);
       if(res) {
+        toast.success("등록이 완료되었습니다.")
         router.push(`/course/${courseId}/survey`)
       }
     } catch (error) {

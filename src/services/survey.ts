@@ -52,6 +52,33 @@ const answerSurvey = async (surveyId: number, requestBody: IAnswerSurvey) => {
   );
   return data;
 };
+/**
+ * 학생들이 설문 응답한 데이터를 요약해서 받는다.
+ * @param surveyId 
+ * @returns 
+ */
+const getSurveySummaryList = async (surveyId: number) => {
+  const data = await requestAPI().get(`/surveys/${surveyId}/summary`)
+  return data;
+}
+/**
+ * 해당 설문에 응답한 학생들의 리스트를 반환한다.
+ * @param surveyId 
+ * @returns 
+ */
+const getSurveyStudentList = async (surveyId: number) => {
+  const data = await requestAPI().get(`/surveys/${surveyId}/responses`)
+  return data
+};
+/**
+ * 해당 설문에 응답한 학생의 개인 응답을 조회한다.
+ * @param surveyId 
+ * @returns 
+ */
+const getSurveyDetailStudent = async (surveyId: number,memberId: number) => {
+  const data = await requestAPI().get(`/surveys/${surveyId}/response/${memberId}`);
+  return data;
+};
 
 const surveyAPIList = {
   insertSurvey,
@@ -60,6 +87,9 @@ const surveyAPIList = {
   registerSurvey,
   getStudentSurveyList,
   answerSurvey,
+  getSurveySummaryList,
+  getSurveyStudentList,
+  getSurveyDetailStudent,
 };
 
 export default surveyAPIList;

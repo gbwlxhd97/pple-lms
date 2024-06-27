@@ -21,7 +21,7 @@ const NoticePage = () => {
       const res = await noticeAPIList.getNoticeList();
       const updatedData = res.map((item: INoticeList) => ({
         ...item,
-        isNew: item.createdAt === today,
+        isNew: item.createdAt === today(),
       }));
       console.log(updatedData);
       setNoticeList(updatedData);

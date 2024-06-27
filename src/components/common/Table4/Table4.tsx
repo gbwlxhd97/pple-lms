@@ -46,7 +46,7 @@ const Table4 = ({ tableBody, tableHead, path }: Table4Props) => {
         {tableBody.map((row, rowIndex) => {
           // 마감기한이 남았는지 남지 않았는지 판단하는 변수
           const isPastDue = row?.endAt
-            ? row.endAt > today
+            ? row.endAt > today()
             : false;
           return (
             <tr
@@ -71,13 +71,13 @@ const Table4 = ({ tableBody, tableHead, path }: Table4Props) => {
                       ${!row.userParticipated && !isPastDue ? styles.NotSubmitted : ''}`}
                   >
                     {/* 
-                      case 1: 응시완료는 응시완료 텍스트를 보여준다. -> 배경색 grey
-                      case 2: 응시 전인 경우 마감기한과 남은경우 비교해서 응시 전 텍스트를 보여준다. -> 배경색 white
-                      case 3: 응시 전인 경우 마감기한이 끝난경우 비교해서 미응시 텍스트를 보여준다. -> 배경색 grey
+                      case 1: 제출완료 는 제출완료 텍스트를 보여준다. -> 배경색 grey
+                      case 2: 제출전인 경우 마감기한과 남은경우 비교해서 제출전 텍스트를 보여준다. -> 배경색 white
+                      case 3: 제출전인 경우 마감기한이 끝난경우 비교해서 미제출 텍스트를 보여준다. -> 배경색 grey
                     */}
-                    {row.userParticipated && '응시완료'}
-                    {!row.userParticipated && isPastDue && '응시 전'}
-                    {!row.userParticipated && !isPastDue && '미응시'}
+                    {row.userParticipated && '제출완료'}
+                    {!row.userParticipated && isPastDue && '제출전'}
+                    {!row.userParticipated && !isPastDue && '미제출'}
                   </span>
                   <span>・</span>
                   <span className={styles.EndAt}>마감일 {row.endAt}</span>
