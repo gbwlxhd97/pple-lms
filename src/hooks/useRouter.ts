@@ -14,7 +14,7 @@ export function useRouter() {
       back(steps = 1) {
         navigate(-steps);
       },
-      push(path: RoutePath, search?: any, state?: any) {
+      push(path: RoutePath | any, search?: any, state?: any) {
         navigate(
           {
             pathname: path,

@@ -100,5 +100,6 @@
     }
     .EndedRow{
         background-color: $gray0;
+        pointer-events: none;
     }
 }

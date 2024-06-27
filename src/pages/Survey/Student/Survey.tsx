@@ -4,6 +4,7 @@ import Table4 from '@/components/common/Table4/Table4';
 import { useParams } from 'react-router';
 import surveyAPIList from '@/services/survey';
 import { useEffect, useState } from 'react';
+import { today } from '@/utils/date';
 
 const SurveyStudentPage = () => {
   const { courseId } = useParams();
@@ -12,7 +13,12 @@ const SurveyStudentPage = () => {
     try {
       const res = await surveyAPIList.getStudentSurveyList(Number(courseId));
       console.log(res);
-      setSurveyList(res)
+      const updatedData = res.map((item:any) => ({
+        ...item,
+        isNew: item.createdAt === today,
+      }));
+      console.log(updatedData);
+      setSurveyList(updatedData);
     } catch (error) {
       
     }
