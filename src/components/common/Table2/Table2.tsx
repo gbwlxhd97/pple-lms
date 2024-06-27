@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Table2.module.scss';
 import NewIcon from '@/icons/icon/NewIcon';
 import { Link } from 'react-router-dom';
+import { useRouter } from '@/hooks/useRouter';
 
 interface Table2Props {
   tableHead: string[]; // 테이블의 각 열 제목
@@ -22,6 +23,10 @@ interface TableRow {
 }
 
 const Table2 = ({ tableBody, tableHead, path }: Table2Props) => {
+  const router = useRouter();
+  const onPushPage = (rowId: number) => {
+    router.push(`${path}/${rowId}`)
+  }
   return (
     <table style={{ width: '100%' }}>
       <thead className={styles.TableHead}>
@@ -40,13 +45,16 @@ const Table2 = ({ tableBody, tableHead, path }: Table2Props) => {
             className={
               row.titleDetails?.status === '종료' ? styles.EndedRow : ''
             }
+            onClick={() => {
+              onPushPage(row.id)
+            }}
           >
             <td className={styles.TableNum}>{tableBody.length - rowIndex}</td>
             <td className={styles.TableTitle}>
               <div
                 className={`${styles.Title} ${row.isNew ? `${styles.isNew}` : ''}`}
               >
-                <Link to={`${path}/${row.id}`}>{row.title}</Link>
+                {row.title}
                 {row.isNew && (
                   <div className={styles.NewIcon}>
                     <NewIcon width={12} height={12} />
