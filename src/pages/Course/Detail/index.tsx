@@ -21,26 +21,6 @@ import useProfileStore from '@/stores/useProfileStore';
 import statisticsAPIList from '@/services/statistics';
 import { ITotalStudent } from '@/interfaces/statistics';
 
-const data02 = {
-  attendInfo: {
-    attendCount: 35,
-    notAttendCount: 8,
-  },
-  assignmentInfo: {
-    submitCount: 35,
-    notSubmitCount: 8,
-  },
-};
-
-const pieData = [
-  { name: 'Attended', value: data02.attendInfo.attendCount },
-  { name: 'Not Attended', value: data02.attendInfo.notAttendCount },
-];
-
-const pieData2 = [
-  { name: 'SubmitCount', value: data02.assignmentInfo.submitCount },
-  { name: 'Not SubmitCount', value: data02.assignmentInfo.notSubmitCount },
-];
 
 const CourseDetailPage = () => {
   const { state } = useLocation();

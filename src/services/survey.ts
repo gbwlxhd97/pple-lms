@@ -58,7 +58,7 @@ const answerSurvey = async (surveyId: number, requestBody: IAnswerSurvey) => {
  * @returns 
  */
 const getSurveySummaryList = async (surveyId: number) => {
-  const data = await requestAPI().get(`/surveys/${surveyId}/summary`)
+  const {data} = await requestAPI().get(`/surveys/${surveyId}/summary`)
   return data;
 }
 /**

@@ -1,0 +1,23 @@
+@import '@/styles/theme.scss';
+
+.StudentFlexWrap {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $gray100;
+  padding-top: 24px;
+}
+
+.StudentChild {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: border-bottom 0.3s ease;
+  
+  &.Active {
+    border-bottom: 2px solid $gray400;
+  }
+  
+  &:not(.Active) {
+    border-bottom: 2px solid transparent;
+  }
+}

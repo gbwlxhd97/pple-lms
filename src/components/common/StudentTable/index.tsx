@@ -33,7 +33,7 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
                 goPushPath(row.id);
               }}
             >
-              <td>{index + 1}</td>
+              <td>{tableBody.length - index}</td>
               <td>{row.name}</td>
               <td>{row.tel}</td>
             </tr>
