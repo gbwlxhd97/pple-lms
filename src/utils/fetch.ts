@@ -37,7 +37,7 @@ axiosInstance?.interceptors.response.use((response) => {
   (error) => {
     if(error.response && error.response.status === 401) {
       Cookies.remove(SESSION_KEY);
-      window.location.reload()
+      // window.location.reload()
     }
   }
 )

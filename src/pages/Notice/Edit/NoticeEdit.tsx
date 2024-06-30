@@ -56,10 +56,13 @@ const NoticeEditPage = () => {
   };
 
   const isValidateButton =
-    noticeEdit.title.length > 0 &&
-    noticeEdit.main.length > 0 &&
-    (noticeEdit.sendType === 'STUDENT' || noticeEdit.sendType === 'PARENTS');
+    noticeEdit.title.length > 0 && noticeEdit.main.length > 0;
 
+  /**
+     * && 아래 주석은 학생, 부모님 유효성검사를 제외한다.
+    // (noticeEdit.sendType === 'STUDENT' || noticeEdit.sendType === 'PARENTS');
+     * 
+     */
   useEffect(() => {
     if (role !== 'TEACHER') {
       toast.error('권한이 없습니다.');

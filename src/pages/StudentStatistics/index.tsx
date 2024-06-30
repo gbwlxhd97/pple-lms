@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import styles from './index.module.scss';
+import CustomTooltip from '@/components/common/\bCustomTooltip';
 const StudentStaticsPage = () => {
   const { courseId } = useParams();
   const [students, setStudents] = useState([]);
@@ -27,7 +28,10 @@ const StudentStaticsPage = () => {
     }
   }
 
-
+  const barLegendData:any = [
+    { value: '전체학생수', type: 'circle', color: '#FF6969' },
+    { value: '출석학생수', type: 'circle', color: '#67B472' },
+  ];
   useEffect(() => {
     getStatDatas();
   }, [isTotalStudentStat]);
@@ -55,25 +59,20 @@ const StudentStaticsPage = () => {
       </div>
       {isTotalStudentStat && (
         <>
-          <ResponsiveContainer width={'100%'} height={'50%'}>
-            <BarChart
-              data={totalStudents}
-              dataKey="date"
-            >
+          <ResponsiveContainer width={'100%'} height={'70%'}>
+            <BarChart data={totalStudents} dataKey="date">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
               <YAxis />
-              <Tooltip />
-              <Legend />
+              <Tooltip content={<CustomTooltip/>} />
+              <Legend payload={barLegendData} />
               <Bar
                 dataKey="totalCount"
-                fill="#8884d8"
-                activeBar={<Rectangle fill="pink" stroke="blue" />}
+                fill="#FF6969"
               />
               <Bar
                 dataKey="attendCount"
-                fill="#82ca9d"
-                activeBar={<Rectangle fill="gold" stroke="purple" />}
+                fill="#67B472"
               />
             </BarChart>
           </ResponsiveContainer>
