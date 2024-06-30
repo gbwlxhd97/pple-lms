@@ -35,7 +35,7 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
             >
               <td>{tableBody.length - index}</td>
               <td>{row.name}</td>
-              <td>{row.tel}</td>
+              {row.tel && <td>{row.tel}</td>}
             </tr>
           ))}
         </tbody>

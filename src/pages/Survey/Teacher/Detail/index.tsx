@@ -4,10 +4,13 @@ import { useParams } from 'react-router-dom';
 import styles from './index.module.scss';
 import { today } from '@/utils/date';
 import SummaryChart from '@/components/common/SurveySummary/chart';
+import Title from '@/components/common/Title/Title';
+import StudentTable from '@/components/common/StudentTable';
 const SurveyTeacherDetailPage = () => {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState<any>();
   const [isSummary, setIsSummary] = useState(true); //default
+  const [students, setStudents] = useState([]);
   const getSurveyData = async () => {
     try {
       if(isSummary) {
@@ -17,6 +20,7 @@ const SurveyTeacherDetailPage = () => {
       } else {
         const res = await surveyAPIList.getSurveyStudentList(Number(surveyId));
         console.log(res);
+        setStudents(res);
       }
     } catch (error) {}
   };
@@ -49,7 +53,17 @@ const SurveyTeacherDetailPage = () => {
               개별보기
             </div>
           </div>
-          {/* <SummaryChart title='' /> */}
+          {isSummary && <div>요약</div>}
+
+          {!isSummary && (
+            <>
+              <Title title={`설문 참여 학생 (${students.length})`} />
+              <StudentTable
+                tableHead={['iD', '이름']}
+                tableBody={students}
+              />
+            </>
+          )}
         </div>
       </div>
     </>
