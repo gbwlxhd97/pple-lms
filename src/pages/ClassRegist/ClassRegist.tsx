@@ -40,6 +40,7 @@ const ClassRegistPage = () => {
         <Table5
           tableHead={['이름', '전화번호', '수강신청']}
           tableBody={awaitingList || []}
+          fetchData={getAwaitingList}
         />
       </div>
     </>

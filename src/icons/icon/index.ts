@@ -7,3 +7,4 @@ export { default as TrashIcon } from './TrashIcon';
 export { default as ReferenceIcon} from './ReferenceIcon';
 export { default as SurveyIcon } from './SurveyIcon';
 export { default as WhiteHomeIcon } from './WhiteHomeIcon';
+export { default as ClassRegistIcon } from './ClassRegistIcon';
