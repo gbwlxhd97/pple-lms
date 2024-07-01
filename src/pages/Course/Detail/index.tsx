@@ -173,7 +173,7 @@ const CourseDetailPage = () => {
           출석정보확인
         </Button>
       </div>
-      <div className={styles.CommonWrapper}>
+      {/* <div className={styles.CommonWrapper}>
         <Title title="강의자료" />
         <Button
           buttonType="Active"
@@ -196,7 +196,7 @@ const CourseDetailPage = () => {
         >
           설 문
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

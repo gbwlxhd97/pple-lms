@@ -13,6 +13,8 @@ import { loadingToast } from '@/utils';
 import useProfileStore from '@/stores/useProfileStore';
 import Cookies from 'js-cookie';
 import { SESSION_KEY } from '@/utils/constant';
+import { ReferenceIcon, SurveyIcon, WhiteHomeIcon } from '@/icons/icon';
+import { useParams } from 'react-router';
 
 type AsideProps = {
   children?: ReactNode;
@@ -20,8 +22,9 @@ type AsideProps = {
 
 const ASidebar = ({ children }: AsideProps) => {
   const [toggle, setToggle] = useState(false);
+  const {courseId} = useParams()
   const {
-    profile: { name },
+    profile: { name,role },
   } = useProfileStore();
   const toggleSidebar = () => {
     setToggle(!toggle);
@@ -101,8 +104,26 @@ const ASidebar = ({ children }: AsideProps) => {
                     routeThenCloseAside('/main');
                   }}
                 >
-                  <span>메인페이지</span> <HomeIcon width={18} height={18} />
+                  <span>메인페이지</span> <WhiteHomeIcon width={18} height={18} />
                 </li>
+                {courseId && (
+                  <li
+                    onClick={() => {
+                      routeThenCloseAside(`/course/${courseId}/survey`);
+                    }}
+                  >
+                    <span>설문</span> <SurveyIcon width={18} height={18} />
+                  </li>
+                )}
+                {courseId && (
+                  <li
+                    onClick={() => {
+                      routeThenCloseAside(`/course/reference/${courseId}`);
+                    }}
+                  >
+                    <span>강의자료</span> <ReferenceIcon width={18} height={18} />
+                  </li>
+                )}
                 {/* <li
                   onClick={() => {
                     routeThenCloseAside('/attendance');
