@@ -22,7 +22,6 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
           boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <p className="label" style={{ margin: 0 }}>{`Date: ${label}`}</p>
         <p
           className="intro"
           style={{ margin: 0, color: '#FF6969' }}

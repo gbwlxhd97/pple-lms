@@ -32,7 +32,7 @@ const ASidebar = ({ children }: AsideProps) => {
   const { clear } = useProfileStore();
   const router = useRouter();
 
-  const routeThenCloseAside = (route: RoutePath) => {
+  const routeThenCloseAside = (route: RoutePath | any) => {
     router.push(route);
     setToggle(false);
   };
@@ -133,6 +133,16 @@ const ASidebar = ({ children }: AsideProps) => {
                     }}
                   >
                     <span>학생 수강신청</span>{' '}
+                    <ClassRegistIcon width={18} height={18} />
+                  </li>
+                )}
+                {courseId && role === 'TEACHER' && (
+                  <li
+                    onClick={() => {
+                      routeThenCloseAside(`/course/${courseId}/growth/1`);
+                    }}
+                  >
+                    <span>학생 성장기록부</span>{' '}
                     <ClassRegistIcon width={18} height={18} />
                   </li>
                 )}

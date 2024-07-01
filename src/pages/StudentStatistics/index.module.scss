@@ -12,12 +12,26 @@
   text-align: center;
   cursor: pointer;
   transition: border-bottom 0.3s ease;
-  
+  font-size: 14px;
+  font-weight: 700;
+  color: $gray200;
+  padding-bottom: 12px;
   &.Active {
     border-bottom: 2px solid $gray400;
+    color: $gray400;
   }
   
   &:not(.Active) {
     border-bottom: 2px solid transparent;
   }
+}
+
+.TotalTitle {
+  color: $gray400;
+  font-size: 16px;
+  font-weight: 500;
+  > span {
+    color: $purple1;
+  }
+  padding: 20px 0;
 }

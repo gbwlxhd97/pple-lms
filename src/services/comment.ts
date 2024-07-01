@@ -19,9 +19,15 @@ const insertComment = async (requestBody: { courseSectionId : number, memberId: 
   return data;
 };
 
+const getDetailCourseSectionComments = async (courseId:number,courseSectionId:number) => {
+  const {data} = await requestAPI().get(`/comment/course/${courseId}/courseSections/${courseSectionId}/comments`)
+  return data
+}
+
 const commentAPIList = {
   getStudentComments,
-  insertComment
+  insertComment,
+  getDetailCourseSectionComments
 };
 
 export default commentAPIList;

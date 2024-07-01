@@ -59,30 +59,32 @@ const StudentStaticsPage = () => {
       </div>
       {isTotalStudentStat && (
         <>
+          <div className={styles.TotalTitle}>
+            <span>월별</span> 학생 출석 현황
+          </div>
           <ResponsiveContainer width={'100%'} height={'70%'}>
             <BarChart data={totalStudents} dataKey="date">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
               <YAxis />
-              <Tooltip content={<CustomTooltip/>} />
+              <Tooltip content={<CustomTooltip />} />
               <Legend payload={barLegendData} />
-              <Bar
-                dataKey="totalCount"
-                fill="#FF6969"
-              />
-              <Bar
-                dataKey="attendCount"
-                fill="#67B472"
-              />
+              <Bar dataKey="totalCount" fill="#FF6969" />
+              <Bar dataKey="attendCount" fill="#67B472" />
             </BarChart>
           </ResponsiveContainer>
         </>
       )}
       {!isTotalStudentStat && (
-        <StudentTable
-          tableHead={['iD', '이름', '전화번호']}
-          tableBody={students}
-        />
+        <>
+          <div className={styles.TotalTitle}>
+            학생 리스트
+          </div>
+          <StudentTable
+            tableHead={['iD', '이름', '전화번호']}
+            tableBody={students}
+          />
+        </>
       )}
     </>
   );
