@@ -16,7 +16,9 @@ type ButtonProps = {
     | 'Certification'
     | 'Spacing'
     | 'List'
-    | 'File';
+    | 'File'
+    | 'Accept'
+    | 'Refuse';
   children?: ReactNode;
   className?: string;
   onClick?: () => void;

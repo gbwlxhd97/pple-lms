@@ -22,3 +22,7 @@ export interface IReferenceList {
   num: number;
   isNew?: boolean;
 }
+
+export interface IClassRegist {
+  action: 'ACCEPT' | 'REFUSE';
+}

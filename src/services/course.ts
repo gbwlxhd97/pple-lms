@@ -48,6 +48,22 @@ const getCourseStudents = async (id: number) => {
   return data;
 };
 
+const getCourseStudentsAwaiting = async (id: number) => {
+  const data = await requestAPI().get(`/course/${id}/students/awaiting`);
+  return data;
+};
+
+const StudentEnroll = async (
+  courseId: number,
+  memberId: number,
+  action: boolean
+) => {
+  const { data } = await requestAPI().post(
+    `/course/${courseId}/enroll/${memberId}?action=${action}`
+  );
+  return data;
+};
+
 const courseAPIList = {
   getCoursePage,
   getCourseSection,
@@ -56,6 +72,8 @@ const courseAPIList = {
   getCourseReferenceDetail,
   deleteCourseReference,
   getCourseStudents,
+  getCourseStudentsAwaiting,
+  StudentEnroll,
 };
 
 export default courseAPIList;

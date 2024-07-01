@@ -70,6 +70,18 @@ button {
     border-radius: 6px;
     padding: 8px 12px;
   }
+  &.Accept {
+    background-color: $purple1;
+    color: $white;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+  &.Refuse {
+    background-color: $gray400;
+    color: $white;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
   &:hover {
     opacity: 0.8;
   }

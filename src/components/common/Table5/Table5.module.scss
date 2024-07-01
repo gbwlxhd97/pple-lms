@@ -1,0 +1,58 @@
+@import '@/styles/theme.scss';
+
+.TableHead {
+    background-color: $purple2;
+    width: 100%;
+    > tr {
+        display: flex;
+        align-items: flex-start;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        color: $gray500;
+        > th {
+            text-align: left;
+            padding: 12px 12px;
+        }
+        .TableHead0 {
+            width: 30%;
+        }
+        .TableHead1 {
+            width: 35%;
+        }
+        .TableHead2 {
+            width: 35%;
+        }
+    }
+}
+
+.TableBody {
+    background-color: white;
+    > tr {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $gray100;
+        cursor: pointer;
+        > td {
+            padding: 12px 12px;
+        }
+        .Name {
+            width: 30%;
+        }
+        .Tel {
+            width: 35%;
+        }
+        .Status {
+            width: 35%;
+            .Button {
+                width: auto; 
+                height: auto; 
+                padding: 5px 15px;
+                margin-right: 10px;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+            }
+        }
+    }
+}
