@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import styles from './index.module.scss';
-import CustomTooltip from '@/components/common/\bCustomTooltip';
+import CustomTooltip from '@/components/common/CustomTooltip';
 const StudentStaticsPage = () => {
   const { courseId } = useParams();
   const [students, setStudents] = useState([]);
