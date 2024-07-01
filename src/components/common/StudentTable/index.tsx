@@ -12,8 +12,8 @@ type StudentTableProps = {
 const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
   const router = useRouter();
   const { courseId } = useParams();
-  const goPushPath = (studentId: string) => {
-    router.push(`/course/${courseId}/statistics/detail/${studentId}`);
+  const goPushPath = (studentId: string,studentState:any) => {
+    router.push(`/course/${courseId}/statistics/detail/${studentId}`,{}, studentState);
   };
   return (
     <div className={styles.TableContainer}>
@@ -30,7 +30,7 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
             <tr
               key={index}
               onClick={() => {
-                goPushPath(row.id);
+                goPushPath(row.id,row);
               }}
             >
               <td>{tableBody.length - index}</td>

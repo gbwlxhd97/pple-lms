@@ -128,7 +128,11 @@ const SurveyDetailPage = () => {
           </div>
         ) : (
           <div key={question.id} className={styles.Survey}>
-            <ShortAnswerPage question={question} setAnswer={setAnswer} />
+            <ShortAnswerPage
+              question={question}
+              setAnswer={setAnswer}
+              index={idx}
+            />
             <div className={styles.Space}></div>
           </div>
         )

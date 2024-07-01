@@ -6,6 +6,16 @@ import { today } from '@/utils/date';
 import SummaryChart from '@/components/common/SurveySummary/chart';
 import Title from '@/components/common/Title/Title';
 import StudentTable from '@/components/common/StudentTable';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 const SurveyTeacherDetailPage = () => {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState<any>();
@@ -53,15 +63,33 @@ const SurveyTeacherDetailPage = () => {
               개별보기
             </div>
           </div>
-          {isSummary && <div>요약</div>}
+          {isSummary && (
+            <div>
+              {surveyData?.questions?.map((item: any, i: number) => (
+                <>
+                  <div>Q. {i + 1}</div>
+                  <div>{item.text}</div>
+                  {item?.questionType === 'SINGLE_CHOICE' &&
+                    item?.choices?.length > 0 && (
+                      <ResponsiveContainer width="100%" height={300}>
+                        <BarChart data={item.choices}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="text" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="count" fill="#8884d8" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    )}
+                </>
+              ))}
+            </div>
+          )}
 
           {!isSummary && (
             <>
               <Title title={`설문 참여 학생 (${students.length})`} />
-              <StudentTable
-                tableHead={['iD', '이름']}
-                tableBody={students}
-              />
+              <StudentTable tableHead={['iD', '이름']} tableBody={students} />
             </>
           )}
         </div>

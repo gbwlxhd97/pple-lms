@@ -25,11 +25,11 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         <p className="label" style={{ margin: 0 }}>{`Date: ${label}`}</p>
         <p
           className="intro"
-          style={{ margin: 0 }}
+          style={{ margin: 0, color: '#FF6969' }}
         >{`전체학생수: ${payload[0].value}`}</p>
         <p
           className="desc"
-          style={{ margin: 0 }}
+          style={{ margin: 0, color: '#67B472' }}
         >{`출석학생수: ${payload[1].value}`}</p>
       </div>
     );

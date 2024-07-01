@@ -1,0 +1,53 @@
+@import '@/styles/theme.scss';
+
+.Name {
+  color: $black;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.Phone {
+  padding: 8px 0;
+  color: $gray300;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ChartWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.Legend {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.LegendItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.LegendColor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.LegendText {
+  font-size: 14px;
+}
+
+.LegendValue {
+  font-weight: bold;
+  margin-left: 5px;
+}
