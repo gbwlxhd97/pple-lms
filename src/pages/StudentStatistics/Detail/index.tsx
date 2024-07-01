@@ -86,7 +86,7 @@ const StudentStatisticsDetailPage = () => {
                 />
                 <span className={styles.LegendText}>
                   {entry.name}{' '}
-                  <span className={styles.LegendValue}>{entry.value}</span>
+                  <span className={`${styles.LegendValue} ${entry.name === '출석' ? styles.Green : styles.Red}`}>{entry.value}</span>
                 </span>
               </div>
             ))}

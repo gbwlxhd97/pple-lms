@@ -45,9 +45,15 @@
 
 .LegendText {
   font-size: 14px;
+  color: $gray300;
 }
 
 .LegendValue {
-  font-weight: bold;
   margin-left: 5px;
+  &.Green {
+    color: #67B472;
+  }
+  &.Red {
+    color: #ff6969;
+  }
 }
