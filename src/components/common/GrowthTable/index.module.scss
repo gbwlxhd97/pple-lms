@@ -4,6 +4,9 @@
     padding: 20px 0;
 }
 
+.table {
+    width: 100%;
+}
 .TableHead {
     background-color: $purple2;
     width: 100%;
@@ -15,18 +18,16 @@
         font-style: normal;
         font-weight: 400;
         color: $gray500;
+        // gap: 20px;
         > th {
             text-align: left;
             padding: 12px 12px;
         }
         .TableHead0 {
-            width: 30%;
+            flex: 1;
         }
         .TableHead1 {
-            width: 35%;
-        }
-        .TableHead2 {
-            width: 35%;
+            flex: 1;
         }
     }
 }
@@ -43,12 +44,17 @@
             padding: 12px 12px;
         }
         .Name {
-            width: 30%;
+            flex: 1;
         }
         .Tel {
-            width: 30%;
+            flex: 1;
             max-height: 100px;
-            overflow-y: auto;
+            overflow: hidden;
+            white-space: nowrap;
+            > div {
+                text-overflow: ellipsis;
+                max-width: 100px;
+            }
         }
     }
 }

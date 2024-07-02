@@ -26,9 +26,20 @@ const GrowthPage = () => {
         Number(courseId),
         parseInt(selectedRound)
       );
+      const modifiedData = res.map((comment:any) => {
+        if (comment.main.length > 20) {
+          return {
+            ...comment,
+            main: comment.main.substring(0, 20) + '...',
+          };
+        }
+        return comment;
+      });
+      console.log(modifiedData);
+      
       const noCommentList = await commentAPIList.getNoCommentStudentList(parseInt(selectedRound));
       setNoCommentData(noCommentList);
-      setGrowthData(res)
+      setGrowthData(modifiedData);
     } catch (error) {
       
     }

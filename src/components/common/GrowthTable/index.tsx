@@ -15,7 +15,7 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
 
   return (
     <div className={styles.Container}>
-      <table style={{ width: '100%' }}>
+      <table className={styles.table}>
         <thead className={styles.TableHead}>
           <tr>
             {tableHead.map((column, index) => (
@@ -34,7 +34,9 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
               }}
             >
               <td className={styles.Name}>{row.name}</td>
-              <td className={styles.Tel}>{row.main}</td>
+              <td className={styles.Tel}>
+                <div>{row.main}</div>
+              </td>
             </tr>
           ))}
           {/* 데이터가 없을경우 */}
