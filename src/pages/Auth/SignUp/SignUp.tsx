@@ -137,7 +137,7 @@ const SignUpPage = () => {
             className={styles.WrapInput}
             name="tel"
             onChange={handleChange}
-            disabled={isAuthCodeComplete}
+            disabled={isSendAuthCode}
           />
           <Button
             className={styles.WrapButton}
@@ -195,9 +195,7 @@ const SignUpPage = () => {
             비밀번호는 6자리 이상 입력해주세요.
           </div>
         )}
-      <div className={styles.InputLabel}>
-        기관
-      </div>
+      <div className={styles.InputLabel}>기관</div>
       <AgencySelect
         options={agencyData}
         placeholder="기관을 선택해주세요"
