@@ -7,13 +7,16 @@ export function validateForm(info: IRegister, phoneAuthorization: boolean) {
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(info.email);
   const isPasswordValid = info.password.length >= 6;
   const isPasswordConfirmValid = info.password === info.passwordConfirm;
-
+  console.log(info,"김인");
+  
+  const isAgencyValid = info.agencyId !== 0;
   return (
     isNameValid &&
     isTelValid &&
     isEmailValid &&
     isPasswordValid &&
     isPasswordConfirmValid &&
+    isAgencyValid &&
     phoneAuthorization
   );
 }

@@ -9,6 +9,8 @@ import CheckBox from '@/components/common/CheckBox/CheckBox';
 import { useRouter } from '@/hooks/useRouter';
 import { validateForm } from '@/utils/validate';
 import toast from 'react-hot-toast';
+import AgencySelect from '@/components/agencySelect';
+import agencyAPIList from '@/services/agency';
 
 const SignUpPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,10 +22,16 @@ const SignUpPage = () => {
     memberRole: 'STUDENT', // select default
     passwordConfirm: '',
     passwordMatch: false,
+    parentTel: '',
+    agencyId: 0,
   });
   const [isSendAuthCode, setIsSendAuthCode] = useState<boolean>(false);
   const [isLoading, setIsLoadin] = useState(false);
-
+  const [agencyData,setAgencyData] = useState([])
+  const [selectedAgency, setSelectedAgency] = useState<{
+    id:number;
+    name: string;
+  }>()
   const router = useRouter();
 
   /**
@@ -82,10 +90,32 @@ const SignUpPage = () => {
     }
   };
 
+  const getAgencyList = async () => {
+    try {
+      const res = await agencyAPIList.getAgencyList();
+      setAgencyData(res)
+      console.log(res);
+      
+    } catch (error) {
+      
+    }
+    
+  }
+
   useEffect(() => {
     inputRef.current?.focus();
+    getAgencyList()
   }, []);
 
+
+  useEffect(() => {
+    if (selectedAgency) {
+      setSignUpInfo((prev) => ({
+        ...prev,
+        agencyId: selectedAgency?.id,
+      }));
+    }
+  }, [selectedAgency]);
   const isFormValid = validateForm(signUpInfo, isAuthCodeComplete);
 
   return (
@@ -102,7 +132,7 @@ const SignUpPage = () => {
         <div className={styles.LabelWrap}>전화번호</div>
         <div className={styles.Flex}>
           <input
-            type="tel"
+            type="number"
             placeholder="(-) 제외하고 입력하세요"
             className={styles.WrapInput}
             name="tel"
@@ -157,11 +187,23 @@ const SignUpPage = () => {
           비밀번호가 일치하지 않습니다.
         </div>
       )}
-      {signUpInfo.password.length > 0 && signUpInfo.passwordConfirm.length >0 && signUpInfo.passwordConfirm.length < 6 && signUpInfo.password.length < 6 && (
-        <div className={styles.PasswordMissMatch}>
-          비밀번호는 6자리 이상 입력해주세요.
-        </div>
-      )}
+      {signUpInfo.password.length > 0 &&
+        signUpInfo.passwordConfirm.length > 0 &&
+        signUpInfo.passwordConfirm.length < 6 &&
+        signUpInfo.password.length < 6 && (
+          <div className={styles.PasswordMissMatch}>
+            비밀번호는 6자리 이상 입력해주세요.
+          </div>
+        )}
+      <div className={styles.InputLabel}>
+        기관
+      </div>
+      <AgencySelect
+        options={agencyData}
+        placeholder="기관을 선택해주세요"
+        selectedItem={selectedAgency}
+        setSelectItem={setSelectedAgency}
+      />
       <Input
         label="Email"
         name="email"
@@ -197,6 +239,13 @@ const SignUpPage = () => {
           선생님
         </CheckBox>
       </div>
+      <Input
+        label="보호자 전화번호 (선택사항)"
+        type="number"
+        placeholder="보호자 전화번호를 입력하세요"
+        name="parentTel"
+        onChange={handleChange}
+      />
       <Button
         buttonType={isFormValid ? 'Active' : 'Disabled'}
         className={styles.LoginButton}

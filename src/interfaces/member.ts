@@ -6,6 +6,8 @@ export interface IRegister {
   memberRole: 'STUDENT' | 'TEACHER';
   passwordConfirm: string;
   passwordMatch?: boolean;
+  parentTel?: string;
+  agencyId: number;
 }
 
 export interface IMainPageResponse {

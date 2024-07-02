@@ -1,8 +1,4 @@
 import RootLayout from '@/components/Layout/RootLayout/RootLayout';
-import DetailReservation from '@/pages/Reservation/Detail/DetailReservation';
-import ReservationIndexPage from '@/pages/Reservation/Index/Index';
-import ChatRoom from '@/pages/Chat/ChatRoom/ChatRoom';
-import CharRooms from '@/pages/Chat/ChatRooms/ChatRooms';
 import {
   createBrowserRouter,
   RouterProvider,

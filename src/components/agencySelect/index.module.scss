@@ -1,0 +1,80 @@
+.AllianceDropdownWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
+
+  > .AllianceInputFieldHeader {
+    display: flex;
+    padding-left: 16px;
+
+    > .AllianceInputFieldTitle {
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    > .AllianceInputFieldRequire {
+      color: #ff6a69;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
+  > .AllianceDropdownContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #EFEFEF;
+    position: relative;
+    cursor: pointer;
+
+    > .AllianceDropdownInput {
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+
+      &::placeholder {
+        color: #dbdee2;
+      }
+    }
+
+    > .AllianceDropdownArrow {
+      transition: transform 0.3s;
+      transform: rotate(90deg);
+      &.Active {
+        transform: rotate(-90deg);
+      }
+    }
+
+    > .AllianceDropdownDistrictWrapper {
+      position: absolute;
+      width: 100%;
+      top: 56px;
+      right: 0px;
+      z-index: 1;
+      padding: 8px 0px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: #fff;
+
+      > .AllianceDropdownDistrict {
+        padding: 8px 16px;
+        color: #000;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #e8e8e8;
+        }
+      }
+    }
+  }
+}

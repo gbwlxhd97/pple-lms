@@ -1,3 +1,4 @@
+import agencyAPIList from './agency';
 import attendAPIList from './attend';
 import authAPIList from './auth';
 import commentAPIList from './comment';
@@ -16,4 +17,5 @@ export default {
   commentAPIList,
   statisticsAPIList,
   surveyAPIList,
+  agencyAPIList
 };
