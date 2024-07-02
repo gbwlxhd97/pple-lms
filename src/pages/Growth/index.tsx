@@ -5,6 +5,8 @@ import Title from '@/components/common/Title/Title';
 import commentAPIList from '@/services/comment';
 import GrowthTable from '@/components/common/GrowthTable';
 import { ArrowRightIcon } from '@/icons/icon';
+import AgencySelect from '@/components/agencySelect';
+import NoCommentInput from '@/components/common/NoCommentInput';
 
 const GrowthPage = () => {
   const {courseId,courseSectionId} = useParams()
@@ -12,6 +14,11 @@ const GrowthPage = () => {
   const [selectedRound, setSelectedRound] = useState('1차시');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const rounds = Array.from({ length: 16 }, (_, i) => `${i + 1}차시`);
+  const [noCommentData, setNoCommentData] = useState([])
+  const [selectedNoCommentStudent, setSelectedNoCommentStudent] = useState({
+    name: '이름',
+    id: 0,
+  })
   const dropdownRef = useRef<HTMLDivElement>(null);
   const getGrowthData = async () => {
     try {
@@ -19,7 +26,8 @@ const GrowthPage = () => {
         Number(courseId),
         parseInt(selectedRound)
       );
-      console.log(res);
+      const noCommentList = await commentAPIList.getNoCommentStudentList(parseInt(selectedRound));
+      setNoCommentData(noCommentList);
       setGrowthData(res)
     } catch (error) {
       
@@ -64,6 +72,13 @@ const GrowthPage = () => {
           </div>
         )}
       </div>
+      <NoCommentInput
+        selectedItem={selectedNoCommentStudent}
+        fetchComments={getGrowthData}
+        setSelectedItem={setSelectedNoCommentStudent}
+        options={noCommentData}
+        couseSectionId={selectedRound}
+      />
       <GrowthTable tableHead={['이름', '내용']} tableBody={growthData} />
     </>
   );

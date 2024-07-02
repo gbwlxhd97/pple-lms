@@ -24,10 +24,16 @@ const getDetailCourseSectionComments = async (courseId:number,courseSectionId:nu
   return data
 }
 
+const getNoCommentStudentList = async (courseSectionId:number) => {
+  const {data} = await requestAPI().get(`/comment/${courseSectionId}/students/no-comment`)
+  return data
+}
+
 const commentAPIList = {
   getStudentComments,
   insertComment,
-  getDetailCourseSectionComments
+  getDetailCourseSectionComments,
+  getNoCommentStudentList
 };
 
 export default commentAPIList;

@@ -71,6 +71,9 @@ const Table5 = ({ tableBody, tableHead, fetchData }: Table5Props) => {
             </td>
           </tr>
         ))}
+        {tableBody.length === 0 && (
+          <tr className={'EmptyData'}>정보가 없습니다.</tr>
+        )}
       </tbody>
     </table>
   );

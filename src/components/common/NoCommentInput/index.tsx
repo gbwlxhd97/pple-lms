@@ -5,46 +5,58 @@ import { ArrowRightIcon } from '@/icons/icon';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import toast from 'react-hot-toast';
 
-type CommentInputProps = {
-  memberId: string;
+type NoCommentInputProps = {
+  selectedItem: any;
   fetchComments: any;
+  setSelectedItem: any;
+  options: Array<any>;
+  couseSectionId:string;
 };
 /**
  * 학생 통계 디테일 페이지에서 코맨트를 남기는 인풋
  * @param param0 
  * @returns 
  */
-const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
-  const [selectedRound, setSelectedRound] = useState('1차시');
+const NoCommentInput = ({
+  selectedItem,
+  fetchComments,
+  setSelectedItem,
+  options,
+  couseSectionId,
+}: NoCommentInputProps) => {
+  // const [selectedRound, setSelectedRound] = useState('1차시');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [comment, setComment] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const rounds = Array.from({ length: 16 }, (_, i) => `${i + 1}차시`);
+  // const rounds = Array.from({ length: 16 }, (_, i) => `${i + 1}차시`);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const selectRound = (round: string) => {
-    setSelectedRound(round);
+  const selectRound = (round: any) => {
+    setSelectedItem(round);
     setIsDropdownOpen(false);
   };
 
   const handleSumbmit = async () => {
-    const courseSectionId = parseInt(selectedRound);
-
     try {
+      console.log(selectedItem);
       const payload = {
-        courseSectionId: courseSectionId,
-        memberId: Number(memberId),
+        
+        courseSectionId: parseInt(couseSectionId),
+        memberId: Number(selectedItem.id),
         main: comment,
       };
       const res = await commentAPIList.insertComment(payload);
       console.log(res);
       if (res.status === 200) {
-        toast.success('코맨트 작성완료!')
+        toast.success('코맨트 작성완료!');
         fetchComments();
-        setSelectedRound('1차시');
+        setSelectedItem({
+          name: '이름',
+          id: 0,
+        });
         setComment('');
       }
     } catch (error) {
@@ -60,7 +72,7 @@ const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.leftSection} onClick={toggleDropdown}>
-        <span className={styles.round}>{selectedRound}</span>
+        <span className={styles.round}>{selectedItem.name}</span>
         <span
           className={`${styles.arrowDown} ${isDropdownOpen ? styles.ArrowUp : ''} `}
         >
@@ -68,24 +80,24 @@ const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
         </span>
         {isDropdownOpen && (
           <div className={styles.dropdown} ref={dropdownRef}>
-            {rounds.map((round) => (
+            {options.map((round) => (
               <div
                 key={round}
                 className={styles.dropdownItem}
                 onClick={() => selectRound(round)}
               >
-                {round}
+                {round.name}
               </div>
             ))}
           </div>
         )}
       </div>
-        <textarea
-          className={styles.textarea}
-          placeholder="코멘트를 입력해주세요"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
+      <textarea
+        className={styles.textarea}
+        placeholder="코멘트를 입력해주세요"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
       <button className={styles.sendButton} onClick={handleSumbmit}>
         <span className={styles.arrowUp}>↑</span>
       </button>
@@ -93,4 +105,4 @@ const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
   );
 };
 
-export default CommentInput;
+export default NoCommentInput;
