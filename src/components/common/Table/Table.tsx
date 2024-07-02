@@ -30,6 +30,10 @@ const Table = ({ tableBody, tableHead }: TableProps) => {
               </td>
             </tr>
           ))}
+          {/* 데이터가 없을경우 */}
+          {tableBody.length === 0 && (
+            <tr className={'EmptyData'}>정보가 없습니다.</tr>
+          )}
         </tbody>
       </table>
     </div>

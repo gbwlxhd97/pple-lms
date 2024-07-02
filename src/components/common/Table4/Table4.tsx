@@ -60,7 +60,7 @@ const Table4 = ({ tableBody, tableHead, path }: Table4Props) => {
               <td className={styles.TableNum}>{tableBody.length - rowIndex}</td>
               <td className={styles.TableTitle}>
                 <div
-                  className={`${styles.Title} ${row.isNew ? `${styles.isNew}` : ''}`}
+                  className={`${styles.Title} ${!row.userParticipated && isPastDue ? `${styles.isBold}` : ''}`}
                 >
                   {row.title}
                 </div>

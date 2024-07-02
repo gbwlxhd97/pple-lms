@@ -53,7 +53,7 @@
             .Title {
               display: flex;
               flex-direction: row;
-              &.isNew {
+              &.isBold {
                 font-weight: 700;
                 color:$black;
               }

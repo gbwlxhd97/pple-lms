@@ -2,19 +2,17 @@ import React from 'react';
 import styles from './index.module.scss';
 import { useRouter } from '@/hooks/useRouter';
 import { useParams } from 'react-router';
+import toast from 'react-hot-toast';
 
-type StudentTableProps = {
+type SurveyStudentTableProps = {
   tableHead: Array<string>;
   tableBody: Array<any>;
   path?: string;
 };
 
-const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
+const SurveyStudentTable = ({ tableHead, tableBody, path }: SurveyStudentTableProps) => {
   const router = useRouter();
   const { courseId } = useParams();
-  const goPushPath = (studentId: string,studentState:any) => {
-    router.push(`/course/${courseId}/statistics/detail/${studentId}`,{}, studentState);
-  };
   return (
     <div className={styles.TableContainer}>
       <table style={{ width: '100%' }}>
@@ -30,7 +28,7 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
             <tr
               key={index}
               onClick={() => {
-                goPushPath(row.id, row);
+                toast.error("개별 보기는 준비중인 기능입니다.")
               }}
             >
               <td>{tableBody.length - index}</td>
@@ -48,4 +46,4 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
   );
 };
 
-export default StudentTable;
+export default SurveyStudentTable;

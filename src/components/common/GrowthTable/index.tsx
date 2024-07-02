@@ -27,13 +27,20 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
         </thead>
         <tbody className={styles.TableBody}>
           {tableBody.map((row, rowIndex) => (
-            <tr key={rowIndex} onClick={() => {
-              onPushPage(1,row.memberId);
-            }}>
+            <tr
+              key={rowIndex}
+              onClick={() => {
+                onPushPage(1, row.memberId);
+              }}
+            >
               <td className={styles.Name}>{row.name}</td>
               <td className={styles.Tel}>{row.main}</td>
             </tr>
           ))}
+          {/* 데이터가 없을경우 */}
+          {tableBody.length === 0 && (
+            <tr className={'EmptyData'}>정보가 없습니다.</tr>
+          )}
         </tbody>
       </table>
     </div>

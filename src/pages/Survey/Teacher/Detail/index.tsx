@@ -16,6 +16,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import SurveyStudentTable from '@/components/common/SurveyStudentTable';
 const SurveyTeacherDetailPage = () => {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState<any>();
@@ -64,11 +65,16 @@ const SurveyTeacherDetailPage = () => {
             </div>
           </div>
           {isSummary && (
-            <div>
+            <div className={styles.SurveySpacing}>
               {surveyData?.questions?.map((item: any, i: number) => (
                 <>
-                  <div>Q. {i + 1}</div>
-                  <div>{item.text}</div>
+                  <span className={styles.QuestionTitle}>Q.{i + 1}</span>
+                  <span className={styles.ChartTextSpacingBottom}>
+                    {item.text}
+                  </span>
+                  <div className={styles.AnswerTotalCount}>
+                    답변 {item.answer_total}개
+                  </div>
                   {item?.questionType === 'SINGLE_CHOICE' &&
                     item?.choices?.length > 0 && (
                       <ResponsiveContainer width="100%" height={300}>
@@ -81,16 +87,26 @@ const SurveyTeacherDetailPage = () => {
                         </BarChart>
                       </ResponsiveContainer>
                     )}
+                  {item.questionType === 'SHORT_ANSWER' && (
+                    <div className={styles.ShortContainer}>
+                      {item.answers?.map((item: any, i: number) => (
+                        <div>{item}</div>
+                      ))}
+                    </div>
+                  )}
                 </>
               ))}
             </div>
           )}
 
           {!isSummary && (
-            <>
+            <div className={styles.SurveySpacing}>
               <Title title={`설문 참여 학생 (${students.length})`} />
-              <StudentTable tableHead={['iD', '이름']} tableBody={students} />
-            </>
+              <SurveyStudentTable
+                tableHead={['iD', '이름']}
+                tableBody={students}
+              />
+            </div>
           )}
         </div>
       </div>

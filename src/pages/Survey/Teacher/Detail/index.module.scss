@@ -63,3 +63,36 @@ h2 {
     border-bottom: 2px solid transparent;
   }
 }
+
+
+.SurveySpacing {
+  padding-top: 16px;
+}
+
+.ChartTextSpacingBottom {
+  padding-left: 12px;
+  display: inline-block;
+}
+
+.QuestionTitle {
+  color: $gray400;
+  font-size: 14px;
+  font-weight: 500
+}
+.AnswerTotalCount {
+  color: $pink100;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+
+.ShortContainer {
+  border-radius: 7px;
+  background: #FBFBFE;
+  padding: 12px;
+  > div {
+    border-bottom: 1px solid #F6F6F6;
+    padding: 12px 0;
+  }
+}
