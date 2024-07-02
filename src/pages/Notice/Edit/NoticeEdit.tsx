@@ -11,12 +11,14 @@ import useProfileStore from '@/stores/useProfileStore';
 import { useRouter } from '@/hooks/useRouter';
 import toast from 'react-hot-toast';
 import noticeAPIList from '@/services/notice';
+import NoticeSelect from '@/components/NoticeSelect';
 
 const NoticeEditPage = () => {
   const [noticeEdit, setNoticeEdit] = useState<INotice>({
     title: '',
     main: '',
     sendType: '',
+    category: '',
   });
 
   const {
@@ -24,7 +26,8 @@ const NoticeEditPage = () => {
   } = useProfileStore();
 
   const router = useRouter();
-
+  const [category,setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>()
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -42,6 +45,7 @@ const NoticeEditPage = () => {
         main: noticeEdit.main,
         toStudent: noticeEdit.sendType === 'STUDENT',
         toParent: noticeEdit.sendType === 'PARENTS',
+        category: noticeEdit.category
       };
 
       const response = await noticeAPIList.insertNotice(requestBody);
@@ -56,19 +60,39 @@ const NoticeEditPage = () => {
   };
 
   const isValidateButton =
-    noticeEdit.title.length > 0 && noticeEdit.main.length > 0;
+    noticeEdit.title.length > 0 && noticeEdit.main.length > 0 && noticeEdit.category.length > 0;
 
   /**
      * && 아래 주석은 학생, 부모님 유효성검사를 제외한다.
     // (noticeEdit.sendType === 'STUDENT' || noticeEdit.sendType === 'PARENTS');
      * 
      */
+
+  const getNoticeCategory = async () => {
+    try {
+      const res = await noticeAPIList.getNoticeCategory();
+      setCategory(res)
+    } catch (error) {
+      
+    }
+    
+  }
   useEffect(() => {
     if (role !== 'TEACHER') {
       toast.error('권한이 없습니다.');
       router.push('/main');
     }
+    getNoticeCategory()
   }, []);
+
+  useEffect(() => {
+    if(selectedCategory) {
+      setNoticeEdit((prev) => ({
+        ...prev,
+        category: selectedCategory
+      }))
+    }
+  },[selectedCategory])
 
   return (
     <>
@@ -87,6 +111,8 @@ const NoticeEditPage = () => {
           name="main"
           onChange={handleChange}
         />
+        공지사항 메뉴 선택
+        <NoticeSelect options={category} selectedItem={selectedCategory} setSelectItem={setSelectedCategory} placeholder='공지사항 메뉴를 선택하세요.'/>
         <div className={styles.FlexCheckBoxWrap}>
           <SingleCheckBox
             className={styles.CheckBox}

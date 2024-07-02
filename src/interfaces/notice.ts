@@ -2,6 +2,7 @@ export interface INotice {
   title: string;
   main: string;
   sendType: '' | 'STUDENT' | 'PARENTS';
+  category: string;
 }
 
 export interface INoticeList {

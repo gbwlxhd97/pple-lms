@@ -27,11 +27,17 @@ const deleteNotice = async (noticeId:number) => {
   return data
 }
 
+const getNoticeCategory = async () => {
+  const {data} = await requestAPI().get('/notice/notice/category')
+  return data
+}
+
 const noticeAPIList = {
   insertNotice,
   getNoticeList,
   getDetailNotice,
-  deleteNotice
+  deleteNotice,
+  getNoticeCategory
 };
 
 export default noticeAPIList
