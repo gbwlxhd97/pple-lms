@@ -12,7 +12,10 @@ import courseAPIList from '@/services/course';
 const GrowthPage = () => {
   const {courseId,courseSectionId} = useParams()
   const [growthData,setGrowthData] = useState([])
-  const [selectedCourseSectionId, setSelectedCourseSectionId] = useState(1);
+  const [selectedCourseSection, setSelectedCourseSection] = useState<{id:number,name:string}>({
+    id:0,
+    name: ''
+  });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [courseSectionList, setCourseSectionList] = useState([])
   const [noCommentData, setNoCommentData] = useState([])
@@ -25,7 +28,7 @@ const GrowthPage = () => {
     try {
       const res = await commentAPIList.getDetailCourseSectionComments(
         Number(courseId),
-        selectedCourseSectionId
+        selectedCourseSection?.id
       );
       const modifiedData = res.map((comment:any) => {
         if (comment.main.length > 20) {
@@ -37,7 +40,7 @@ const GrowthPage = () => {
         return comment;
       });
       const noCommentList = await commentAPIList.getNoCommentStudentList(
-        selectedCourseSectionId
+        selectedCourseSection.id
       );
       const courseSectionList = await courseAPIList.getShowCourseSection(Number(courseId))
       setCourseSectionList(courseSectionList);
@@ -53,20 +56,24 @@ const GrowthPage = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const selectRound = (courseSectionId: number) => {
-    setSelectedCourseSectionId(courseSectionId);
+  const selectRound = (courseSection: {id:number,name:string}) => {
+    setSelectedCourseSection(courseSection);
     setIsDropdownOpen(false);
   };
 
   useEffect(() => {
     getGrowthData();
-  }, [selectedCourseSectionId]);
+  }, [selectedCourseSection]);
 
   return (
     <>
       <Title title="성장기록부" />
       <div className={styles.leftSection} onClick={toggleDropdown}>
-        <span className={styles.round}>{selectedCourseSectionId}차시</span>
+        <span className={styles.round}>
+          {selectedCourseSection.name
+            ? selectedCourseSection.name
+            : '차시를 선택하세요.'}
+        </span>
         <span
           className={`${styles.arrowDown} ${isDropdownOpen ? styles.ArrowUp : ''} `}
         >
@@ -78,7 +85,7 @@ const GrowthPage = () => {
               <div
                 key={round}
                 className={styles.dropdownItem}
-                onClick={() => selectRound(round.id)}
+                onClick={() => selectRound(round)}
               >
                 {round.name}
               </div>
@@ -86,13 +93,17 @@ const GrowthPage = () => {
           </div>
         )}
       </div>
-      <NoCommentInput
-        selectedItem={selectedNoCommentStudent}
-        fetchComments={getGrowthData}
-        setSelectedItem={setSelectedNoCommentStudent}
-        options={noCommentData}
-        couseSectionId={selectedCourseSectionId}
-      />
+      {selectedCourseSection.name &&
+        noCommentData.length > 0 &&(
+          <NoCommentInput
+            selectedItem={selectedNoCommentStudent}
+            fetchComments={getGrowthData}
+            setSelectedItem={setSelectedNoCommentStudent}
+            options={noCommentData}
+            couseSectionId={selectedCourseSection.id}
+          />
+        )}
+
       <GrowthTable tableHead={['이름', '내용']} tableBody={growthData} />
     </>
   );

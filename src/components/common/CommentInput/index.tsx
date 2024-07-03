@@ -20,7 +20,13 @@ const CommentInput = ({
   fetchComments,
   options,
 }: CommentInputProps) => {
-  const [selectedCourseSectionId, setSelectedCourseSectionId] = useState(1);
+  const [selectedCourseSection, setSelectedCourseSection] = useState<{
+    id: number;
+    name: string;
+  }>({
+    id: 0,
+    name: '',
+  });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [comment, setComment] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -29,14 +35,23 @@ const CommentInput = ({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-   const selectRound = (courseSectionId: number) => {
-     setSelectedCourseSectionId(courseSectionId);
-     setIsDropdownOpen(false);
-   };
+    const selectRound = (courseSection: { id: number; name: string }) => {
+      setSelectedCourseSection(courseSection);
+      setIsDropdownOpen(false);
+    };
 
   const handleSumbmit = async () => {
-    const courseSectionId = selectedCourseSectionId;
-
+    const courseSectionId = selectedCourseSection.id;
+    // 차시 선택안하고 버튼 눌렀을 떄
+    if (courseSectionId === 0 ) {
+      toast.error("차시를 선택해주세요!")
+      return
+    }
+      if (comment.length === 0) {
+        // 텍스트 입력안하고 버튼 눌렀을 때
+        toast.error('텍스트를 입력해주세요!');
+        return;
+      }
     try {
       const payload = {
         courseSectionId: courseSectionId,
@@ -63,7 +78,11 @@ const CommentInput = ({
   return (
     <div className={styles.container}>
       <div className={styles.leftSection} onClick={toggleDropdown}>
-        <span className={styles.round}>{selectedCourseSectionId}차시</span>
+        <span className={styles.round}>
+          {selectedCourseSection.name
+            ? selectedCourseSection.name
+            : '차시를 선택하세요.'}
+        </span>
         <span
           className={`${styles.arrowDown} ${isDropdownOpen ? styles.ArrowUp : ''} `}
         >
@@ -75,7 +94,7 @@ const CommentInput = ({
               <div
                 key={round}
                 className={styles.dropdownItem}
-                onClick={() => selectRound(round.id)}
+                onClick={() => selectRound(round)}
               >
                 {round.name}
               </div>

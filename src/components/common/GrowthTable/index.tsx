@@ -1,5 +1,6 @@
 import { useRouter } from '@/hooks/useRouter';
 import styles from './index.module.scss';
+import { useParams } from 'react-router';
 
 interface Table5Props {
   tableHead: string[]; // 테이블의 각 열 제목
@@ -8,8 +9,10 @@ interface Table5Props {
 
 const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
   const router = useRouter();
-
-  const onPushPage = (courseId:number,memberId: number) => {
+  const {courseId} = useParams()
+  console.log(courseId,"zhtm");
+  
+  const onPushPage = (memberId: number) => {
     router.push(`/course/${courseId}/statistics/detail/${memberId}`);
   }
 
@@ -30,7 +33,7 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
             <tr
               key={rowIndex}
               onClick={() => {
-                onPushPage(1, row.memberId);
+                onPushPage(row.memberId);
               }}
             >
               <td className={styles.Name}>{row.name}</td>

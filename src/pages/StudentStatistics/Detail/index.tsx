@@ -69,7 +69,7 @@ const StudentStatisticsDetailPage = () => {
       <div className={styles.CommentWrap}>
         {commentData.map((comment, index) => (
           <div className={styles.CommentCard}>
-            <span>{comment.courseSectionId}차시 - </span>
+            <span>{comment.title} - </span>
             {comment.main}
           </div>
         ))}

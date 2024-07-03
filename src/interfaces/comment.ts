@@ -6,4 +6,5 @@ export interface IComments {
   memberId: number;
   name: string;
   writerId: number;
+  title:string;
 }

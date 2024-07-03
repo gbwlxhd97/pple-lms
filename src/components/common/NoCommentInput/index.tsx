@@ -24,11 +24,9 @@ const NoCommentInput = ({
   options,
   couseSectionId,
 }: NoCommentInputProps) => {
-  // const [selectedRound, setSelectedRound] = useState('1차시');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [comment, setComment] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
-  // const rounds = Array.from({ length: 16 }, (_, i) => `${i + 1}차시`);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -42,6 +40,15 @@ const NoCommentInput = ({
   const handleSumbmit = async () => {
     try {
       console.log(selectedItem);
+      if (Number(selectedItem.id) === 0) {
+        toast.error('학생을 선택해주세요!');
+        return;
+      }
+      if (comment.length === 0) {
+        // 텍스트 입력안하고 버튼 눌렀을 때
+        toast.error('텍스트를 입력해주세요!');
+        return;
+      }
       const payload = {
         
         courseSectionId: couseSectionId,
