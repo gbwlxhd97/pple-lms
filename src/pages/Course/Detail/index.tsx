@@ -114,7 +114,7 @@ const CourseDetailPage = () => {
                 ))}
               </Pie>
               <text
-                x="13%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                x="17%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
                 y="32%"
                 textAnchor="middle"
                 dominantBaseline="middle"
@@ -123,6 +123,8 @@ const CourseDetailPage = () => {
                 {`${totalRateObject.statisticsRate.toFixed(2)}%`}
               </text>
               <Tooltip />
+              {/* 
+                TODO: Legend컴포넌트는 위치 조정 해결하고 코맨트를 해제한다.
               <Legend
                 layout="vertical"
                 align="right"
@@ -133,7 +135,7 @@ const CourseDetailPage = () => {
                     {` (${entry.payload.name}) ${entry.payload.value}`}
                   </span>
                 )}
-              />
+              /> */}
               <Pie
                 dataKey="value"
                 data={assignmentPie}
@@ -151,7 +153,7 @@ const CourseDetailPage = () => {
                 ))}
               </Pie>
               <text
-                x="13%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                x="17%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
                 y="79%"
                 textAnchor="middle"
                 dominantBaseline="middle"
