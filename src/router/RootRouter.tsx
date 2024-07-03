@@ -87,7 +87,7 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="course/reference/:id"
+          path="course/reference/:courseId"
           element={
             <ProtectedRoute>
               <CourseReferencePage />
@@ -95,7 +95,7 @@ export const RootRouter = () => {
           }
         />
         <Route
-          path="course/reference/detail/:id"
+          path="course/reference/detail/:courseId"
           element={
             <ProtectedRoute>
               <CourseReferenceDetailPage />

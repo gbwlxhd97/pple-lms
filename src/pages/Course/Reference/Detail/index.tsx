@@ -11,10 +11,10 @@ import toast from 'react-hot-toast';
 import useProfileStore from '@/stores/useProfileStore';
 
 const CourseReferenceDetailPage = () => {
-  const { id } = useParams();
+  const { courseId } = useParams();
   const [detailInfo, setDetailInfo] = useState<IReferenceDetail>();
   const getReferDetail = async () => {
-    const res = await courseAPIList.getCourseReferenceDetail(Number(id));
+    const res = await courseAPIList.getCourseReferenceDetail(Number(courseId));
     console.log(res);
     setDetailInfo(res);
   };
@@ -30,7 +30,7 @@ const CourseReferenceDetailPage = () => {
   const deleteNote = async () => {
     if (confirm('삭제 하시겠습니까? (추후 예쁘게 변경예정..)')) {
       try {
-        const res = await courseAPIList.deleteCourseReference(Number(id));
+        const res = await courseAPIList.deleteCourseReference(Number(courseId));
         console.log(res);
         if (res) {
           toast.success('삭제 완료');

@@ -12,13 +12,13 @@ const CourseReferencePage = () => {
   const {
     profile: { role },
   } = useProfileStore();
-  const { id } = useParams();
+  const { courseId } = useParams();
   const [referenceList, setReferenceList] = useState<
     IReferenceList[] | undefined
   >();
   const getReferList = async () => {
     try {
-      const res = await courseAPIList.getCourseReferenceList(Number(id));
+      const res = await courseAPIList.getCourseReferenceList(Number(courseId));
       // isNew 필드 추가
       const updatedData = res.map((item: IReferenceList) => ({
         ...item,

@@ -23,6 +23,8 @@ type AsideProps = {
 const ASidebar = ({ children }: AsideProps) => {
   const [toggle, setToggle] = useState(false);
   const {courseId} = useParams()
+  const paramId = useParams()
+  
   const {
     profile: { name,role },
   } = useProfileStore();
@@ -55,6 +57,7 @@ const ASidebar = ({ children }: AsideProps) => {
           position: 'sticky',
           top: 0,
           right: 0,
+          zIndex:999999
         }}
       >
         <Sidebar
