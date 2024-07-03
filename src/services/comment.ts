@@ -18,7 +18,12 @@ const insertComment = async (requestBody: { courseSectionId : number, memberId: 
   const data = await requestAPI().post('/comment/comment',requestBody);
   return data;
 };
-
+/**
+ * 성장기록부 리스트
+ * @param courseId 
+ * @param courseSectionId 
+ * @returns 
+ */
 const getDetailCourseSectionComments = async (courseId:number,courseSectionId:number) => {
   const {data} = await requestAPI().get(`/comment/course/${courseId}/courseSections/${courseSectionId}/comments`)
   return data

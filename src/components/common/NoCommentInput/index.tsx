@@ -10,7 +10,7 @@ type NoCommentInputProps = {
   fetchComments: any;
   setSelectedItem: any;
   options: Array<any>;
-  couseSectionId:string;
+  couseSectionId:number;
 };
 /**
  * 학생 통계 디테일 페이지에서 코맨트를 남기는 인풋
@@ -44,7 +44,7 @@ const NoCommentInput = ({
       console.log(selectedItem);
       const payload = {
         
-        courseSectionId: parseInt(couseSectionId),
+        courseSectionId: couseSectionId,
         memberId: Number(selectedItem.id),
         main: comment,
       };
