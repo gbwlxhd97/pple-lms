@@ -8,6 +8,7 @@ import StudentInfoChart from '@/components/common/StudentInfoChart';
 import Button from '@/components/common/Button/Button';
 import CommentInput from '@/components/common/CommentInput';
 import { IComments } from '@/interfaces/comment';
+import courseAPIList from '@/services/course';
 
 
 const StudentStatisticsDetailPage = () => {
@@ -15,6 +16,7 @@ const StudentStatisticsDetailPage = () => {
   const [studentData, setStudentData] = useState<ITotalStudent | any>();
   const [isShowInput, setIsShowInput] = useState(false);
   const [commentData, setCommentData] = useState<Array<IComments>>([]);
+  const [courseSectionList, setCourseSectionList] = useState([]);
   const getCommentInfo = async () => {
     try {
       const res = await statisticsAPIList.getStudentDetailStatistics(
@@ -42,14 +44,22 @@ const StudentStatisticsDetailPage = () => {
     } catch (error) {
       
     }
-    
   }
 
+  const getCourseSectionList = async () => {
+    try {
+      const res = await courseAPIList.getShowCourseSection(Number(courseId))
+      setCourseSectionList(res);
+    } catch (error) {
+      
+    }
+  }
 
 
   useEffect(() => {
     getCommentInfo();
     getDetailComments()
+    getCourseSectionList();
   }, []);
   return (
     <>
@@ -78,6 +88,7 @@ const StudentStatisticsDetailPage = () => {
           <CommentInput
             memberId={studentData.studentId}
             fetchComments={getDetailComments}
+            options={courseSectionList}
           />
         </>
       )}

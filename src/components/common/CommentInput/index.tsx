@@ -8,30 +8,34 @@ import toast from 'react-hot-toast';
 type CommentInputProps = {
   memberId: string;
   fetchComments: any;
+  options: Array<any>;
 };
 /**
  * 학생 통계 디테일 페이지에서 코맨트를 남기는 인풋
  * @param param0 
  * @returns 
  */
-const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
-  const [selectedRound, setSelectedRound] = useState('1차시');
+const CommentInput = ({
+  memberId,
+  fetchComments,
+  options,
+}: CommentInputProps) => {
+  const [selectedCourseSectionId, setSelectedCourseSectionId] = useState(1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [comment, setComment] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const rounds = Array.from({ length: 16 }, (_, i) => `${i + 1}차시`);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const selectRound = (round: string) => {
-    setSelectedRound(round);
-    setIsDropdownOpen(false);
-  };
+   const selectRound = (courseSectionId: number) => {
+     setSelectedCourseSectionId(courseSectionId);
+     setIsDropdownOpen(false);
+   };
 
   const handleSumbmit = async () => {
-    const courseSectionId = parseInt(selectedRound);
+    const courseSectionId = selectedCourseSectionId;
 
     try {
       const payload = {
@@ -42,9 +46,8 @@ const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
       const res = await commentAPIList.insertComment(payload);
       console.log(res);
       if (res.status === 200) {
-        toast.success('코맨트 작성완료!')
+        toast.success('코맨트 작성완료!');
         fetchComments();
-        setSelectedRound('1차시');
         setComment('');
       }
     } catch (error) {
@@ -60,7 +63,7 @@ const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.leftSection} onClick={toggleDropdown}>
-        <span className={styles.round}>{selectedRound}</span>
+        <span className={styles.round}>{selectedCourseSectionId}차시</span>
         <span
           className={`${styles.arrowDown} ${isDropdownOpen ? styles.ArrowUp : ''} `}
         >
@@ -68,24 +71,24 @@ const CommentInput = ({ memberId, fetchComments }: CommentInputProps) => {
         </span>
         {isDropdownOpen && (
           <div className={styles.dropdown} ref={dropdownRef}>
-            {rounds.map((round) => (
+            {options.map((round) => (
               <div
                 key={round}
                 className={styles.dropdownItem}
-                onClick={() => selectRound(round)}
+                onClick={() => selectRound(round.id)}
               >
-                {round}
+                {round.name}
               </div>
             ))}
           </div>
         )}
       </div>
-        <textarea
-          className={styles.textarea}
-          placeholder="코멘트를 입력해주세요"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
+      <textarea
+        className={styles.textarea}
+        placeholder="코멘트를 입력해주세요"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
       <button className={styles.sendButton} onClick={handleSumbmit}>
         <span className={styles.arrowUp}>↑</span>
       </button>
