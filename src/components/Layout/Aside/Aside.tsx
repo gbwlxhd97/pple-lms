@@ -13,7 +13,7 @@ import { loadingToast } from '@/utils';
 import useProfileStore from '@/stores/useProfileStore';
 import Cookies from 'js-cookie';
 import { SESSION_KEY } from '@/utils/constant';
-import { ClassRegistIcon, ReferenceIcon, SurveyIcon, WhiteHomeIcon } from '@/icons/icon';
+import { ClassRegistIcon, NoticeIcon, ReferenceIcon, SurveyIcon, WhiteHomeIcon } from '@/icons/icon';
 import { useParams } from 'react-router';
 
 type AsideProps = {
@@ -57,7 +57,7 @@ const ASidebar = ({ children }: AsideProps) => {
           position: 'sticky',
           top: 0,
           right: 0,
-          zIndex:999999
+          zIndex: 999999,
         }}
       >
         <Sidebar
@@ -110,6 +110,15 @@ const ASidebar = ({ children }: AsideProps) => {
                   <span>메인페이지</span>{' '}
                   <WhiteHomeIcon width={18} height={18} />
                 </li>
+                {courseId && (
+                  <li
+                    onClick={() => {
+                      routeThenCloseAside(`/course/${courseId}/notice`);
+                    }}
+                  >
+                    <span>공지사항</span> <NoticeIcon width={18} height={18} />
+                  </li>
+                )}
                 {courseId && (
                   <li
                     onClick={() => {
