@@ -12,7 +12,12 @@ type SurveyStudentTableProps = {
 
 const SurveyStudentTable = ({ tableHead, tableBody, path }: SurveyStudentTableProps) => {
   const router = useRouter();
-  const { courseId } = useParams();
+  const { courseId,surveyId } = useParams();
+  const onPushShowSurveyPage = (memberId:number) => {
+    router.push(
+      `/course/${courseId}/survey/${surveyId}/show-survey/${memberId}`
+    );
+  }
   return (
     <div className={styles.TableContainer}>
       <table style={{ width: '100%' }}>
@@ -28,6 +33,7 @@ const SurveyStudentTable = ({ tableHead, tableBody, path }: SurveyStudentTablePr
             <tr
               key={index}
               onClick={() => {
+                // onPushShowSurveyPage(row.id);
                 toast.error("개별 보기는 준비중인 기능입니다.")
               }}
             >

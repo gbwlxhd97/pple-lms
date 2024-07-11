@@ -57,9 +57,9 @@ const SignInPage = () => {
           textAlign: 'center',
         }}
       >
-        AI&SW
+        피플에듀
         <br />
-        새싹인재 양성교육
+        CMS 시스템
       </h2>
       <Input
         type="tel"

@@ -76,7 +76,7 @@ const getSurveyStudentList = async (surveyId: number) => {
  * @returns 
  */
 const getSurveyDetailStudent = async (surveyId: number,memberId: number) => {
-  const data = await requestAPI().get(`/surveys/${surveyId}/response/${memberId}`);
+  const {data} = await requestAPI().get(`/surveys/${surveyId}/response/${memberId}`);
   return data;
 };
 

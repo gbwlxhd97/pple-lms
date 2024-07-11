@@ -1,0 +1,43 @@
+@import '@/styles/theme.scss';
+
+.DetailContainer {
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+}
+  
+h2 {
+  font-size: 20px;
+  font-weight: 600; 
+}  
+
+.Date {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 5px 0;
+  width: 100%;
+  margin-top: 10px;
+  color: $gray300;
+}
+
+.InfoLabel {
+  margin-right: 10px;
+}
+
+.content {
+  font-size: 16px; 
+  font-style: normal;
+  font-weight: 400;
+  color: $gray300;
+}
+
+.Space {
+  height: 15px; 
+  background-color: $gray0;
+  margin: 20px 0 30px 0;
+}
+
+.SubmitButton {
+  width: 100%;
+  margin-top: 10px;
+}
