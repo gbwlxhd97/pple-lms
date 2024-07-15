@@ -33,8 +33,8 @@ const SurveyStudentTable = ({ tableHead, tableBody, path }: SurveyStudentTablePr
             <tr
               key={index}
               onClick={() => {
-                // onPushShowSurveyPage(row.id);
-                toast.error("개별 보기는 준비중인 기능입니다.")
+                onPushShowSurveyPage(row.id);
+                // toast.error("개별 보기는 준비중인 기능입니다.")
               }}
             >
               <td>{tableBody.length - index}</td>

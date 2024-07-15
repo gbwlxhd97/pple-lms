@@ -21,8 +21,16 @@ const ShowSurveyPage = () => {
     questions: [],
   });
   const getShowSurveyDetail = async () => {
-    const res = await surveyAPIList.getSurveyDetailStudent(Number(surveyId),Number(memberId));
-    console.log(res);
+    try {
+      const res = await surveyAPIList.getSurveyDetailStudent(
+        Number(surveyId),
+        Number(memberId)
+      );
+      console.log(res);
+      setSurveyData(res)
+    } catch (error) {
+      
+    }
     
   }
 
@@ -35,7 +43,7 @@ const ShowSurveyPage = () => {
         <div className={styles.SurveyDetail}>
           <h2>{surveyData?.title}</h2>
           <div className={styles.Date}>
-            <span className={styles.EndAt}>마감일 {surveyData?.endAt}</span>
+            <span className={styles.EndAt}>{surveyData?.description}</span>
           </div>
         </div>
       </div>
@@ -44,12 +52,29 @@ const ShowSurveyPage = () => {
         question.questionType === 'SINGLE_CHOICE' ||
         question.questionType === 'MULTIPLE_CHOICE' ? (
           <div key={question.id} className={styles.Survey}>
-            객관식
+            <MultipleChoicePage
+              questions={question}
+              choices={question.choices}
+              index={idx}
+              setAnswer={() => {}}
+              isReadOnly={true}
+            />
             <div className={styles.Space}></div>
           </div>
         ) : (
           <div key={question.id} className={styles.Survey}>
-            주관식
+            {question.questionType === 'SHORT_ANSWER' && (
+              <>
+                <p className={styles.Question}>
+                  Q{idx + 1}. {question.text}
+                </p>
+                <div className={styles.ShortContainer}>
+                  {question.choices?.map((item: any, i: number) => (
+                    <div>A: {item.text}</div>
+                  ))}
+                </div>
+              </>
+            )}
             <div className={styles.Space}></div>
           </div>
         )

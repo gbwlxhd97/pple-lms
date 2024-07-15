@@ -41,3 +41,17 @@ h2 {
   width: 100%;
   margin-top: 10px;
 }
+
+.ShortContainer {
+  border-radius: 7px;
+  background: #FBFBFE;
+  padding: 12px;
+  > div {
+    border-bottom: 1px solid #F6F6F6;
+    padding: 12px 0;
+  }
+}
+
+.Question {
+    color: $gray800;
+}
