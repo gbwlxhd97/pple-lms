@@ -19,6 +19,7 @@ const ShowSurveyPage = () => {
     description: '',
     endAt: '',
     questions: [],
+    name: ''
   });
   const getShowSurveyDetail = async () => {
     try {
@@ -41,9 +42,9 @@ const ShowSurveyPage = () => {
     <>
       <div className={styles.DetailContainer}>
         <div className={styles.SurveyDetail}>
-          <h2>{surveyData?.title}</h2>
+          <h2>{surveyData?.name}</h2>
           <div className={styles.Date}>
-            <span className={styles.EndAt}>{surveyData?.description}</span>
+            <span className={styles.EndAt}>{surveyData?.title}</span>
           </div>
         </div>
       </div>

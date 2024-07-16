@@ -67,8 +67,8 @@ const SurveyTeacherDetailPage = () => {
           {isSummary && (
             <div className={styles.SurveySpacing}>
               {surveyData?.questions?.map((item: any, i: number) => (
-                <>
-                  <span className={styles.QuestionTitle}>Q.{i + 1}</span>
+                <div className={styles.AnswerWrapper}>
+                  <span className={styles.QuestionTitle}>Q{i + 1}.</span>
                   <span className={styles.ChartTextSpacingBottom}>
                     {item.text}
                   </span>
@@ -87,14 +87,14 @@ const SurveyTeacherDetailPage = () => {
                         </BarChart>
                       </ResponsiveContainer>
                     )}
-                  {item.questionType === 'SHORT_ANSWER' && (
+                  {item.questionType === 'SHORT_ANSWER' && item.answer && (
                     <div className={styles.ShortContainer}>
                       {item.answers?.map((item: any, i: number) => (
                         <div>{item}</div>
                       ))}
                     </div>
                   )}
-                </>
+                </div>
               ))}
             </div>
           )}
