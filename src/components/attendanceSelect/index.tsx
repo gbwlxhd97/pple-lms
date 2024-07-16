@@ -41,7 +41,7 @@ const AllianceDropdown = ({
       >
         <input
           className={styles.AllianceDropdownInput}
-          value={region?.title}
+          value={region?.title + ' ' + region.startAt.split('T')[0]}
           placeholder="차시를 선택해주세요"
           readOnly
           ref={inputRef}
@@ -62,7 +62,7 @@ const AllianceDropdown = ({
                 }}
                 className={styles.AllianceDropdownDistrict}
               >
-                {district.title}
+                {district.title + ' ' + district.startAt.split('T')[0]}
               </div>
             ))}
           </div>
