@@ -18,22 +18,8 @@ import { useRouter } from '@/hooks/useRouter';
 
 const SurveyEditPage: React.FC = () => {
   const { courseId } = useParams();
-  const router = useRouter()
-  const [questions, setQuestions] = useState([
-    {
-      id: 1,
-      num: 1,
-      text: '',
-      questionType: '',
-      choices: [
-        {
-          id: 1,
-          num: 1,
-          text: '',
-        },
-      ],
-    },
-  ]);
+  const router = useRouter();
+  const [questions, setQuestions] = useState<any[]>([]);
   const [endValues, setEndValues] = useState('');
   const [surveyInfo, setSurveyInfo] = useState({
     title: '',
@@ -43,6 +29,7 @@ const SurveyEditPage: React.FC = () => {
     questions: questions,
   });
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+  const [isTemplateApplied, setIsTemplateApplied] = useState(false);
 
   useEffect(() => {
     setSurveyInfo((prevSurveyInfo) => ({
@@ -71,7 +58,7 @@ const SurveyEditPage: React.FC = () => {
         (question) =>
           question.questionType === 'SHORT_ANSWER' ||
           (question.text.trim().length > 0 &&
-            question.choices.every((choice) => choice.text.trim().length > 0))
+            question.choices.every((choice:any) => choice.text.trim().length > 0))
       )
     ) {
       setIsSubmitEnabled(true);
@@ -80,9 +67,8 @@ const SurveyEditPage: React.FC = () => {
     }
   };
 
-  // 새로운 질문을 추가하는 함수
   const addQuestion = () => {
-    const newQuestion: any = {
+    const newQuestion = {
       id: questions.length + 1,
       num: questions.length + 1,
       text: '',
@@ -129,7 +115,7 @@ const SurveyEditPage: React.FC = () => {
           return {
             ...question,
             choices: question.choices.filter(
-              (choice) => choice.id !== choiceId
+              (choice: any) => choice.id !== choiceId
             ),
           };
         }
@@ -155,7 +141,7 @@ const SurveyEditPage: React.FC = () => {
   ) => {
     const newQuestions = questions.map((question) => {
       if (question.id === questionId) {
-        const newChoices = question.choices.map((choice) => {
+        const newChoices = question.choices.map((choice: any) => {
           if (choice.id === choiceId) {
             return { ...choice, [event.target.name]: event.target.value };
           }
@@ -169,7 +155,7 @@ const SurveyEditPage: React.FC = () => {
   };
 
   const handleQuestionDelete = (questionId: number) => {
-    if (questionId === 1) {
+    if (questions.length === 1) {
       toast.error('최소 질문은 한 개 이상 있어야합니다.');
       return;
     }
@@ -209,12 +195,12 @@ const SurveyEditPage: React.FC = () => {
         surveyInfo
       );
       console.log(res);
-      if(res) {
-        toast.success("등록이 완료되었습니다.")
-        router.push(`/course/${courseId}/survey`)
+      if (res) {
+        toast.success('등록이 완료되었습니다.');
+        router.push(`/course/${courseId}/survey`);
       }
     } catch (error) {
-      
+      console.error(error);
     }
   };
 
@@ -223,7 +209,57 @@ const SurveyEditPage: React.FC = () => {
       ...prev,
       anonymous: isAnonymous,
     }));
-  }
+  };
+
+  // 템플릿 데이터 정의
+  const templateQuestions = [
+    {
+      id: 1,
+      num: 1,
+      text: '수업만족도를 알려주세요 (5점 만점)',
+      questionType: 'SINGLE_CHOICE',
+      choices: [
+        { id: 1, num: 1, text: '5점' },
+        { id: 2, num: 2, text: '4점' },
+        { id: 3, num: 3, text: '3점' },
+        { id: 4, num: 4, text: '2점' },
+        { id: 5, num: 5, text: '1점' },
+      ],
+    },
+    {
+      id: 2,
+      num: 2,
+      text: '위 점수를 준 이유를 설명해주세요',
+      questionType: 'SHORT_ANSWER',
+      choices: [],
+    },
+    {
+      id: 3,
+      num: 3,
+      text: '다음 시간 먹고 싶은 간식을 말씀해주세요!',
+      questionType: 'SHORT_ANSWER',
+      choices: [],
+    },
+    {
+      id: 4,
+      num: 4,
+      text: '건의/불만/제보 사항이 있다면 말씀해주세요!',
+      questionType: 'SHORT_ANSWER',
+      choices: [],
+    },
+  ];
+
+  const applyTemplate = () => {
+    // 템플릿 질문이 1번부터 시작하도록 기존 질문 번호 조정
+    const adjustedQuestions = questions.map((question, index) => ({
+      ...question,
+      num: templateQuestions.length + index + 1,
+      id: templateQuestions.length + index + 1,
+    }));
+    // 템플릿 질문 추가
+    setQuestions([...templateQuestions, ...adjustedQuestions]);
+    setIsTemplateApplied(true); // 템플릿 버튼 비활성화
+  };
 
   return (
     <>
@@ -254,14 +290,12 @@ const SurveyEditPage: React.FC = () => {
         <div key={question.id}>
           <div className={styles.Flex}>
             <div>질문 {idx + 1}</div>
-            {/* <div> */}
             <TrashIcon
               className={styles.RightValue}
               width={24}
               height={24}
               onClick={() => handleQuestionDelete(question.id)}
             />
-            {/* </div> */}
           </div>
           <Select
             placeholder="객관식"
@@ -273,9 +307,9 @@ const SurveyEditPage: React.FC = () => {
                   ? '객관식'
                   : ''
             }
-            setValues={(value: any) => {
-              handleQuestionTypeChange(question.id, value);
-            }}
+            setValues={(value: any) =>
+              handleQuestionTypeChange(question.id, value)
+            }
           />
           <Input
             placeholder="질문을 입력해주세요"
@@ -284,14 +318,11 @@ const SurveyEditPage: React.FC = () => {
             value={question.text}
             onChange={(e) => handleQuestionChange(question.id, e)}
           />
-          {/* <CheckBox checkBoxType="Active">복수응답</CheckBox> */}
           {question.questionType === 'SINGLE_CHOICE' &&
-            question.choices.map((choice, index) => (
+            question.choices.map((choice: any, index:number) => (
               <OptionInput
                 placeholder={`옵션${index + 1}`}
-                onClickDelete={() => {
-                  deleteOption(question.id, choice.id);
-                }}
+                onClickDelete={() => deleteOption(question.id, choice.id)}
                 onChange={(e) => handleChoiceChange(question.id, choice.id, e)}
                 name="text"
                 value={choice.text}
@@ -300,9 +331,7 @@ const SurveyEditPage: React.FC = () => {
           {question.questionType === 'SINGLE_CHOICE' && (
             <div
               className={styles.AddOptionText}
-              onClick={() => {
-                addOption(question.id);
-              }}
+              onClick={() => addOption(question.id)}
             >
               + 옵션 추가
             </div>
@@ -316,21 +345,24 @@ const SurveyEditPage: React.FC = () => {
       >
         질문 추가
       </Button>
+      <Button
+        buttonType={isTemplateApplied ? 'Disabled' : 'Primary'}
+        onClick={applyTemplate}
+        className={styles.AddButton}
+      >
+        템플릿 적용
+      </Button>
       <div className="Space"></div>
       <div className={styles.FlexAnonymous}>
         <SingleCheckBox
           checkBoxType={surveyInfo.anonymous ? 'Active' : 'Default'}
-          onClick={() => {
-            handleAnonymous(true);
-          }}
+          onClick={() => handleAnonymous(true)}
         >
           익명으로 받기
         </SingleCheckBox>
         <SingleCheckBox
           checkBoxType={surveyInfo.anonymous ? 'Default' : 'Active'}
-          onClick={() => {
-            handleAnonymous(false);
-          }}
+          onClick={() => handleAnonymous(false)}
         >
           실명으로 받기
         </SingleCheckBox>

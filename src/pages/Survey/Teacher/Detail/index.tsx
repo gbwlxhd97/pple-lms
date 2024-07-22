@@ -87,7 +87,7 @@ const SurveyTeacherDetailPage = () => {
                         </BarChart>
                       </ResponsiveContainer>
                     )}
-                  {item.questionType === 'SHORT_ANSWER' && item.answer && (
+                  {item.questionType === 'SHORT_ANSWER' && item.answers && (
                     <div className={styles.ShortContainer}>
                       {item.answers?.map((item: any, i: number) => (
                         <div>{item}</div>
