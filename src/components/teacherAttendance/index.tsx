@@ -45,10 +45,10 @@ const TeacherAttendance = ({
   };
 
   useEffect(() => {
-    if (courseId) {
+    if (studySession?.courseSectionId) {
       // getAttendInfo();
-      console.log(studySession,"스터디세션");
-      
+      console.log(studySession, '스터디세션');
+
       getCourse();
     }
   }, [studySession]);
@@ -56,9 +56,10 @@ const TeacherAttendance = ({
   const setStartCourse = async () => {
     try {
       const res = await attendAPIList.startAttendTimer(
-        courseId
+        studySession?.courseSectionId
       );
       setAttendCode(res.attendCode);
+      getCourse();
       console.log(res, '수업시작번호');
     } catch (error: any) {
       console.log(error);
@@ -69,7 +70,7 @@ const TeacherAttendance = ({
   const endCourse = async () => {
     setIsLoading(true);
     try {
-      const res = await attendAPIList.endAttend(Number(courseId));
+      const res = await attendAPIList.endAttend(studySession?.courseSectionId);
       setIsEndSection(true);
       getCourse();
     } catch (error) {
@@ -95,7 +96,13 @@ const TeacherAttendance = ({
             수업 시작하기
           </Button>
           <Button
-            buttonType={isEndSection ? 'Disabled' : 'Abled'}
+            buttonType={
+              isEndSection
+                ? 'Disabled'
+                : attendCode === 0
+                  ? 'Disabled'
+                  : 'Abled'
+            }
             onClick={endCourse}
             isLoading={isLoading}
           >
