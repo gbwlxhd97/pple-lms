@@ -4,7 +4,7 @@ import { useRouter } from '@/hooks/useRouter';
 import courseAPIList from '@/services/course';
 import useCourseNameStore from '@/stores/useCourseName';
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import styles from './index.module.scss';
 import Title from '@/components/common/Title/Title';
 import noticeAPIList from '@/services/notice';
@@ -23,7 +23,7 @@ import { ITotalStudent } from '@/interfaces/statistics';
 
 
 const CourseDetailPage = () => {
-  const { state } = useLocation();
+  const {courseId} = useParams()
   const router = useRouter();
   const { setTitle } = useCourseNameStore();
   const {
@@ -32,13 +32,12 @@ const CourseDetailPage = () => {
   const [courseData, setCourseData] = useState<any>();
   const [statisticsData, setStatisticsData] = useState<ITotalStudent>();
   const onPushAttendPage = () => {
-    router.push('/attendance', {}, { state });
+    router.push(`/attendance/${courseId}`);
   };
-
   // 해당 과목 공지사항 및 과목명 반환
   const getCourseDatas = async () => {
     try {
-      const res = await courseAPIList.getCoursePage(state.id);
+      const res = await courseAPIList.getCoursePage(String(courseId));
       console.log(res);
       setTitle(res.courseName);
       setCourseData(res);
@@ -47,12 +46,12 @@ const CourseDetailPage = () => {
 
   // 해당 과목 차시 데이터 생성
   const getCourseSection = async () => {
-    const res = await courseAPIList.getCourseSection(state.id);
+    const res = await courseAPIList.getCourseSection(String(courseId));
   };
 
   // 전체 학생 통계
   const getTotalStatistics = async () => {
-    const res = await statisticsAPIList.getTotalStudentStatistics(state.id)
+    const res = await statisticsAPIList.getTotalStudentStatistics(Number(courseId))
     console.log(res,"출석정보");
     setStatisticsData(res);
     
@@ -165,7 +164,7 @@ const CourseDetailPage = () => {
           </div>
         </>
       )}
-      <div className={styles.CommonWrapper}>
+      {/* <div className={styles.CommonWrapper}>
         <Title title="출석정보" />
         <Button
           buttonType="Active"
@@ -174,14 +173,14 @@ const CourseDetailPage = () => {
         >
           출석정보확인
         </Button>
-      </div>
+      </div> */}
       {/* <div className={styles.CommonWrapper}>
         <Title title="강의자료" />
         <Button
           buttonType="Active"
           className={styles.AttendButton}
           onClick={() => {
-            router.push(`/course/reference/${state.id}`);
+            router.push(`/course/reference/${courseId}`);
           }}
         >
           강의자료확인
@@ -193,7 +192,7 @@ const CourseDetailPage = () => {
           buttonType="Active"
           className={styles.AttendButton}
           onClick={() => {
-            router.push(`/course/${state.id}/survey`);
+            router.push(`/course/${courseId}/survey`);
           }}
         >
           설 문

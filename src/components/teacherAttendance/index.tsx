@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import AllianceDropdown from '../attendanceSelect';
 import Button from '../common/Button/Button';
 import styles from './index.module.scss';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import attendAPIList from '@/services/attend';
 import { ISection } from '@/interfaces/section';
 import TimeCircleIcon from '@/icons/icon/TimeCircle';
@@ -19,19 +19,18 @@ const TeacherAttendance = ({
   setStudentAttend,
 }: TeacherAttendanceProps) => {
   const { state } = useLocation();
-
-  const [studySession, setStudySession] = useState<any>(
-    state ?? '차시를 골라주세요'
-  );
+  const {courseId} = useParams()
+  
+  const [studySession, setStudySession] = useState<any>('차시를 골라주세요');
   const [attendCode, setAttendCode] = useState(0);
   const [isEndSection, setIsEndSection] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const getCourse = async () => {
     try {
       const res = await attendAPIList.getSectionAttend(
-        studySession.courseSectionId
+        studySession?.courseSectionId
       );
-      console.log(res);
+      console.log(res,"출석데이터?");
       setStudentAttend(res);
     } catch (error) {}
   };
@@ -46,8 +45,10 @@ const TeacherAttendance = ({
   };
 
   useEffect(() => {
-    // getAttendInfo();
-    if (studySession.courseSectionId) {
+    if (courseId) {
+      // getAttendInfo();
+      console.log(studySession,"스터디세션");
+      
       getCourse();
     }
   }, [studySession]);
@@ -55,7 +56,7 @@ const TeacherAttendance = ({
   const setStartCourse = async () => {
     try {
       const res = await attendAPIList.startAttendTimer(
-        studySession.courseSectionId
+        courseId
       );
       setAttendCode(res.attendCode);
       console.log(res, '수업시작번호');
@@ -68,7 +69,7 @@ const TeacherAttendance = ({
   const endCourse = async () => {
     setIsLoading(true);
     try {
-      const res = await attendAPIList.endAttend(studySession.courseSectionId);
+      const res = await attendAPIList.endAttend(Number(courseId));
       setIsEndSection(true);
       getCourse();
     } catch (error) {
@@ -77,7 +78,7 @@ const TeacherAttendance = ({
     }
   };
 
-  const isValidateStartButton = studySession.courseSectionId;
+  const isValidateStartButton = courseId;
   return (
     <div className={styles.TeachAttendContainer}>
       <AllianceDropdown
@@ -85,7 +86,7 @@ const TeacherAttendance = ({
         setRegion={setStudySession}
         options={weekSection}
       />
-      {studySession.title && (
+      {studySession && (
         <div className={styles.TeacherAttendanceButtonWrap}>
           <Button
             buttonType={attendCode !== 0 ? 'Disabled' : 'Active'}

@@ -21,7 +21,7 @@ const AttendancePage = () => {
   const getTeacherSection = async () => {
     try {
       const res = await attendAPIList.getTeacherSectionTitle();
-      console.log(res);
+      console.log(res,"24페이지");
       setWeekSection(res);
     } catch (error) {
       
