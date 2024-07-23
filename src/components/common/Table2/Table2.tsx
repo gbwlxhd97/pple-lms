@@ -46,7 +46,7 @@ const Table2 = ({ tableBody, tableHead, path }: Table2Props) => {
               row.titleDetails?.status === '종료' ? styles.EndedRow : ''
             }
             onClick={() => {
-              onPushPage(row.id)
+              onPushPage(row.id);
             }}
           >
             <td className={styles.TableNum}>{tableBody.length - rowIndex}</td>
@@ -92,6 +92,10 @@ const Table2 = ({ tableBody, tableHead, path }: Table2Props) => {
             )}
           </tr>
         ))}
+        {/* 데이터가 없을경우 */}
+        {tableBody.length === 0 && (
+          <tr className={'EmptyData'}>정보가 없습니다.</tr>
+        )}
       </tbody>
     </table>
   );

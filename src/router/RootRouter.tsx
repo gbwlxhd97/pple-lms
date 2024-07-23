@@ -64,7 +64,7 @@ export const RootRouter = () => {
         <Route path="login" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
         <Route
-          path="attendance"
+          path="attendance/:courseId"
           element={
             <ProtectedRoute>
               <AttendancePage />

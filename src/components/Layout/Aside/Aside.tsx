@@ -13,7 +13,7 @@ import { loadingToast } from '@/utils';
 import useProfileStore from '@/stores/useProfileStore';
 import Cookies from 'js-cookie';
 import { SESSION_KEY } from '@/utils/constant';
-import { ClassRegistIcon, NoticeIcon, ReferenceIcon, SurveyIcon, WhiteHomeIcon } from '@/icons/icon';
+import { CheckAttendanceIcon, ClassRegistIcon, NoticeIcon, ReferenceIcon, SurveyIcon, WhiteHomeIcon } from '@/icons/icon';
 import { useParams } from 'react-router';
 
 type AsideProps = {
@@ -117,6 +117,15 @@ const ASidebar = ({ children }: AsideProps) => {
                     }}
                   >
                     <span>공지사항</span> <NoticeIcon width={18} height={18} />
+                  </li>
+                )}
+                {courseId && (
+                  <li
+                    onClick={() => {
+                      routeThenCloseAside(`/attendance/${courseId}`);
+                    }}
+                  >
+                    <span>출석</span> <CheckAttendanceIcon width={18} height={18} />
                   </li>
                 )}
                 {courseId && (

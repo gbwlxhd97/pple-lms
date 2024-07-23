@@ -9,3 +9,4 @@ export { default as SurveyIcon } from './SurveyIcon';
 export { default as WhiteHomeIcon } from './WhiteHomeIcon';
 export { default as ClassRegistIcon } from './ClassRegistIcon';
 export { default as NoticeIcon } from './NoticeIcon';
+export { default as CheckAttendanceIcon } from './CheckAttendanceIcon';
