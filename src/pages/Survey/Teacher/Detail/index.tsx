@@ -1,30 +1,31 @@
-import surveyAPIList from '@/services/survey';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './index.module.scss';
-import { today } from '@/utils/date';
-import SummaryChart from '@/components/common/SurveySummary/chart';
+import surveyAPIList from '@/services/survey';
 import Title from '@/components/common/Title/Title';
-import StudentTable from '@/components/common/StudentTable';
+import SurveyStudentTable from '@/components/common/SurveyStudentTable';
 import {
-  Bar,
+  ResponsiveContainer,
   BarChart,
   CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
+  Tooltip,
+  Bar,
 } from 'recharts';
-import SurveyStudentTable from '@/components/common/SurveyStudentTable';
+
 const SurveyTeacherDetailPage = () => {
   const { surveyId } = useParams();
   const [surveyData, setSurveyData] = useState<any>();
-  const [isSummary, setIsSummary] = useState(true); //default
+  const [isSummary, setIsSummary] = useState(() => {
+    const savedIsSummary = sessionStorage.getItem('isSummary');
+    return savedIsSummary ? JSON.parse(savedIsSummary) : true;
+  });
   const [students, setStudents] = useState([]);
+
   const getSurveyData = async () => {
     try {
-      if(isSummary) {
+      if (isSummary) {
         const res = await surveyAPIList.getSurveySummaryList(Number(surveyId));
         console.log(res);
         setSurveyData(res);
@@ -33,11 +34,20 @@ const SurveyTeacherDetailPage = () => {
         console.log(res);
         setStudents(res);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   useEffect(() => {
     getSurveyData();
   }, [isSummary]);
+
+  const handleSummaryClick = (summaryState: boolean) => {
+    setIsSummary(summaryState);
+    sessionStorage.setItem('isSummary', JSON.stringify(summaryState));
+  };
+
   return (
     <>
       <div className={styles.DetailContainer}>
@@ -48,17 +58,13 @@ const SurveyTeacherDetailPage = () => {
           </div>
           <div className={styles.StudentFlexWrap}>
             <div
-              onClick={() => {
-                setIsSummary(true);
-              }}
+              onClick={() => handleSummaryClick(true)}
               className={`${styles.StudentChild} ${isSummary && styles.Active}`}
             >
               요약
             </div>
             <div
-              onClick={() => {
-                setIsSummary(false);
-              }}
+              onClick={() => handleSummaryClick(false)}
               className={`${styles.StudentChild} ${!isSummary && styles.Active}`}
             >
               개별보기
@@ -67,7 +73,7 @@ const SurveyTeacherDetailPage = () => {
           {isSummary && (
             <div className={styles.SurveySpacing}>
               {surveyData?.questions?.map((item: any, i: number) => (
-                <div className={styles.AnswerWrapper}>
+                <div className={styles.AnswerWrapper} key={i}>
                   <span className={styles.QuestionTitle}>Q{i + 1}.</span>
                   <span className={styles.ChartTextSpacingBottom}>
                     {item.text}
@@ -89,8 +95,8 @@ const SurveyTeacherDetailPage = () => {
                     )}
                   {item.questionType === 'SHORT_ANSWER' && item.answers && (
                     <div className={styles.ShortContainer}>
-                      {item.answers?.map((item: any, i: number) => (
-                        <div>{item}</div>
+                      {item.answers?.map((answer: any, index: number) => (
+                        <div key={index}>{answer}</div>
                       ))}
                     </div>
                   )}
@@ -112,6 +118,6 @@ const SurveyTeacherDetailPage = () => {
       </div>
     </>
   );
-} 
+};
 
 export default SurveyTeacherDetailPage;
