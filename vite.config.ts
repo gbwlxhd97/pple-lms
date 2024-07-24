@@ -16,4 +16,13 @@ export default defineConfig({
       { find: '@/styles', replacement: path.resolve(__dirname, 'src/styles') },
     ],
   },
+  build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+  },
 });

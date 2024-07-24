@@ -21,9 +21,8 @@ import useProfileStore from '@/stores/useProfileStore';
 import statisticsAPIList from '@/services/statistics';
 import { ITotalStudent } from '@/interfaces/statistics';
 
-
 const CourseDetailPage = () => {
-  const {courseId} = useParams()
+  const { courseId } = useParams();
   const router = useRouter();
   const { setTitle } = useCourseNameStore();
   const {
@@ -51,11 +50,12 @@ const CourseDetailPage = () => {
 
   // 전체 학생 통계
   const getTotalStatistics = async () => {
-    const res = await statisticsAPIList.getTotalStudentStatistics(Number(courseId))
-    console.log(res,"출석정보");
+    const res = await statisticsAPIList.getTotalStudentStatistics(
+      Number(courseId)
+    );
+    console.log(res, '출석정보');
     setStatisticsData(res);
-    
-  }
+  };
 
   useEffect(() => {
     getCourseDatas();
@@ -69,19 +69,27 @@ const CourseDetailPage = () => {
   ];
   const assignmentPie = [
     { name: '제출', value: statisticsData?.homeworkStatisticsDto.submitted! },
-    { name: '제출', value: statisticsData?.homeworkStatisticsDto.notSubmitted! },
+    {
+      name: '미제출',
+      value: statisticsData?.homeworkStatisticsDto.notSubmitted!,
+    },
   ];
   const totalObject = {
-    statisticsTotal: statisPie.reduce((sum, entry:any) => sum + entry.value, 0),
-    assignmentTotal: assignmentPie.reduce((sum, entry:any) => sum + entry.value, 0),
+    statisticsTotal: statisPie.reduce(
+      (sum, entry: any) => sum + entry.value,
+      0
+    ),
+    assignmentTotal: assignmentPie.reduce(
+      (sum, entry: any) => sum + entry.value,
+      0
+    ),
   };
-  
+
   const totalRateObject = {
     statisticsRate: (statisPie[0]?.value / totalObject.statisticsTotal) * 100,
     assignmentRate:
       (assignmentPie[0]?.value / totalObject.assignmentTotal) * 100,
   };
-
 
   return (
     <div>
@@ -95,72 +103,71 @@ const CourseDetailPage = () => {
         <>
           <Title title="출석 학생 통계" isMore={true} />
           <div className={styles.CardWrap}>
-            <PieChart width={500} height={200}>
-              <Pie
-                data={statisPie}
-                cx="16%"
-                cy="30%"
-                innerRadius={30}
-                outerRadius={40}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {statisPie.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
-                  />
-                ))}
-              </Pie>
-              <text
-                x="17%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
-                y="32%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{ fontSize: '12px', fontWeight: 'bold' }}
-              >
-                {`${totalRateObject.statisticsRate.toFixed(2)}%`}
-              </text>
-              <Tooltip />
-              {/* 
-                TODO: Legend컴포넌트는 위치 조정 해결하고 코맨트를 해제한다.
-              <Legend
-                layout="vertical"
-                align="right"
-                verticalAlign="middle"
-                wrapperStyle={{ top: 20, right: 20 }}
-                formatter={(value, entry: any) => (
-                  <span style={{ color: entry.color }}>
-                    {` (${entry.payload.name}) ${entry.payload.value}`}
-                  </span>
-                )}
-              /> */}
-              <Pie
-                dataKey="value"
-                data={assignmentPie}
-                cx="16%"
-                cy="80%"
-                innerRadius={30}
-                outerRadius={40}
-                fill="#82ca9d"
-              >
-                {assignmentPie.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
-                  />
-                ))}
-              </Pie>
-              <text
-                x="17%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
-                y="79%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                style={{ fontSize: '12px', fontWeight: 'bold' }}
-              >
-                {`${totalRateObject.assignmentRate.toFixed(2)}%`}
-              </text>
-            </PieChart>
+            <ResponsiveContainer width={'100%'} height={200}>
+              <PieChart>
+                <Pie
+                  data={statisPie}
+                  cx="16%"
+                  cy="30%"
+                  innerRadius={30}
+                  outerRadius={40}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {statisPie.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
+                    />
+                  ))}
+                </Pie>
+                <text
+                  x="14%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                  y="32%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  style={{ fontSize: '12px', fontWeight: 'bold' }}
+                >
+                  {`${totalRateObject.statisticsRate.toFixed(2)}%`}
+                </text>
+                <Tooltip />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  formatter={(value, entry: any) => (
+                    <span style={{ color: entry.color }}>
+                      {` (${entry.payload.name}) ${entry.payload.value}`}
+                    </span>
+                  )}
+                />
+                <Pie
+                  dataKey="value"
+                  data={assignmentPie}
+                  cx="16%"
+                  cy="80%"
+                  innerRadius={30}
+                  outerRadius={40}
+                  fill="#82ca9d"
+                >
+                  {assignmentPie.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={index === 0 ? '#82ca9d' : '#ff6b6b'}
+                    />
+                  ))}
+                </Pie>
+                <text
+                  x="14%" // 차트 중앙에 위치시키기 위해 x 좌표와 y 좌표를 수정합니다.
+                  y="79%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  style={{ fontSize: '12px', fontWeight: 'bold' }}
+                >
+                  {`${totalRateObject.assignmentRate.toFixed(2)}%`}
+                </text>
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </>
       )}
