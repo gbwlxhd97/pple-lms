@@ -1,6 +1,10 @@
-import { useRouter } from '@/hooks/useRouter';
+import React, { useState } from 'react';
+import ReactModal from 'react-modal';
 import styles from './index.module.scss';
 import { useParams } from 'react-router';
+import { useRouter } from '@/hooks/useRouter';
+import StudentStatisticsDetailComponents from '@/components/studentStatisticsDetail';
+import { customStyles } from '@/utils/constant';
 
 interface Table5Props {
   tableHead: string[]; // 테이블의 각 열 제목
@@ -9,12 +13,21 @@ interface Table5Props {
 
 const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
   const router = useRouter();
-  const {courseId} = useParams()
-  console.log(courseId,"zhtm");
-  
-  const onPushPage = (memberId: number) => {
-    router.push(`/course/${courseId}/statistics/detail/${memberId}`);
-  }
+  const { courseId } = useParams();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedStudentId, setSelectedStudentId] = useState<number | null>(
+    null
+  );
+
+  const openModal = (memberId: number) => {
+    setSelectedStudentId(memberId);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedStudentId(null);
+  };
 
   return (
     <div className={styles.Container}>
@@ -33,7 +46,7 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
             <tr
               key={rowIndex}
               onClick={() => {
-                onPushPage(row.memberId);
+                openModal(row.memberId);
               }}
             >
               <td className={styles.Name}>{row.name}</td>
@@ -42,12 +55,25 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
               </td>
             </tr>
           ))}
-          {/* 데이터가 없을경우 */}
           {tableBody.length === 0 && (
             <tr className={'EmptyData'}>정보가 없습니다.</tr>
           )}
         </tbody>
       </table>
+
+      <ReactModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="학생 상세 정보"
+        style={customStyles}
+      >
+        {selectedStudentId !== null && (
+          <StudentStatisticsDetailComponents
+            courseId={Number(courseId)}
+            studentId={selectedStudentId}
+          />
+        )}
+      </ReactModal>
     </div>
   );
 };

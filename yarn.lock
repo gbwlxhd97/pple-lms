@@ -1376,6 +1376,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-modal@npm:^3":
+  version: 3.16.3
+  resolution: "@types/react-modal@npm:3.16.3"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10c0/dfcf52fa4b5d5c203aa47ffaafade369836cb9f891e9b60e7056bf5fdfc508ebec7971bb3d4c4018f422953c1c79948755ef19da3e816c28d7c5fdacf9466af8
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:^18.2.56":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
@@ -2731,6 +2740,13 @@ __metadata:
     signal-exit: "npm:^4.1.0"
     strip-final-newline: "npm:^3.0.0"
   checksum: 10c0/2c52d8775f5bf103ce8eec9c7ab3059909ba350a5164744e9947ed14a53f51687c040a250bda833f906d1283aa8803975b84e6c8f7a7c42f99dc8ef80250d1af
+  languageName: node
+  linkType: hard
+
+"exenv@npm:^1.2.0":
+  version: 1.2.2
+  resolution: "exenv@npm:1.2.2"
+  checksum: 10c0/4e96b355a6b9b9547237288ca779dd673b2e698458b409e88b50df09feb7c85ef94c07354b6b87bc3ed0193a94009a6f7a3c71956da12f45911c0d0f5aa3caa0
   languageName: node
   linkType: hard
 
@@ -4318,6 +4334,7 @@ __metadata:
     "@types/qs": "npm:^6.9.15"
     "@types/react": "npm:^18.2.56"
     "@types/react-dom": "npm:^18.2.19"
+    "@types/react-modal": "npm:^3"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.2"
     "@typescript-eslint/parser": "npm:^7.0.2"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
@@ -4338,6 +4355,7 @@ __metadata:
     react-drag-drop-files: "npm:^2.3.10"
     react-hot-toast: "npm:^2.4.1"
     react-loader-spinner: "npm:^6.1.6"
+    react-modal: "npm:^3.16.1"
     react-pro-sidebar: "npm:^1.1.0"
     react-router: "npm:^6.22.3"
     react-router-dom: "npm:^6.22.3"
@@ -4502,6 +4520,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-lifecycles-compat@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "react-lifecycles-compat@npm:3.0.4"
+  checksum: 10c0/1d0df3c85af79df720524780f00c064d53a9dd1899d785eddb7264b378026979acbddb58a4b7e06e7d0d12aa1494fd5754562ee55d32907b15601068dae82c27
+  languageName: node
+  linkType: hard
+
 "react-loader-spinner@npm:^6.1.6":
   version: 6.1.6
   resolution: "react-loader-spinner@npm:6.1.6"
@@ -4512,6 +4537,21 @@ __metadata:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/20d9d31b4cbd0720d8d9c818babbb9aaa430fe0adbbf85a90d585f7ac6bd1a338df9beb6c63f970de4d41c95ccd2cf2751e0842486e392fa7b0796c945535e43
+  languageName: node
+  linkType: hard
+
+"react-modal@npm:^3.16.1":
+  version: 3.16.1
+  resolution: "react-modal@npm:3.16.1"
+  dependencies:
+    exenv: "npm:^1.2.0"
+    prop-types: "npm:^15.7.2"
+    react-lifecycles-compat: "npm:^3.0.0"
+    warning: "npm:^4.0.3"
+  peerDependencies:
+    react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+  checksum: 10c0/7b56e2c505b2b924736c471a34754a4211df40ac2d6fb0949cf095aea5e65d3326bd9f111fa7898acf40afa54f526809ad8aa47e02b8328663d11422568dc7b1
   languageName: node
   linkType: hard
 
@@ -5526,7 +5566,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"warning@npm:^4.0.0":
+"warning@npm:^4.0.0, warning@npm:^4.0.3":
   version: 4.0.3
   resolution: "warning@npm:4.0.3"
   dependencies:

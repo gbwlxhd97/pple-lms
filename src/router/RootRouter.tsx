@@ -167,14 +167,14 @@ export const RootRouter = () => {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="course/:courseId/statistics/detail/:studentId"
           element={
             <ProtectedRoute>
               <StudentStatisticsDetailPage />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path="course/:courseId/survey/:surveyId/take-survey"
           element={

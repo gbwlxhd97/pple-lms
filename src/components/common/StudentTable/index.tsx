@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { useRouter } from '@/hooks/useRouter';
 import { useParams } from 'react-router';
+import ReactModal from 'react-modal';
+import { customStyles } from '@/utils/constant';
+import StudentStatisticsDetailComponents from '@/components/studentStatisticsDetail';
 
 type StudentTableProps = {
   tableHead: Array<string>;
@@ -12,9 +15,28 @@ type StudentTableProps = {
 const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
   const router = useRouter();
   const { courseId } = useParams();
-  const goPushPath = (studentId: string,studentState:any) => {
-    router.push(`/course/${courseId}/statistics/detail/${studentId}`,{}, studentState);
+  const goPushPath = (studentId: string, studentState: any) => {
+    router.push(
+      `/course/${courseId}/statistics/detail/${studentId}`,
+      {},
+      studentState
+    );
   };
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedStudentId, setSelectedStudentId] = useState<number | null>(
+    null
+  );
+
+  const openModal = (memberId: number) => {
+    setSelectedStudentId(memberId);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedStudentId(null);
+  };
+
   return (
     <div className={styles.TableContainer}>
       <table style={{ width: '100%' }}>
@@ -30,7 +52,7 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
             <tr
               key={index}
               onClick={() => {
-                goPushPath(row.id, row);
+                openModal(row.id);
               }}
             >
               <td>{tableBody.length - index}</td>
@@ -44,6 +66,19 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
           )}
         </tbody>
       </table>
+      <ReactModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="학생 상세 정보"
+        style={customStyles}
+      >
+        {selectedStudentId !== null && (
+          <StudentStatisticsDetailComponents
+            courseId={Number(courseId)}
+            studentId={selectedStudentId}
+          />
+        )}
+      </ReactModal>
     </div>
   );
 };

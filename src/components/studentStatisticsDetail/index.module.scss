@@ -1,0 +1,47 @@
+@import '@/styles/theme.scss';
+
+.Name {
+  color: $black;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.Phone {
+  padding: 8px 0;
+  color: $gray300;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.CommentTitle {
+  padding: 20px 0 12px 0;
+  color: $gray400;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.CommentButton {
+  padding: 8px 14px;
+}
+
+.CommentWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 20px;
+}
+
+.CommentCard {
+  border-radius: 10px;
+  background: $gray0;
+  padding: 8px 10px;
+  color: $gray400;
+  font-size: 14px;
+  font-weight: 400;
+  max-height: 80px;
+  overflow-y: auto;
+  > span {
+    color: $purple1;
+  }
+  
+}
