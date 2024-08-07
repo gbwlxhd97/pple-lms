@@ -20,10 +20,12 @@ export const customStyles: any = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#fff',
-    padding: '20px',
     borderRadius: '10px',
     boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)',
     zIndex: '1000',
+    maxHeight: '80vh', // 최대 높이를 설정합니다.
+    width: '80vw', // 최대 너비를 설정합니다.
+    overflow: 'auto', // 내용이 넘칠 경우 스크롤을 추가합니다.
   },
   overlay: {
     position: 'fixed',
