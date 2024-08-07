@@ -13,9 +13,14 @@ import courseAPIList from '@/services/course';
 type Props = {
   courseId: number;
   studentId: number;
+  closeModal: () => void;
 };
 
-const StudentStatisticsDetailComponents = ({ courseId, studentId }: Props) => {
+const StudentStatisticsDetailComponents = ({
+  courseId,
+  studentId,
+  closeModal,
+}: Props) => {
   const [studentData, setStudentData] = useState<ITotalStudent | any>();
   const [isShowInput, setIsShowInput] = useState(false);
   const [commentData, setCommentData] = useState<Array<IComments>>([]);
@@ -57,7 +62,21 @@ const StudentStatisticsDetailComponents = ({ courseId, studentId }: Props) => {
     getCourseSectionList();
   }, []);
   return (
-    <>
+    <div style={{ position: 'relative' }}>
+      <button
+        onClick={() => {
+          closeModal();
+        }}
+        style={{
+          position: 'absolute',
+          top: '0px',
+          right: '10px',
+          zIndex: '1001',
+          backgroundColor: 'transparent',
+        }}
+      >
+        X
+      </button>
       <StudentInfoChart studentData={studentData} />
       <div className="Space"></div>
       <div className={styles.CommentTitle}>학생 코멘트</div>
@@ -87,7 +106,7 @@ const StudentStatisticsDetailComponents = ({ courseId, studentId }: Props) => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 

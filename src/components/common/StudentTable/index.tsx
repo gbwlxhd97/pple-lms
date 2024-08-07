@@ -76,6 +76,7 @@ const StudentTable = ({ tableHead, tableBody, path }: StudentTableProps) => {
           <StudentStatisticsDetailComponents
             courseId={Number(courseId)}
             studentId={selectedStudentId}
+            closeModal={closeModal}
           />
         )}
       </ReactModal>

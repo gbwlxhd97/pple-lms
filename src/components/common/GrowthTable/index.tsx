@@ -71,6 +71,7 @@ const GrowthTable = ({ tableBody, tableHead }: Table5Props) => {
           <StudentStatisticsDetailComponents
             courseId={Number(courseId)}
             studentId={selectedStudentId}
+            closeModal={closeModal}
           />
         )}
       </ReactModal>
